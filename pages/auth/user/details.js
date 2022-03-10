@@ -1,54 +1,48 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { getSession, useSession } from 'next-auth/react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { reloadSession } from '../../../src/lib/helper';
-import Loader from '../../../src/components/Layouts/Loader';
+import React, { useState, useEffect, Fragment } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { getSession, useSession } from "next-auth/react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { reloadSession } from "../../../src/lib/helper";
+import Loader from "../../../src/components/Layouts/Loader";
 
 const categories = [
-  { id: 'customer', title: 'customer' },
-  { id: 'volunteer', title: 'volunteer' },
-  { id: 'provider', title: 'provider' },
+  { id: "customer", title: "customer" },
+  { id: "volunteer", title: "volunteer" },
+  { id: "provider", title: "provider" },
 ];
 
 const Details = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [category, setCategory] = useState('customer');
-  const [phone, setPhone] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [category, setCategory] = useState("customer");
+  const [phone, setPhone] = useState("");
   const [address, setAddress] = useState({
-    name: '',
-    street: '',
+    name: "",
+    street: "",
     location: {
       loading: false,
-      coordinates: { latitude: '', longitude: '' },
+      coordinates: { latitude: "", longitude: "" },
     },
   });
   const [state, setState] = useState(0);
-  // const [location, setLocation] = useState({
-  //   loading: false,
-  //   coordinates: { latitude: '', longitude: '' },
-  // });
 
   const handlelocation = () => {
     setAddress({
-      ...state,
+      ...address,
       location: {
-        ...state,
         loading: true,
       },
     });
 
     const onSuccess = (location) => {
       setAddress({
-        ...state,
+        ...address,
         location: {
-          ...state,
           loading: false,
           coordinates: {
             latitude: location.coords.latitude,
@@ -60,9 +54,8 @@ const Details = () => {
 
     const onError = (error) => {
       setAddress({
-        ...state,
+        ...address,
         location: {
-          ...state,
           loading: true,
           error,
         },
@@ -73,7 +66,7 @@ const Details = () => {
   };
 
   useEffect(() => {
-    if (!('geolocation' in navigator)) {
+    if (!("geolocation" in navigator)) {
       onError({
         code: 0,
         message: "Geolocation doesn't support your browser.",
@@ -95,7 +88,7 @@ const Details = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post('http://localhost:3000/api/users', {
+      const { data } = await axios.post("http://localhost:3000/api/users", {
         userId: session.userId,
         image: session.user.image,
         firstName,
@@ -113,61 +106,61 @@ const Details = () => {
   };
 
   function classNames(...classes) {
-    return classes.filter(Boolean).join(' ');
+    return classes.filter(Boolean).join(" ");
   }
 
   return (
     <React.Fragment>
       <Head>
         <title>Resume Builder | Details</title>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className='min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
-          <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-            <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
+        <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+          <div className="sm:mx-auto sm:w-full sm:max-w-md">
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Sign in to your account
             </h2>
-            <p className='mt-2 text-center text-sm text-gray-600'>
-              Or{' '}
-              <Link href='/login'>
-                <span className='font-medium text-blue-600 hover:text-blue-500 cursor-pointer'>
+            <p className="mt-2 text-center text-sm text-gray-600">
+              Or{" "}
+              <Link href="/login">
+                <span className="font-medium text-blue-600 hover:text-blue-500 cursor-pointer">
                   Login
                 </span>
               </Link>
             </p>
           </div>
-          <div className='mt-4 sm:mx-auto sm:w-full sm:max-w-lg'>
-            <div className='bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10'>
+          <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-lg">
+            <div className="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10">
               <div>
                 {state === 0 ? (
                   <React.Fragment>
                     <fieldset>
-                      <div className='catdiv space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10'>
+                      <div className="catdiv space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
                         {categories.map((category) => (
-                          <div key={category.id} className='flex items-center'>
+                          <div key={category.id} className="flex items-center">
                             <input
                               id={category.id}
-                              name='category'
-                              type='radio'
-                              defaultChecked={category.id === 'student'}
+                              name="category"
+                              type="radio"
+                              defaultChecked={category.id === "student"}
                               value={category.title}
                               onChange={(e) => handleCategory()}
-                              className='h-4 w-4 text-indigo-600 border-gray-300'
+                              className="h-4 w-4 text-indigo-600 border-gray-300"
                             />
                             <label
                               htmlFor={category.id}
-                              className='ml-3 block text-sm font-medium text-gray-700 capitalize'
+                              className="ml-3 block text-sm font-medium text-gray-700 capitalize"
                             >
                               {category.title}
                             </label>
                           </div>
                         ))}
                       </div>
-                      <div className='mt-4'>
+                      <div className="mt-4">
                         <button
                           onClick={() => setState(1)}
-                          className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 '
+                          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 "
                         >
                           Next
                         </button>
@@ -181,92 +174,94 @@ const Details = () => {
                 {state === 1 ? (
                   <React.Fragment>
                     <button onClick={() => setState(0)}>Back</button>
-                    <div className='grid grid-cols-6 gap-6'>
-                      <div className='col-span-6 sm:col-span-3'>
+                    <div className="grid grid-cols-6 gap-6">
+                      <div className="col-span-6 sm:col-span-3">
                         <label
-                          htmlFor='firstName'
-                          className='block text-sm font-medium text-gray-700'
+                          htmlFor="firstName"
+                          className="block text-sm font-medium text-gray-700"
                         >
                           First Name
                         </label>
                         <input
-                          type='text'
-                          name='firstName'
-                          id='firstName'
-                          autoComplete='given-name'
+                          type="text"
+                          name="firstName"
+                          id="firstName"
+                          autoComplete="given-name"
                           required
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value)}
-                          className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                          className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
 
-                      <div className='col-span-6 sm:col-span-3'>
+                      <div className="col-span-6 sm:col-span-3">
                         <label
-                          htmlFor='lastName'
-                          className='block text-sm font-medium text-gray-700'
+                          htmlFor="lastName"
+                          className="block text-sm font-medium text-gray-700"
                         >
                           Last name
                         </label>
                         <input
-                          type='text'
-                          name='lastName'
-                          id='lastName'
-                          autoComplete='family-name'
+                          type="text"
+                          name="lastName"
+                          id="lastName"
+                          autoComplete="family-name"
                           required
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
-                          className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                          className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
                     </div>
 
-                    <div className='col-span-6 sm:col-span-4 mt-4'>
+                    <div className="col-span-6 sm:col-span-4 mt-4">
                       <label
-                        htmlFor='phone'
-                        className='block text-sm font-medium text-gray-700'
+                        htmlFor="phone"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         Phone Number
                       </label>
                       <input
-                        type='text'
-                        name='phone'
-                        id='phone'
-                        autoComplete='tel'
+                        type="text"
+                        name="phone"
+                        id="phone"
+                        autoComplete="tel"
                         required
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                        className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
-                    <div className='col-span-6 sm:col-span-4 mt-4'>
+                    <div className="col-span-6 sm:col-span-4 mt-4">
                       <label
-                        htmlFor='street-address'
-                        className='block text-sm font-medium text-gray-700'
+                        htmlFor="street-address"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         Address
                       </label>
                       <textarea
-                        type='text'
-                        name='street-address'
-                        id='street-address'
-                        autoComplete='street-address'
+                        type="text"
+                        name="street-address"
+                        id="street-address"
+                        autoComplete="street-address"
                         required
                         value={address.street}
-                        onChange={(e) => setAddress({ street: e.target.value })}
-                        className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                        onChange={(e) =>
+                          setAddress({ ...address, street: e.target.value })
+                        }
+                        className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
 
-                    <div className='mt-4'>
+                    <div className="mt-4">
                       <button
                         onClick={handlelocation}
                         disabled={location.loading}
-                        className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 '
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 "
                       >
                         {location.loading ? (
-                          <div className='flex'>
-                            <Loader width={6} height={6} color='white' />
+                          <div className="flex">
+                            <Loader width={6} height={6} color="white" />
                           </div>
                         ) : (
                           <div>Grant Location Permission</div>
@@ -274,11 +269,11 @@ const Details = () => {
                       </button>
                     </div>
 
-                    <div className='mt-4'>
+                    <div className="mt-4">
                       <button
-                        type='submit'
+                        type="submit"
                         onClick={submitHandler}
-                        className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 '
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 "
                       >
                         Submit
                       </button>
@@ -301,7 +296,7 @@ export const getServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: '/auth/signin',
+        destination: "/auth/signin",
         permanent: false,
       },
     };
