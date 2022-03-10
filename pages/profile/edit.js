@@ -5,8 +5,8 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { getSession, useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
-import Loader from '../../../src/components/Layouts/Loader';
-import { reloadSession } from '../../../src/lib/helper';
+import Loader from '../../src/components/Layouts/Loader';
+import { reloadSession } from '../../src/lib/helper';
 
 const ProfileEdit = ({ details }) => {
   const { data: session, status } = useSession();

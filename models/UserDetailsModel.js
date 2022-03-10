@@ -13,13 +13,6 @@ const userDetailsSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    emailList: [
-      {
-        type: String,
-        required: true,
-        trim: true,
-      },
-    ],
     image: {
       type: String,
       required: true,
@@ -32,8 +25,14 @@ const userDetailsSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      default: 'student',
+      default: 'customer',
     },
+    address: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
   },
   {
     timestamps: true,

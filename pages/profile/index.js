@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { MdEdit } from 'react-icons/md';
 import { getSession, useSession } from 'next-auth/react';
-import { Modal } from '../../../src/components/Student/Profile/Modal';
+import { Modal } from '../../src/components/Student/Profile/Modal';
 
 const tabs = [{ name: 'Profile', href: '#', current: true }];
 
@@ -26,7 +26,7 @@ const Profile = () => {
   return (
     <React.Fragment>
       <Head>
-        <title>Resume Builder | Profile</title>
+        <title>Provider | Profile</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
@@ -187,15 +187,6 @@ export const getServerSideProps = async (context) => {
     return {
       redirect: {
         destination: '/auth/user/details',
-        permanent: false,
-      },
-    };
-  }
-
-  if (session.userDetails.category !== 'student') {
-    return {
-      redirect: {
-        destination: '/dashboard',
         permanent: false,
       },
     };

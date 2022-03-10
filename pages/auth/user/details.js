@@ -6,21 +6,80 @@ import { getSession, useSession } from 'next-auth/react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { reloadSession } from '../../../src/lib/helper';
+import Loader from '../../../src/components/Layouts/Loader';
 
 const categories = [
-  { id: 'student', title: 'student' },
-  { id: 'college', title: 'college' },
+  { id: 'customer', title: 'customer' },
+  { id: 'volunteer', title: 'volunteer' },
+  { id: 'provider', title: 'provider' },
 ];
 
 const Details = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [category, setCategory] = useState('student');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [state, setState] = useState(0);
   const { data: session } = useSession();
   const router = useRouter();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [category, setCategory] = useState('customer');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState({
+    name: '',
+    street: '',
+    location: {
+      loading: false,
+      coordinates: { latitude: '', longitude: '' },
+    },
+  });
+  const [state, setState] = useState(0);
+  // const [location, setLocation] = useState({
+  //   loading: false,
+  //   coordinates: { latitude: '', longitude: '' },
+  // });
+
+  const handlelocation = () => {
+    setAddress({
+      ...state,
+      location: {
+        ...state,
+        loading: true,
+      },
+    });
+
+    const onSuccess = (location) => {
+      setAddress({
+        ...state,
+        location: {
+          ...state,
+          loading: false,
+          coordinates: {
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+          },
+        },
+      });
+    };
+
+    const onError = (error) => {
+      setAddress({
+        ...state,
+        location: {
+          ...state,
+          loading: true,
+          error,
+        },
+      });
+    };
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  };
+
+  useEffect(() => {
+    if (!('geolocation' in navigator)) {
+      onError({
+        code: 0,
+        message: "Geolocation doesn't support your browser.",
+      });
+    }
+  }, []);
 
   const handleCategory = (e) => {
     setCategory(document.querySelector('input[name="category"]:checked').value);
@@ -42,7 +101,6 @@ const Details = () => {
         firstName,
         lastName,
         category,
-        email,
         phone,
       });
 
@@ -81,7 +139,7 @@ const Details = () => {
           </div>
           <div className='mt-4 sm:mx-auto sm:w-full sm:max-w-lg'>
             <div className='bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10'>
-              <form onSubmit={submitHandler}>
+              <div>
                 {state === 0 ? (
                   <React.Fragment>
                     <fieldset>
@@ -165,25 +223,6 @@ const Details = () => {
 
                     <div className='col-span-6 sm:col-span-4 mt-4'>
                       <label
-                        htmlFor='email'
-                        className='block text-sm font-medium text-gray-700'
-                      >
-                        Email address
-                      </label>
-                      <input
-                        type='text'
-                        name='email'
-                        id='email'
-                        autoComplete='email'
-                        required
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                      />
-                    </div>
-
-                    <div className='col-span-6 sm:col-span-4 mt-4'>
-                      <label
                         htmlFor='phone'
                         className='block text-sm font-medium text-gray-700'
                       >
@@ -200,8 +239,47 @@ const Details = () => {
                         className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                       />
                     </div>
+                    <div className='col-span-6 sm:col-span-4 mt-4'>
+                      <label
+                        htmlFor='street-address'
+                        className='block text-sm font-medium text-gray-700'
+                      >
+                        Address
+                      </label>
+                      <textarea
+                        type='text'
+                        name='street-address'
+                        id='street-address'
+                        autoComplete='street-address'
+                        required
+                        value={address.street}
+                        onChange={(e) => setAddress({ street: e.target.value })}
+                        className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                      />
+                    </div>
+
                     <div className='mt-4'>
-                      <button className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 '>
+                      <button
+                        onClick={handlelocation}
+                        disabled={location.loading}
+                        className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 '
+                      >
+                        {location.loading ? (
+                          <div className='flex'>
+                            <Loader width={6} height={6} color='white' />
+                          </div>
+                        ) : (
+                          <div>Grant Location Permission</div>
+                        )}
+                      </button>
+                    </div>
+
+                    <div className='mt-4'>
+                      <button
+                        type='submit'
+                        onClick={submitHandler}
+                        className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 '
+                      >
                         Submit
                       </button>
                     </div>
@@ -209,7 +287,7 @@ const Details = () => {
                 ) : (
                   <div />
                 )}
-              </form>
+              </div>
             </div>
           </div>
         </div>

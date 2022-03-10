@@ -1,13 +1,7 @@
 import React from 'react';
 import { getSession } from 'next-auth/react';
-import { Layout } from '../../../src/components/Student/Dashboard/Layout';
-
-const Index = () => {
-  return (
-    <div>
-      <Layout />
-    </div>
-  );
+const Dashboard = () => {
+  return <div>Dashboard</div>;
 };
 
 export const getServerSideProps = async (context) => {
@@ -37,4 +31,5 @@ export const getServerSideProps = async (context) => {
     },
   };
 };
-export default Index;
+
+export default Dashboard;
