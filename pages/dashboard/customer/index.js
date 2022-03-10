@@ -1,6 +1,6 @@
 import React from 'react';
 import { getSession } from 'next-auth/react';
-const Dashboard = () => {
+const index = () => {
   return <div>Dashboard</div>;
 };
 
@@ -25,11 +25,20 @@ export const getServerSideProps = async (context) => {
     };
   }
 
+  if (session.userDetails.category !== 'customer') {
+    return {
+      redirect: {
+        destination: `/dashboard/${session.userDetails.category}`,
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
-      session,
+      session: session,
     },
   };
 };
 
-export default Dashboard;
+export default index;

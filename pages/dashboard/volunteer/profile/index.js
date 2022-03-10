@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { MdEdit } from 'react-icons/md';
 import { getSession, useSession } from 'next-auth/react';
-import { Modal } from '../../src/components/Student/Profile/Modal';
+import { Modal } from '../../../../src/components/Student/Profile/Modal';
 
 const tabs = [{ name: 'Profile', href: '#', current: true }];
 
@@ -26,7 +26,7 @@ const Profile = () => {
   return (
     <React.Fragment>
       <Head>
-        <title>Provider | Profile</title>
+        <title>Resume Builder | Profile</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
@@ -71,7 +71,7 @@ const Profile = () => {
                       </h1>
                     </div>
                     <div className='mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4'>
-                      <Link href='/student/profile/edit'>
+                      <Link href='/dashboard/student/profile/edit'>
                         <button
                           type='button'
                           className='inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
@@ -172,7 +172,6 @@ const Profile = () => {
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
-  // const userId = session?.userId;
 
   if (!session) {
     return {
@@ -192,13 +191,14 @@ export const getServerSideProps = async (context) => {
     };
   }
 
-  // const { data } = await axios.get('http://localhost:3000/api/users', {
-  //   params: {
-  //     userId: userId,
-  //   },
-  // });
-
-  // const { details } = data;
+  if (session.userDetails.category !== 'volunteer') {
+    return {
+      redirect: {
+        destination: `/dashboard/${session.userDetails.category}`,
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {

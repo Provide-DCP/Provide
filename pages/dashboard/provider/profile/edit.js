@@ -5,8 +5,8 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { getSession, useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
-import Loader from '../../src/components/Layouts/Loader';
-import { reloadSession } from '../../src/lib/helper';
+import Loader from '../../../../src/components/Layouts/Loader';
+import { reloadSession } from '../../../../src/lib/helper';
 
 const ProfileEdit = ({ details }) => {
   const { data: session, status } = useSession();
@@ -51,7 +51,7 @@ const ProfileEdit = ({ details }) => {
     if (message == 'Details Updated') {
       toast.success(message, { toastId: message });
       reloadSession();
-      router.push('/student/profile');
+      router.push('/dashboard/student/profile');
     } else {
       toast.error(message, { toastId: message });
     }
@@ -241,7 +241,7 @@ const ProfileEdit = ({ details }) => {
 
           <div className='pt-5 pb-20'>
             <div className='flex justify-end'>
-              <Link href='/student/profile'>
+              <Link href='/dashboard/student/profile'>
                 <button
                   type='button'
                   className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 '
@@ -284,6 +284,15 @@ export const getServerSideProps = async ({ req, res }) => {
     return {
       redirect: {
         destination: '/auth/user/details',
+        permanent: false,
+      },
+    };
+  }
+
+  if (session.userDetails.category !== 'provider') {
+    return {
+      redirect: {
+        destination: `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };
