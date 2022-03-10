@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { MdEdit } from 'react-icons/md';
 import { getSession, useSession } from 'next-auth/react';
 import { Modal } from '../../../src/components/Layouts/Modal';
+import { OptionCard } from '../../../src/components/Profile/OptionCard';
 
 const tabs = [{ name: 'Profile', href: '#', current: true }];
 
@@ -152,8 +153,20 @@ const Profile = () => {
                   </dd>
                 </div>
               </dl>
-              <Link href='/address'>Your addresses</Link>
-              <Link href='/orders'>Your Orders</Link>
+              <div className='my-10 flex flex-start flex-wrap'>
+                <OptionCard
+                  heading='Your Addresses'
+                  description='Edit addresses for orders'
+                  href='/address'
+                  logo='/address_logo.png'
+                />
+                <OptionCard
+                  heading='Your Addresses'
+                  description='Edit addresses for orders'
+                  href='/address'
+                  logo='/address_logo.png'
+                />
+              </div>
             </div>
           </div>
         </div>
