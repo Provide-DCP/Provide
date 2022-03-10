@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { useSession } from 'next-auth/react';
 import { GrClose } from 'react-icons/gr';
-import Loader from '../../Layouts/Loader';
+import Loader from './Loader';
 
 export const Modal = ({ isOpen, closeModal }) => {
   const { data: session, status } = useSession();

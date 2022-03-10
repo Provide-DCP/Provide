@@ -290,9 +290,13 @@ export const getServerSideProps = async ({ req, res }) => {
   }
 
   if (session.userDetails.category !== 'volunteer') {
+    const category = session.userDetails.category;
     return {
       redirect: {
-        destination: `/dashboard/${session.userDetails.category}`,
+        destination:
+          category === 'customer'
+            ? `/customer`
+            : `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };

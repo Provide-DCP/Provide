@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { MdEdit } from 'react-icons/md';
 import { getSession, useSession } from 'next-auth/react';
-import { Modal } from '../../../../src/components/Student/Profile/Modal';
+import { Modal } from '../../../src/components/Layouts/Modal';
 
 const tabs = [{ name: 'Profile', href: '#', current: true }];
 
@@ -138,19 +138,9 @@ const Profile = () => {
                   </dd>
                 </div>
                 <div className='sm:col-span-1'>
-                  <dt className='text-md font-medium text-gray-500'>
-                    Registered Email
-                  </dt>
+                  <dt className='text-md font-medium text-gray-500'>Email</dt>
                   <dd className=' font-semibold text-md text-gray-900'>
                     {session?.user?.email}
-                  </dd>
-                </div>
-                <div className='sm:col-span-1'>
-                  <dt className='text-md font-medium text-gray-500'>
-                    Given Email
-                  </dt>
-                  <dd className=' font-semibold text-md text-gray-900'>
-                    {session?.userDetails?.emailList[0]}
                   </dd>
                 </div>
                 <div className='sm:col-span-1'>
@@ -159,6 +149,16 @@ const Profile = () => {
                   </dt>
                   <dd className=' font-semibold text-md text-gray-900'>
                     {session?.userDetails?.phone}
+                  </dd>
+                </div>
+              </dl>
+              <dl className='grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2'>
+                <div className='sm:col-span-1 mt-9'>
+                  <dt className='capitalize text-md font-medium text-gray-500'>
+                    Your Addresses
+                  </dt>
+                  <dd className=' text-md font-semibold text-gray-900'>
+                    {session?.userDetails?.firstName}
                   </dd>
                 </div>
               </dl>

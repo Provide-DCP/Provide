@@ -10,6 +10,7 @@ function classNames(...classes) {
 
 export const LoginDropdown = () => {
   const { data: session } = useSession();
+  const { category } = session.userDetails;
   return (
     <Menu as='div' className='z-10 relative inline-block text-left'>
       <Menu.Button className='inline-flex justify-center w-full rounded-md px-4 py-2 bg-white text-md font-medium text-gray-500 '>
@@ -42,40 +43,27 @@ export const LoginDropdown = () => {
               </div>
             </Menu.Item>
           </div>
-          {/* <Menu.Item>
+
+          <Menu.Item>
             {({ active }) => (
-              <Link href='/admin/userlist'>
+              <Link
+                href={
+                  category === 'customer'
+                    ? `/customer/profile`
+                    : `dashboard/${category}/profile`
+                }
+              >
                 <span
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block px-4 py-2 text-sm cursor-pointer hover:bg-gray-50'
                   )}
                 >
-                  Users
+                  Profile
                 </span>
               </Link>
             )}
-          </Menu.Item> */}
-
-          {session?.userDetails?.category === 'student' && (
-            <Menu.Item>
-              {({ active }) => (
-                <Link
-                  href='/student/profile
-              '
-                >
-                  <span
-                    className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm cursor-pointer hover:bg-gray-50'
-                    )}
-                  >
-                    Profile
-                  </span>
-                </Link>
-              )}
-            </Menu.Item>
-          )}
+          </Menu.Item>
 
           <Menu.Item>
             <button

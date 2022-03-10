@@ -104,7 +104,10 @@ const Details = () => {
       });
 
       reloadSession();
-      router.push(`/dashboard/${category}`);
+
+      router.push(
+        category === 'customer' ? '/customer' : `/dashboard/${category}`
+      );
     } catch (error) {
       toast.error(error.message, {
         toastId: error,
@@ -356,9 +359,13 @@ export const getServerSideProps = async (context) => {
     };
   }
   if (session.userDetails) {
+    const category = session.userDetails.category;
     return {
       redirect: {
-        destination: `/dashboard/${session.userDetails.category}`,
+        destination:
+          category === 'customer'
+            ? `/customer`
+            : `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };
