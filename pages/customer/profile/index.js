@@ -152,16 +152,6 @@ const Profile = () => {
                   </dd>
                 </div>
               </dl>
-              <dl className='grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2'>
-                <div className='sm:col-span-1 mt-9'>
-                  <dt className='capitalize text-md font-medium text-gray-500'>
-                    Your Addresses
-                  </dt>
-                  <dd className=' text-md font-semibold text-gray-900'>
-                    {session?.userDetails?.firstName}
-                  </dd>
-                </div>
-              </dl>
             </div>
           </div>
         </div>

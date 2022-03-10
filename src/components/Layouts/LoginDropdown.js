@@ -10,7 +10,7 @@ function classNames(...classes) {
 
 export const LoginDropdown = () => {
   const { data: session } = useSession();
-  const { category } = session.userDetails;
+
   return (
     <Menu as='div' className='z-10 relative inline-block text-left'>
       <Menu.Button className='inline-flex justify-center w-full rounded-md px-4 py-2 bg-white text-md font-medium text-gray-500 '>
@@ -48,9 +48,9 @@ export const LoginDropdown = () => {
             {({ active }) => (
               <Link
                 href={
-                  category === 'customer'
+                  session?.userDetails?.category === 'customer'
                     ? `/customer/profile`
-                    : `dashboard/${category}/profile`
+                    : `dashboard/${session?.userDetails?.category}/profile`
                 }
               >
                 <span
