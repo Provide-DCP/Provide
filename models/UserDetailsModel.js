@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const userDetailsSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Types.ObjectId, ref: 'users' },
+    user: { type: mongoose.Types.ObjectId, ref: "users" },
     firstName: {
       type: String,
       required: true,
@@ -25,30 +25,58 @@ const userDetailsSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
-      default: 'customer',
+      default: "customer",
     },
-    address: [
+    addresses: [
       {
         name: {
           type: String,
           required: true,
         },
-        street: {
+        phone: {
+          type: Number,
+          required: true,
+        },
+        pincode: {
+          type: Number,
+          required: true,
+        },
+        building: {
           type: String,
           required: true,
         },
-        location: {
-          latitude: {
-            type: Number,
-            required: true,
-          },
-          longitude: {
-            type: Number,
-            required: true,
-          },
+        area: {
+          type: String,
+          required: true,
+        },
+        landmark: {
+          type: String,
+          required: true,
+        },
+        city: {
+          type: String,
+          required: true,
+        },
+        region: {
+          type: String,
+          required: true,
+        },
+        country: {
+          type: String,
+          required: true,
         },
       },
     ],
+    location: {
+      latitude: {
+        type: Number,
+        required: true,
+      },
+      longitude: {
+        type: Number,
+        required: true,
+      },
+    },
   },
   {
     timestamps: true,
@@ -56,4 +84,4 @@ const userDetailsSchema = new mongoose.Schema(
 );
 
 export default mongoose.models.userDetails ||
-  mongoose.model('userDetails', userDetailsSchema);
+  mongoose.model("userDetails", userDetailsSchema);

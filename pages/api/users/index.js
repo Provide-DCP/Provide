@@ -19,7 +19,7 @@ const createUserDetails = async (req, res) => {
   try {
     await connectDB();
 
-    const { userId, firstName, lastName, image, category, phone, address } =
+    const { userId, firstName, lastName, image, category, phone, location } =
       req.body;
 
     if (!userId) {
@@ -33,7 +33,7 @@ const createUserDetails = async (req, res) => {
       image,
       category,
       phone,
-      address,
+      location,
     });
 
     await createUserDetails.save();
