@@ -17,7 +17,9 @@ const CustomerAdd = () => {
   const { data: session } = useSession();
   const router = useRouter();
   const { id } = router.query;
-  const address = session.userDetails.addresses.filter((x) => x._id === id)[0];
+  const address = session?.userDetails?.addresses.filter(
+    (x) => x._id.toString() === id.toString()
+  )[0];
   const [name, setName] = useState(address?.name);
   const [phone, setPhone] = useState(address?.phone);
   const [building, setBuilding] = useState(address?.building);
@@ -33,7 +35,7 @@ const CustomerAdd = () => {
     e.preventDefault();
     const { data } = await axios.put("/api/users/address", {
       userId: session.userId,
-      addressId: address._id,
+      addressId: id,
       name,
       phone,
       pincode,
@@ -42,7 +44,7 @@ const CustomerAdd = () => {
       landmark,
       region: state,
       city,
-      country: selectedCountry,
+      country: selectedCountry.name,
     });
     reloadSession();
     toast.success(data.message, { toastId: data.message });
@@ -58,7 +60,7 @@ const CustomerAdd = () => {
           <div className="py-8 space-y-6 sm:pt-10 sm:space-y-5">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Add Address
+                Edit Address
               </h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
                 Use address where you can receive order.

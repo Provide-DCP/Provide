@@ -95,6 +95,7 @@ const updateAddress = async (req, res) => {
     await connectDB();
     const {
       userId,
+      addressId,
       name,
       phone,
       pincode,
@@ -105,33 +106,37 @@ const updateAddress = async (req, res) => {
       region,
       country,
     } = req.body;
-
     if (!userId) {
       return res.status(400).json({ message: "Invalid Credentials" });
     }
-
-    const details = await userDetails.findOneAndUpdate(
+    const details = await userDetails.findOne({
+      user: userId,
+    });
+    for (let i = 0; i < details.addresses.length; i++) {
+      if (details.addresses[i]._id.toString() === addressId.toString()) {
+        details.addresses[i] = {
+          _id: details.addresses[i]._id,
+          name,
+          phone,
+          pincode,
+          building,
+          area,
+          landmark,
+          city,
+          region,
+          country,
+        };
+      }
+    }
+    const updatedAddresses = await userDetails.findOneAndUpdate(
       { user: userId },
-      {
-        name,
-        phone,
-        pincode,
-        building,
-        area,
-        landmark,
-        city,
-        region,
-        country,
-      },
+      { addresses: details.addresses },
       { new: true }
     );
-    if (details) {
-      return res
-        .status(200)
-        .json({ message: "Address Updated!", addresses: details.addresses });
-    } else {
-      return res.status(200).json({ message: "Please try again!" });
-    }
+    res.json({
+      message: "Address Updated!",
+      addresses: updatedAddresses.addresses,
+    });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
