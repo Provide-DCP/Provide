@@ -153,6 +153,7 @@ const Profile = () => {
                 </div>
               </dl>
               <Link href='/address'>Your addresses</Link>
+              <Link href='/orders'>Your Orders</Link>
             </div>
           </div>
         </div>
