@@ -1,7 +1,17 @@
 import React from 'react';
 import { getSession } from 'next-auth/react';
+import { ProductList } from '../../../src/components/Customer/ProductList';
+
 const index = () => {
-  return <div>Dashboard</div>;
+  return (
+    <main className='mt-5'>
+      <section className='flex flex-col lg:flex-row justify-evenly w-11/12 mx-auto'>
+        <div className='w-full lg:w-11/12'>
+          <ProductList />
+        </div>
+      </section>
+    </main>
+  );
 };
 
 export const getServerSideProps = async (context) => {
