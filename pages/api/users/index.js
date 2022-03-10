@@ -70,7 +70,7 @@ const searchUserDetails = async (req, res) => {
 const updateUserDetails = async (req, res) => {
   try {
     await connectDB();
-    const { firstName, lastName, userId } = req.body;
+    const { firstName, lastName, phone, image, userId } = req.body;
 
     if (!userId) {
       return res.status(400).json({ message: 'Invalid Credentials' });
@@ -81,6 +81,8 @@ const updateUserDetails = async (req, res) => {
       {
         firstName,
         lastName,
+        phone,
+        image,
       },
       { new: true }
     );
