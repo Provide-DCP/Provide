@@ -1,15 +1,15 @@
-import connectDB from "../../../src/lib/connectDB.js";
-import userDetails from "../../../models/UserDetailsModel";
+import connectDB from '../../../src/lib/connectDB.js';
+import userDetails from '../../../models/UserDetailsModel';
 
 export default async function handler(req, res) {
   switch (req.method) {
-    case "GET":
+    case 'GET':
       await searchUserDetails(req, res);
       break;
-    case "POST":
+    case 'POST':
       await createUserDetails(req, res);
       break;
-    case "PUT":
+    case 'PUT':
       await updateUserDetails(req, res);
       break;
   }
@@ -19,11 +19,10 @@ const createUserDetails = async (req, res) => {
   try {
     await connectDB();
 
-    const { firstName, lastName, category, email, phone, userId, image } =
-      req.body;
+    const { firstName, lastName, category, phone, userId } = req.body;
 
     if (!userId) {
-      return res.status(400).json({ message: "Invalid Credentials" });
+      return res.status(400).json({ message: 'Invalid Credentials' });
     }
 
     const createUserDetails = new userDetails({
@@ -32,13 +31,12 @@ const createUserDetails = async (req, res) => {
       lastName,
       category,
       emailList: [email],
-      image: image || "/favicon.ico",
       phone,
     });
 
     await createUserDetails.save();
     res.json({
-      message: "Success! User Details Created",
+      message: 'Success! User Details Created',
       details: createUserDetails,
     });
   } catch (error) {
@@ -52,7 +50,7 @@ const searchUserDetails = async (req, res) => {
     const userId = req.query.userId;
 
     if (!userId) {
-      return res.status(400).json({ message: "Invalid Credentials" });
+      return res.status(400).json({ message: 'Invalid Credentials' });
     }
 
     const details = await userDetails.findOne({
@@ -60,9 +58,9 @@ const searchUserDetails = async (req, res) => {
     });
 
     if (details) {
-      return res.status(200).json({ message: "Details Found", details });
+      return res.status(200).json({ message: 'Details Found', details });
     } else {
-      return res.status(200).json({ message: "Details not found" });
+      return res.status(200).json({ message: 'Details not found' });
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });
@@ -72,10 +70,10 @@ const searchUserDetails = async (req, res) => {
 const updateUserDetails = async (req, res) => {
   try {
     await connectDB();
-    const { firstName, lastName, email, userId, image } = req.body;
+    const { firstName, lastName, userId } = req.body;
 
     if (!userId) {
-      return res.status(400).json({ message: "Invalid Credentials" });
+      return res.status(400).json({ message: 'Invalid Credentials' });
     }
 
     const details = await userDetails.findOneAndUpdate(
@@ -83,15 +81,13 @@ const updateUserDetails = async (req, res) => {
       {
         firstName,
         lastName,
-        emailList: [email],
-        image,
       },
       { new: true }
     );
     if (details) {
-      return res.status(200).json({ message: "Details Updated", details });
+      return res.status(200).json({ message: 'Details Updated', details });
     } else {
-      return res.status(200).json({ message: "Please try again!" });
+      return res.status(200).json({ message: 'Please try again!' });
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });
