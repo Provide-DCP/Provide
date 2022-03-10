@@ -2,7 +2,7 @@ import { getSession, useSession } from "next-auth/react";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
-import { reloadSession } from "../../src/lib/helper";
+import { reloadSession } from "../../../src/lib/helper";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
@@ -16,19 +16,24 @@ function classNames(...classes) {
 const CustomerAdd = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [building, setBuilding] = useState("");
-  const [area, setArea] = useState("");
-  const [landmark, setLandmark] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [pincode, setPincode] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState(country[0]);
+  const { id } = router.query;
+  const address = session.userDetails.addresses.filter((x) => x._id === id)[0];
+  const [name, setName] = useState(address?.name);
+  const [phone, setPhone] = useState(address?.phone);
+  const [building, setBuilding] = useState(address?.building);
+  const [area, setArea] = useState(address?.area);
+  const [landmark, setLandmark] = useState(address?.landmark);
+  const [city, setCity] = useState(address?.city);
+  const [state, setState] = useState(address?.region);
+  const [pincode, setPincode] = useState(address?.pincode);
+  const [selectedCountry, setSelectedCountry] = useState({
+    name: address?.country,
+  });
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    const { data } = await axios.post("/api/users/address", {
+    const { data } = await axios.put("/api/users/address", {
       userId: session.userId,
+      addressId: address._id,
       name,
       phone,
       pincode,
@@ -37,7 +42,7 @@ const CustomerAdd = () => {
       landmark,
       region: state,
       city,
-      country: selectedCountry.name,
+      country: selectedCountry,
     });
     reloadSession();
     toast.success(data.message, { toastId: data.message });
