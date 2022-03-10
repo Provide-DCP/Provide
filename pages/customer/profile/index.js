@@ -152,6 +152,7 @@ const Profile = () => {
                   </dd>
                 </div>
               </dl>
+              <Link href='/address'>Your addresses</Link>
             </div>
           </div>
         </div>
