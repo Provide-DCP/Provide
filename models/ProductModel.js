@@ -1,0 +1,58 @@
+import mongoose from 'mongoose';
+
+const storeSchema = new mongoose.Schema(
+  {
+    user: { type: mongoose.Types.ObjectId, ref: 'users' },
+    store: { type: mongoose.Types.ObjectId, ref: 'store' },
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: String,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    available: {
+      type: Boolean,
+      required: true,
+      default: 'true',
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    ratings: [
+      {
+        user: { type: mongoose.Types.ObjectId, ref: 'users' },
+        rating: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
+    reviews: [
+      {
+        user: { type: mongoose.Types.ObjectId, ref: 'users' },
+        review: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
+
+export default mongoose.models.storeSchema ||
+  mongoose.model('Store', storeSchema);

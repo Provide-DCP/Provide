@@ -1,0 +1,41 @@
+Goals Included
+	Zero Hunger
+	No Poverty
+	Good Health and Well Being
+
+MODELS
+	Admin
+		name, email, password.
+	User	
+		userId, firstName, lastName, username, category, email, password, mobile number, address.
+	Store	
+		providerId, 
+	
+	Order
+		orderId, productId, userId, dateOfOrder, status.
+	Payment
+
+FEATURES
+
+	Authentication Flows
+		Features :- User SignUp, User Login.
+		Sign Up Flow :- 
+			Sign Up Page -> Enter First Name, Last Name, Mobile Number, Email, Username (has to be unique), Create Password, Confirm Password -> Pick Category (Customer, Provider, Volunteer) -> (If Provider) Enter Valid Address -> Dashboard
+		Login Flow :-
+			Login Page -> Enter Username, Password -> Dashboard
+	
+	User FLows :-
+		Edit Profile
+		Delete Account
+		Contact Us
+
+	Provider Flows
+		New Provider -> Dashboard(/dashboard/provider) -> Add a store -> Form(/dashboard/provider/store/add)[name, image, location, geolocation, purpose] -> Submit -> Admin approval Pending(/dashboard/provider) -> Approved(/dashboard/provider) -> Add products -> Form(/dashboard/provider/store/product/add)[name, price, image, category, quantity, description] -> Store(/dashboard/provider/store)
+
+	Customer Flows
+		Buy item, Access health service(Geo-location)
+		-> Login/ Signup -> Dashboard(Categories) -> Pick Category -> Pick item -> Order status -> IF Success recieve OTP -> Pick a service -> Send location -> Get It Done
+		
+	Volunteer Flows
+		Pick a request, complete a request
+		-> Login/ Signup -> Dashboard(Rating graph, (hours spent, no of customers)) -> Pick a request -> Track location -> Provide service -> Enter OTP -> Close Request
