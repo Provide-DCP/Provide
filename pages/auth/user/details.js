@@ -75,7 +75,9 @@ const Details = () => {
         userId: session.userId,
         firstName,
         lastName,
-        image: session.user.image || '/favicon.ico',
+        image:
+          session.user.image ||
+          'http://res.cloudinary.com/dj7nomqfd/image/upload/v1647117869/uploads/bphhxvmlcyyu2pntbikm.png',
         category,
         phone,
       });
@@ -83,7 +85,9 @@ const Details = () => {
       reloadSession();
 
       router.push(
-        category === 'customer' ? '/customer' : `/dashboard/${category}`
+        category === 'customer/products'
+          ? '/customer'
+          : `/dashboard/${category}`
       );
     } catch (error) {
       toast.error(error.message, {
