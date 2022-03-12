@@ -1,17 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { getSession } from 'next-auth/react';
-import { Layout } from '../../../src/components/Student/Dashboard/Layout';
+import { Layout } from '../../../src/components/Dashboard/Layout';
+import { Status } from '../../../src/components/Provider/Status';
+import axios from 'axios';
 
-const Index = () => {
-  return (
-    <div>
-      <Layout />
-    </div>
-  );
+const flows = [
+  { id: '01', name: 'Create Store', href: '#', status: 'current' },
+  { id: '02', name: 'Store Approval', href: '#', status: 'upcoming' },
+  { id: '03', name: 'Add Product', href: '#', status: 'upcoming' },
+];
+
+const Index = ({ store }) => {
+  const [steps, setSteps] = useState(flows);
+  if (!store)
+    return (
+      <main className='max-w-7xl mx-auto'>
+        <h1 className='text-start my-10 text-3xl font-bold uppercase text-gray-600'>
+          Setup Account
+        </h1>
+        <Status steps={steps} />
+      </main>
+    );
+
+  return <h1>Hello</h1>;
 };
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
+
+  // const store = await axios.get('http://localhost:3000/api/store', {
+  //   params: {
+  //     userId: session.userId,
+  //   },
+  // });
+
+  const store = false;
 
   if (!session) {
     return {
@@ -56,6 +79,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       session,
+      store,
     },
   };
 };
