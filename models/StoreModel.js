@@ -34,9 +34,15 @@ const storeSchema = new mongoose.Schema(
         required: true,
       },
     ],
-    status: {
+    approved: {
       type: String,
       required: true,
+      default: false,
+    },
+    open: {
+      type: Boolean,
+      required: true,
+      default: true,
     },
     timings: {
       start: {
