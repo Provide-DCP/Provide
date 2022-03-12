@@ -26,7 +26,7 @@ const Index = ({ store }) => {
       </main>
     );
 
-  return <h1>Hello</h1>;
+  return <main className='max-w-7xl mx-auto'>Hello</main>;
 };
 
 export const getServerSideProps = async (context) => {
