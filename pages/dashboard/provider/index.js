@@ -3,6 +3,7 @@ import { getSession } from 'next-auth/react';
 import { Layout } from '../../../src/components/Dashboard/Layout';
 import { Status } from '../../../src/components/Provider/Status';
 import axios from 'axios';
+import { EmptyState } from '../../../src/components/Provider/EmptyState';
 
 const flows = [
   { id: '01', name: 'Create Store', href: '#', status: 'current' },
@@ -19,6 +20,9 @@ const Index = ({ store }) => {
           Setup Account
         </h1>
         <Status steps={steps} />
+        <div className='my-20'>
+          <EmptyState />
+        </div>
       </main>
     );
 
