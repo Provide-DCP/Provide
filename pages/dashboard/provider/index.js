@@ -13,12 +13,14 @@ const flows = [
 
 const Index = ({ store }) => {
   const [steps, setSteps] = useState(flows);
-  <h1 className='text-start my-10 text-3xl font-bold uppercase text-gray-600'>
-    Setup Account
-  </h1>;
+
   if (!store)
     return (
       <main className='max-w-7xl mx-auto'>
+        <h1 className='text-start my-10 text-3xl font-bold uppercase text-gray-600'>
+          Setup Account
+        </h1>
+        <Status steps={steps} />
         <div className='my-20'>
           <EmptyState />
         </div>

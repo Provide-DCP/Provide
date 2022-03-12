@@ -71,11 +71,11 @@ const Details = () => {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:3000/api/users', {
+      await axios.post('/api/users', {
         userId: session.userId,
         firstName,
         lastName,
-        image: session.user.image,
+        image: session.user.image || '/favicon.ico',
         category,
         phone,
       });
