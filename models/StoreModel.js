@@ -1,19 +1,17 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const storeSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Types.ObjectId, ref: 'users' },
+    user: { type: mongoose.Types.ObjectId, ref: "users" },
     name: {
       type: String,
       required: true,
       trim: true,
     },
-    images: [
-      {
-        type: String,
-        required: true,
-      },
-    ],
+    image: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -45,18 +43,18 @@ const storeSchema = new mongoose.Schema(
       default: true,
     },
     timings: {
-      start: {
+      from: {
         type: String,
         required: true,
       },
-      end: {
+      to: {
         type: String,
         required: true,
       },
     },
     ratings: [
       {
-        user: { type: mongoose.Types.ObjectId, ref: 'users' },
+        user: { type: mongoose.Types.ObjectId, ref: "users" },
         rating: {
           type: Number,
           required: true,
@@ -65,7 +63,7 @@ const storeSchema = new mongoose.Schema(
     ],
     reviews: [
       {
-        user: { type: mongoose.Types.ObjectId, ref: 'users' },
+        user: { type: mongoose.Types.ObjectId, ref: "users" },
         review: {
           type: String,
           required: true,
@@ -79,11 +77,11 @@ const storeSchema = new mongoose.Schema(
           required: true,
         },
         phone: {
-          type: Number,
+          type: String,
           required: true,
         },
         pincode: {
-          type: Number,
+          type: String,
           required: true,
         },
         building: {
@@ -127,4 +125,4 @@ const storeSchema = new mongoose.Schema(
 );
 
 export default mongoose.models.storeSchema ||
-  mongoose.model('store', storeSchema);
+  mongoose.model("store", storeSchema);
