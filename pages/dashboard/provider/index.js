@@ -3,26 +3,29 @@ import { getSession } from 'next-auth/react';
 import { Layout } from '../../../src/components/Dashboard/Layout';
 import { Status } from '../../../src/components/Provider/Status';
 import axios from 'axios';
+import { EmptyState } from '../../../src/components/Provider/EmptyState';
 
 const flows = [
-  { id: '01', name: 'Create Store', href: '#', status: 'current' },
-  { id: '02', name: 'Store Approval', href: '#', status: 'upcoming' },
+  { id: '01', name: 'Create Store', href: '#', status: 'complete' },
+  { id: '02', name: 'Store Approval', href: '#', status: 'current' },
   { id: '03', name: 'Add Product', href: '#', status: 'upcoming' },
 ];
 
 const Index = ({ store }) => {
   const [steps, setSteps] = useState(flows);
+  <h1 className='text-start my-10 text-3xl font-bold uppercase text-gray-600'>
+    Setup Account
+  </h1>;
   if (!store)
     return (
       <main className='max-w-7xl mx-auto'>
-        <h1 className='text-start my-10 text-3xl font-bold uppercase text-gray-600'>
-          Setup Account
-        </h1>
-        <Status steps={steps} />
+        <div className='my-20'>
+          <EmptyState />
+        </div>
       </main>
     );
 
-  return <h1>Hello</h1>;
+  return <main className='max-w-7xl mx-auto'>Hello</main>;
 };
 
 export const getServerSideProps = async (context) => {

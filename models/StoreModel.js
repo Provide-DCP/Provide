@@ -8,10 +8,12 @@ const storeSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    image: {
-      type: String,
-      required: true,
-    },
+    images: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
     email: {
       type: String,
       required: true,
@@ -19,6 +21,38 @@ const storeSchema = new mongoose.Schema(
     purpose: {
       type: String,
       required: true,
+    },
+    categories: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
+    cuisines: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
+    approved: {
+      type: String,
+      required: true,
+      default: false,
+    },
+    open: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
+    timings: {
+      start: {
+        type: String,
+        required: true,
+      },
+      end: {
+        type: String,
+        required: true,
+      },
     },
     ratings: [
       {
