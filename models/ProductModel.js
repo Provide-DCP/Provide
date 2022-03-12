@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const storeSchema = new mongoose.Schema(
+const productSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Types.ObjectId, ref: 'users' },
     store: { type: mongoose.Types.ObjectId, ref: 'store' },
@@ -54,5 +54,5 @@ const storeSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.storeSchema ||
-  mongoose.model('Store', storeSchema);
+export default mongoose.models.productSchema ||
+  mongoose.model('products', productSchema);

@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const storeSchema = new mongoose.Schema(
+const storeDetailsSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Types.ObjectId, ref: "users" },
+    user: { type: mongoose.Types.ObjectId, ref: 'users' },
     name: {
       type: String,
       required: true,
@@ -54,7 +54,7 @@ const storeSchema = new mongoose.Schema(
     },
     ratings: [
       {
-        user: { type: mongoose.Types.ObjectId, ref: "users" },
+        user: { type: mongoose.Types.ObjectId, ref: 'users' },
         rating: {
           type: Number,
           required: true,
@@ -63,7 +63,7 @@ const storeSchema = new mongoose.Schema(
     ],
     reviews: [
       {
-        user: { type: mongoose.Types.ObjectId, ref: "users" },
+        user: { type: mongoose.Types.ObjectId, ref: 'users' },
         review: {
           type: String,
           required: true,
@@ -124,5 +124,5 @@ const storeSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.storeSchema ||
-  mongoose.model("store", storeSchema);
+export default mongoose.models.storeDetails ||
+  mongoose.model('storeDetails', storeDetailsSchema);
