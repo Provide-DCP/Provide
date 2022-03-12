@@ -26,6 +26,9 @@ const StoreAdd = () => {
   };
   return (
     <div className='space-y-6 max-w-7xl mx-auto my-10'>
+      <h1 className='text-start my-10 text-3xl font-bold text-gray-600'>
+        Create Store
+      </h1>
       <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6'>
         <div className='md:grid md:grid-cols-3 md:gap-6'>
           <div className='md:col-span-1'>
