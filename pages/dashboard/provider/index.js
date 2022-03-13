@@ -4,6 +4,7 @@ import { Layout } from "../../../src/components/Dashboard/Layout";
 import { Status } from "../../../src/components/Provider/Status";
 import axios from "axios";
 import { EmptyState } from "../../../src/components/Provider/EmptyState";
+import Link from "next/link";
 
 const flows = [
   { id: "01", name: "Create Store", href: "#", status: "current" },
@@ -17,12 +18,14 @@ const Index = ({ store }) => {
   if (store && steps[0].status !== "complete") {
     let newstate = flows;
     newstate[0].status = "complete";
+    newstate[1].status = "current";
     setSteps([...newstate]);
   }
 
   if (store.approved && steps[1].status !== "complete") {
     let newstate = flows;
     newstate[1].status = "complete";
+    newstate[2].status = "current";
     setSteps([...newstate]);
   }
 
@@ -38,7 +41,12 @@ const Index = ({ store }) => {
         ) : !store.approved ? (
           "Please wait for approval"
         ) : (
-          "add you first product"
+          <>
+            <p>add you first product</p>
+            <Link href="/dashboard/provider/store/products/add">
+              Add product
+            </Link>
+          </>
         )}
       </div>
     </main>
