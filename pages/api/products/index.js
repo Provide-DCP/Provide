@@ -24,7 +24,7 @@ const searchProducts = async (req, res) => {
       store: storeId,
     });
 
-    if (store) {
+    if (products) {
       return res.status(200).json({ message: "products Found", products });
     } else {
       return res

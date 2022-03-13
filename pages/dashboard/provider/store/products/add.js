@@ -13,7 +13,7 @@ const AddProduct = ({ store }) => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
-  const [price, setPrice] = useState();
+  const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("");
   const [available, setAvailable] = useState(true);
   const [description, setDescription] = useState("");
@@ -40,23 +40,27 @@ const AddProduct = ({ store }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const {
-      data: { message },
-    } = await axios.post("http://localhost:3000/api/products", {
-      userId: session.userId,
-      storeId: store._id,
-      name,
-      image: "adfa",
-      price,
-      category,
-      available,
-      description,
-    });
-    if (message == "Success! Product Created") {
-      toast.success(message, { toastId: message });
-      router.push("/dashboard/provider");
-    } else {
-      toast.error(message, { toastId: message });
+    try {
+      const {
+        data: { message },
+      } = await axios.post("http://localhost:3000/api/products", {
+        userId: session.userId,
+        storeId: store._id,
+        name,
+        image: "adfa",
+        price: parseInt(price),
+        category,
+        available,
+        description,
+      });
+      if (message == "Success! Product Created") {
+        toast.success(message, { toastId: message });
+        router.push("/dashboard/provider");
+      } else {
+        toast.error(message, { toastId: message });
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 

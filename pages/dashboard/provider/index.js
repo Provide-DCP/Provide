@@ -12,9 +12,9 @@ const flows = [
   { id: "03", name: "Add Product", href: "#", status: "upcoming" },
 ];
 
-const Index = ({ store }) => {
+const Index = ({ store, products }) => {
   const [steps, setSteps] = useState(flows);
-
+  console.log(products);
   if (store && steps[0].status !== "complete") {
     let newstate = flows;
     newstate[0].status = "complete";
@@ -27,6 +27,20 @@ const Index = ({ store }) => {
     newstate[1].status = "complete";
     newstate[2].status = "current";
     setSteps([...newstate]);
+  }
+
+  if (products.length > 0 && steps[2].status !== "complete") {
+    let newstate = flows;
+    newstate[2].status = "complete";
+    setSteps([...newstate]);
+  }
+
+  if (
+    steps[0].status === "complete" &&
+    steps[1].status === "complete" &&
+    steps[2].status === "complete"
+  ) {
+    return <>Store index page</>;
   }
 
   return (
@@ -92,11 +106,22 @@ export const getServerSideProps = async (context) => {
     },
   });
   const { store } = data;
+  let products = [];
+  if (store) {
+    const { data } = await axios.get("http://localhost:3000/api/products", {
+      params: {
+        storeId: store._id,
+      },
+    });
+    console.log(data);
+    products = data.products;
+  }
 
   return {
     props: {
       session,
       store,
+      products,
     },
   };
 };
