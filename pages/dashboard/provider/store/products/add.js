@@ -42,17 +42,19 @@ const AddProduct = ({ store }) => {
     e.preventDefault();
     const {
       data: { message },
-    } = await axios.put("http://localhost:3000/api/users", {
+    } = await axios.post("http://localhost:3000/api/products", {
       userId: session.userId,
-      firstName,
-      lastName,
-      phone,
-      image,
+      storeId: store._id,
+      name,
+      image: "adfa",
+      price,
+      category,
+      available,
+      description,
     });
-    if (message == "Details Updated") {
+    if (message == "Success! Product Created") {
       toast.success(message, { toastId: message });
-      reloadSession();
-      router.push("/customer/profile");
+      router.push("/dashboard/provider");
     } else {
       toast.error(message, { toastId: message });
     }
@@ -73,7 +75,7 @@ const AddProduct = ({ store }) => {
           <div className="space-y-6 sm:space-y-5">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Personal Information
+                Product Information
               </h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
                 Use a permanent address where you can receive mail.
@@ -85,15 +87,15 @@ const AddProduct = ({ store }) => {
                   htmlFor="firstName"
                   className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
-                  First name
+                  name
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                   <input
                     type="text"
-                    name="firstName"
-                    id="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    name="name"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     autoComplete="given-name"
                     className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   />
@@ -105,16 +107,15 @@ const AddProduct = ({ store }) => {
                   htmlFor="lastName"
                   className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
-                  Last name
+                  Price
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                   <input
-                    type="text"
-                    name="lastName"
-                    id="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    autoComplete="family-name"
+                    type="number"
+                    name="price"
+                    id="price"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
                     className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -125,16 +126,15 @@ const AddProduct = ({ store }) => {
                   htmlFor="phone"
                   className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
-                  Mobile Number
+                  Category
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                   <input
                     type="text"
-                    name="phone"
-                    id="phone"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    autoComplete="tel"
+                    name="category"
+                    id="category"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
                     className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -142,10 +142,10 @@ const AddProduct = ({ store }) => {
 
               <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                 <label
-                  htmlFor="registered-email"
+                  htmlFor="description"
                   className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
-                  Email address
+                  Description
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2">
                   {status === "loading" ? (
@@ -153,13 +153,13 @@ const AddProduct = ({ store }) => {
                       <input className="max-w-lg block w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 cursor-not-allowed bg-gray-200 rounded-md h-10"></input>
                     </div>
                   ) : (
-                    <input
-                      id="registered-email"
-                      name="registered-email"
-                      type="email"
-                      value={session?.user?.email || ""}
-                      disabled={true}
-                      className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 cursor-not-allowed bg-gray-200 rounded-md"
+                    <textarea
+                      id="description"
+                      name="description"
+                      type="text"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                     />
                   )}
                 </div>
@@ -170,7 +170,7 @@ const AddProduct = ({ store }) => {
             <div>
               <div>
                 <h3 className="text-lg leading-6 font-medium text-gray-900">
-                  Profile
+                  Product Image
                 </h3>
                 <p className="mt-1 max-w-2xl text-sm text-gray-500">
                   This information will be displayed publicly so be careful what
@@ -236,8 +236,8 @@ const AddProduct = ({ store }) => {
                 type="submit"
                 disabled={loading}
                 className={`${
-                  loading ? "cursor-not-allowed" : ""
-                } ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700`}
+                  loading ? "cursor-not-allowed" : "hover:bg-blue-700"
+                } ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600`}
               >
                 Save
               </button>
