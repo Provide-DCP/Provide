@@ -71,7 +71,7 @@ const AddProduct = ({ store }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='md:ml-60 mt-10 '>
+      <main className='md:ml-60 mt-10 px-10'>
         <form
           onSubmit={submitHandler}
           className='max-w-5xl mx-auto space-y-8 divide-y divide-gray-200 px-10'

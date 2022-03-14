@@ -18,9 +18,7 @@ export default function App({
         router.pathname.search('provider') === -1 && <Navbar />}
       {router.pathname.split('/')[1] !== 'auth' &&
         router.pathname !== '/' &&
-        router.pathname.search('provider') !== -1 && (
-          <Sidebar session={session} />
-        )}
+        router.pathname.search('provider') !== -1 && <Sidebar />}
       <Component {...pageProps} />
       <ToastContainer />
     </SessionProvider>
