@@ -35,7 +35,7 @@ export default async function auth(req, res) {
           await transport.sendMail({
             to: email,
             from,
-            subject: `Sign inasdfgadfas to ${host}`,
+            subject: `Sign in to ${host}`,
             text: text({ url, host }),
             html: html({ url, host, email }),
           });
