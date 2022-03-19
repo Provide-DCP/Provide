@@ -9,6 +9,9 @@ export default async function handler(req, res) {
     case "PUT":
       await updateProduct(req, res);
       break;
+    case "DELETE":
+      await deleteProduct(req, res);
+      break;
   }
 }
 
@@ -47,7 +50,6 @@ const updateProduct = async (req, res) => {
       productId,
       {
         user: userId,
-        store: storeId,
         name,
         image,
         price,
@@ -59,7 +61,22 @@ const updateProduct = async (req, res) => {
       { new: true }
     );
     if (product) {
-      return res.status(200).json({ message: "product update", product });
+      return res.status(200).json({ message: "Product Updated!", product });
+    } else {
+      return res.status(200).json({ message: "Please try again", product: false });
+    }
+  } catch (error) {
+    return res.status(200).json({ message: error.message });
+  }
+};
+
+const deleteProduct = async (req, res) => {
+  try {
+    await connectDB();
+    const productId = req.query.id;
+    const product = await Product.findByIdAndDelete(productId);
+    if (product) {
+      return res.status(200).json({ message: "Product Deleted!", product });
     } else {
       return res.status(200).json({ message: "Please try again", product: false });
     }

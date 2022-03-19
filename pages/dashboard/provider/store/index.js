@@ -30,11 +30,11 @@ const Store = ({ store }) => {
         </div>
       </div>
       <div className="mt-2 px-3 flex flex-col">
-        <div className="text-xl font-light mb-4">
+        <div className="text-xl font-light mb-4 mt-2">
           {store?.categories.map((category, index) => {
             return (
               <p
-                className="inline-block border rounded-md bg-gray-100 py-2 px-4 mr-3 text-base"
+                className="inline-block border rounded-md bg-gray-100 py-1 px-3 mr-3 text-base"
                 key={index}
               >
                 {category}
@@ -57,6 +57,13 @@ const Store = ({ store }) => {
       >
         <FaDirections />
         <span className="ml-2 text-gray-800">Direction</span>
+      </a>
+      <a
+        href={`/dashboard/provider/store/edit`}
+        className="inline-flex items-center border-2 mx-2 my-1 py-1 px-2 rounded-md text-red-400 hover:bg-gray-100
+        "
+      >
+        <span className="ml-2 text-gray-800">Edit</span>
       </a>
       <div className="my-5">
         <h1 className="text-center text-3xl font-bold text-gray-500">Store Reviews</h1>

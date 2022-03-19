@@ -1,11 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { StarIcon } from "@heroicons/react/solid";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
+import { toast } from "react-toastify";
 import axios from "axios";
-import { ProductOption } from "../../../../src/components/Provider/ProductOption";
+import { ProductOption } from "../../../../../src/components/Provider/ProductOption";
+import { useRouter } from "next/router";
 
 export default function Product({ store, product }) {
+  const router = useRouter();
   const [selectedColor, setSelectedColor] = useState(
     product.variations.colors.length > 0 ? product.variations.colors[0] : ""
   );
@@ -20,6 +23,23 @@ export default function Product({ store, product }) {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
+
+  const handleDelete = async () => {
+    try {
+      const {
+        data: { message },
+      } = await axios.delete(`http://localhost:3000/api/products/${product._id}`);
+      console.log(message);
+      if (message === "Product Deleted!") {
+        toast.success(message, { toastId: message });
+        router.push("/dashboard/provider/products");
+      } else {
+        toast.error(message, { toastId: message });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div className="ml-[14%] w-[86%] flex text-base text-left w-full md:inline-block md:my-8 md:align-middle">
@@ -70,7 +90,7 @@ export default function Product({ store, product }) {
                 Product options
               </h3>
 
-              <form>
+              <div>
                 {product.variations.sizes.length > 0 && (
                   <ProductOption
                     name="Size"
@@ -104,19 +124,19 @@ export default function Product({ store, product }) {
                   />
                 )}
 
-                <button
-                  type="submit"
+                <a
+                  href={`/dashboard/provider/products/${product._id}/edit`}
                   className="mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Edit Product
-                </button>
-                <button
-                  type="submit"
-                  className="mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                </a>
+                <div
+                  onClick={handleDelete}
+                  className="mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer"
                 >
-                  D Product
-                </button>
-              </form>
+                  Delete Product
+                </div>
+              </div>
             </section>
           </div>
         </div>
@@ -154,7 +174,11 @@ export const getServerSideProps = async (context) => {
     },
   });
 
-  if (session.userDetails.category !== "provider" || !store) {
+  const {
+    data: { product },
+  } = await axios.get(`http://localhost:3000/api/products/${context.query.id}`);
+
+  if (session.userDetails.category !== "provider" || !store || !product) {
     const category = session.userDetails.category;
     return {
       redirect: {
@@ -163,12 +187,6 @@ export const getServerSideProps = async (context) => {
         permanent: false,
       },
     };
-  }
-
-  let product = null;
-  if (store) {
-    const { data } = await axios.get(`http://localhost:3000/api/products/${context.query.id}`);
-    product = data.product;
   }
 
   return {
