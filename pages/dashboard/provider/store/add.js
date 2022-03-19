@@ -12,11 +12,11 @@ function classNames(...classes) {
 }
 
 const categoriesOptions = [
-  { id: 1, title: "food" },
-  { id: 2, title: "clothes" },
-  { id: 3, title: "medicines" },
-  { id: 4, title: "furniture" },
-  { id: 5, title: "books" },
+  { id: 1, title: "Food" },
+  { id: 2, title: "Clothes" },
+  { id: 3, title: "Medicines" },
+  { id: 4, title: "Furniture" },
+  { id: 5, title: "Books" },
 ];
 
 const StoreAdd = () => {

@@ -110,7 +110,7 @@ const Index = ({ store, products }) => {
               <div id="addProduct" className="hidden absolute w-full top-20">
                 <EmptyState
                   heading="Add Product"
-                  link="/dashboard/provider/store/products/add"
+                  link="/dashboard/provider/products/add"
                   Icon={BiStore}
                 />
               </div>

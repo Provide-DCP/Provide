@@ -55,7 +55,7 @@ const AddProduct = ({ store }) => {
       });
       if (message == "Success! Product Created") {
         toast.success(message, { toastId: message });
-        router.push("/dashboard/provider/store/products");
+        router.push("/dashboard/provider/products");
       } else {
         toast.error(message, { toastId: message });
       }
