@@ -7,7 +7,7 @@ import { FaDirections } from 'react-icons/fa';
 
 const Store = ({ store }) => {
   return (
-    <main className='md:ml-[14%] mt-[2%] px-10'>
+    <main className='md:ml-[14%] mt-[2%] sm:px-10'>
       <div className='rounded-md max-w-[100%] mx-auto h-[450px] inset-0'>
         <img
           className='w-full h-full object-cover rounded-md'
@@ -15,11 +15,11 @@ const Store = ({ store }) => {
           alt='store-image'
         />
       </div>
-      <div className='mt-5 px-2 flex flex-col md:flex-row items-center justify-between'>
+      <div className='mt-5 px-2 flex flex-col md:flex-row md:items-center justify-between'>
         <h1 className='text-4xl font-semibold text-gray-800'>{store?.name}</h1>
         <div className='flex items-center'>
-          <div className='w-16 flex items-center justify-between px-3 rounded-md bg-green-600 mr-2 text-white py-1'>
-            <span className='font-bold mr-1'>4.2</span>
+          <div className='my-2 md:my-0 w-16 flex items-center justify-between px-3 rounded-md bg-green-600 mr-2 text-white py-1'>
+            <span className='font-bold mr-1'>0.0</span>
             <AiFillStar />
           </div>
           <p className='text-sm font-semibold text-gray-600'>
@@ -45,12 +45,27 @@ const Store = ({ store }) => {
       </div>
       <a
         href={`https://www.google.com/maps/dir/?api=1&destination=${store?.addresses[0]?.location?.latitude},${store?.addresses[0]?.location?.longitude}`}
-        className='inline-flex items-center border-2 mx-2'
+        className='inline-flex items-center border-2 mx-2 my-1 py-1 px-2 rounded-md text-red-400 hover:bg-gray-100
+        '
         target={`_blank`}
       >
         <FaDirections />
-        <span className=''>Direction</span>
+        <span className='ml-2 text-gray-800'>Direction</span>
       </a>
+      <div className='my-5'>
+        <h1 className='text-center text-3xl font-bold text-gray-500'>
+          Store Reviews
+        </h1>
+        <div className='my-10'>
+          {store?.reviews?.length === 0 ? (
+            <p className='px-2 text-lg tracking-wide font-semibold text-gray-700'>
+              No Reviews Yet
+            </p>
+          ) : (
+            ''
+          )}
+        </div>
+      </div>
     </main>
   );
 };
