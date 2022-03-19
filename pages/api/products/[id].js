@@ -36,30 +36,33 @@ const updateProduct = async (req, res) => {
   try {
     await connectDB();
 
-    const { userId, storeId, name, image, price, category, available, description, variations } =
+    const { userId, productId, name, image, price, category, available, description, variations } =
       req.body;
 
-    if (!userId || !storeId) {
+    if (!userId) {
       return res.status(400).json({ message: "Invalid Credentials" });
     }
 
-    const product = new Product({
-      user: userId,
-      store: storeId,
-      name,
-      image,
-      price,
-      category,
-      available,
-      description,
-      variations,
-    });
-
-    await product.save();
-    res.json({
-      message: "Success! Product Created",
-      product,
-    });
+    const product = await Product.findByIdAndUpdate(
+      productId,
+      {
+        user: userId,
+        store: storeId,
+        name,
+        image,
+        price,
+        category,
+        available,
+        description,
+        variations,
+      },
+      { new: true }
+    );
+    if (product) {
+      return res.status(200).json({ message: "product update", product });
+    } else {
+      return res.status(200).json({ message: "Please try again", product: false });
+    }
   } catch (error) {
     return res.status(200).json({ message: error.message });
   }
