@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import Loader from '../../../../src/components/Layouts/Loader';
 import { reloadSession } from '../../../../src/lib/helper';
 import { Dropdown } from '../../../../src/components/Shared/Dropdown';
+import { RiCloseFill } from 'react-icons/ri';
 
 const categories = [
   { id: 1, name: 'Food' },
@@ -28,6 +29,27 @@ const AddProduct = ({ store }) => {
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState(categories[0]);
+  const [extraOptions, setExtraOptions] = useState([]);
+  const [extra, setExtra] = useState({ text: '', price: '' });
+
+  console.log(extraOptions);
+
+  const handleExtraInput = (e) => {
+    setExtra({ ...extra, [e.target.name]: e.target.value });
+  };
+
+  const handleExtra = (e) => {
+    const initialState = {
+      text: '',
+      price: '',
+    };
+    setExtra(initialState);
+    setExtraOptions((prev) => [...prev, extra]);
+  };
+
+  const deleteInput = (name) => {
+    setExtraOptions(extraOptions.filter((option) => option.text !== name));
+  };
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
@@ -95,6 +117,7 @@ const AddProduct = ({ store }) => {
                 Use a permanent address where you can receive mail.
               </p>
             </div>
+
             <div className='space-y-6 sm:space-y-5'>
               <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                 <label
@@ -118,7 +141,7 @@ const AddProduct = ({ store }) => {
 
               <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                 <label
-                  htmlFor='lastName'
+                  htmlFor='price'
                   className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                 >
                   Price
@@ -132,6 +155,68 @@ const AddProduct = ({ store }) => {
                     onChange={(e) => setPrice(e.target.value)}
                     className='max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                   />
+                </div>
+              </div>
+
+              <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
+                <label
+                  htmlFor='extra'
+                  className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
+                >
+                  Extra
+                </label>
+                <div>
+                  <div className='mt-1 flex items-center justify-between'>
+                    <input
+                      className='max-w-lg mr-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
+                      type='text'
+                      placeholder='Item'
+                      value={extra.text}
+                      name='text'
+                      onChange={handleExtraInput}
+                    />
+                    <input
+                      className='max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md mr-2'
+                      type='number'
+                      placeholder='Price'
+                      name='price'
+                      value={extra.price}
+                      onChange={handleExtraInput}
+                    />
+                    <div
+                      className='bg-white py-2 px-4 rounded-md shadow-sm text-sm font-medium hover:bg-blue-500 bg-blue-700 cursor-pointer text-white'
+                      onClick={handleExtra}
+                    >
+                      Add
+                    </div>
+                  </div>
+                  <div className='flex flex-col w-full'>
+                    {extraOptions.map((option) => (
+                      <div
+                        key={option.text}
+                        className='flex justify-between items-center border-2 my-1 px-4 py-2 rounded-md'
+                      >
+                        <div className='flex items-center'>
+                          <p className='uppercase text-xs font-semibold tracking-wide'>
+                            {option.text}
+                          </p>
+                          <span className='mx-5'>-</span>
+                          <p className='text-sm font-semibold'>
+                            Rs.{' '}
+                            <span className='text-sm font-semibold tracking-wide uppercase'>
+                              {option.price}
+                            </span>
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => deleteInput(option.text)}
+                          className='text-red-600 hover:text-red-400 text-lg'
+                        >
+                          <RiCloseFill />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
