@@ -34,25 +34,25 @@ const productSchema = new mongoose.Schema(
       sizes: [
         {
           name: String,
-          extraPrice: Number,
+          price: String,
         },
       ],
       colors: [
         {
           name: String,
-          extraPrice: Number,
+          price: String,
         },
       ],
       toppings: [
         {
           name: String,
-          extraPrice: Number,
+          price: String,
         },
       ],
       doses: [
         {
           name: String,
-          extraPrice: Number,
+          price: String,
         },
       ],
     },

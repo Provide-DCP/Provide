@@ -27,9 +27,7 @@ const searchProducts = async (req, res) => {
     if (products) {
       return res.status(200).json({ message: "products Found", products });
     } else {
-      return res
-        .status(200)
-        .json({ message: "products not found", products: false });
+      return res.status(200).json({ message: "products not found", products: false });
     }
   } catch (error) {
     return res.status(200).json({ message: error.message });
@@ -40,16 +38,8 @@ const createProduct = async (req, res) => {
   try {
     await connectDB();
 
-    const {
-      userId,
-      storeId,
-      name,
-      image,
-      price,
-      category,
-      available,
-      description,
-    } = req.body;
+    const { userId, storeId, name, image, price, category, available, description, variations } =
+      req.body;
 
     if (!userId || !storeId) {
       return res.status(400).json({ message: "Invalid Credentials" });
@@ -64,6 +54,7 @@ const createProduct = async (req, res) => {
       category,
       available,
       description,
+      variations,
     });
 
     await product.save();

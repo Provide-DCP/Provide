@@ -71,7 +71,7 @@ const AddProduct = ({ store }) => {
         category: selected.name,
         available: true,
         description,
-        variations: {},
+        variations,
       });
       if (message == "Success! Product Created") {
         toast.success(message, { toastId: message });
