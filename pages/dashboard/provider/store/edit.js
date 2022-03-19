@@ -89,7 +89,7 @@ const StoreEdit = ({ store }) => {
       email,
       purpose,
       categories,
-      approved: false,
+      approved: true,
       open: true,
       timings,
       addresses: [
