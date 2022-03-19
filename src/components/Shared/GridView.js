@@ -16,7 +16,7 @@ export const GridView = ({ products }) => {
           <div className="mt-2 px-2 items-center flex justify-between">
             <div>
               <h3 className="text-[18px] text-gray-700">
-                <a href={`/dashboard/provider/product/${product._id}`}>
+                <a href={`/dashboard/provider/products/${product._id}`}>
                   <span aria-hidden="true" className="absolute inset-0" />
                   {product.name}
                 </a>
