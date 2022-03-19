@@ -659,11 +659,19 @@ const StoreAdd = () => {
                     />
                   </div>
                 </div>
-                <p className='py-2 text-xs font-semibold my-2 text-center'>
-                  {`( `}
-                  <span>OR</span>
-                  {` )`}
-                </p>
+                <div className='my-5 relative'>
+                  <div
+                    className='absolute inset-0 flex items-center'
+                    aria-hidden='true'
+                  >
+                    <div className='w-full border-t border-gray-300' />
+                  </div>
+                  <div className='relative flex justify-center'>
+                    <span className='px-2 bg-white text-sm text-gray-500'>
+                      OR
+                    </span>
+                  </div>
+                </div>
                 <div>
                   <div
                     onClick={handlelocation}

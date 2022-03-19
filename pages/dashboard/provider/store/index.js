@@ -1,10 +1,20 @@
 import React from 'react';
 import { getSession } from 'next-auth/react';
 import axios from 'axios';
+import { Purpose } from '../../../../src/components/Provider/Purpose';
 
 const Store = ({ store }) => {
-  console.log(store);
-  return <main className='md:ml-[14%] mt-[2%] px-10'></main>;
+  return (
+    <main className='md:ml-[14%] mt-[2%] px-10'>
+      <div className='rounded-md max-w-7xl h-[450px] inset-0'>
+        <img
+          className='w-full h-full object-cover rounded-md'
+          src={store?.image}
+          alt='store-image'
+        />
+      </div>
+    </main>
+  );
 };
 
 export const getServerSideProps = async (context) => {
