@@ -9,6 +9,9 @@ export default async function handler(req, res) {
     case "POST":
       await createStore(req, res);
       break;
+    case "PUT":
+      await updateStore(req, res);
+      break;
   }
 }
 
@@ -73,6 +76,52 @@ const createStore = async (req, res) => {
     await store.save();
     res.json({
       message: "Success! Store Created",
+      store,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+const updateStore = async (req, res) => {
+  try {
+    await connectDB();
+
+    const {
+      userId,
+      storeId,
+      name,
+      image,
+      email,
+      purpose,
+      categories,
+      cuisines,
+      approved,
+      open,
+      timings,
+      addresses,
+    } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ message: "Invalid Credentials" });
+    }
+
+    const store = await StoreDetails.findByIdAndUpdate(storeId, {
+      user: userId,
+      name,
+      image,
+      email,
+      purpose,
+      categories,
+      cuisines,
+      approved,
+      open,
+      timings,
+      addresses,
+    });
+
+    res.json({
+      message: "Success! Store Updated",
       store,
     });
   } catch (error) {
