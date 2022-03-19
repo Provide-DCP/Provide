@@ -5,9 +5,9 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
-import Loader from "../../../../src/components/Layouts/Loader";
-import { Dropdown } from "../../../../src/components/Shared/Dropdown";
-import { Variation } from "../../../../src/components/Shared/Variation";
+import Loader from "../../../../../src/components/Layouts/Loader";
+import { Dropdown } from "../../../../../src/components/Shared/Dropdown";
+import { Variation } from "../../../../../src/components/Shared/Variation";
 
 const categories = [
   { id: 1, name: "Food" },
@@ -20,20 +20,22 @@ const initialState = {
   price: 0,
 };
 
-const EditProduct = ({ store }) => {
+const EditProduct = ({ store, product }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState("");
-  const [selected, setSelected] = useState(categories[0]);
+  const [name, setName] = useState(product?.name);
+  const [image, setImage] = useState(product?.image);
+  const [price, setPrice] = useState(product?.price);
+  const [description, setDescription] = useState(product?.description);
+  const [selected, setSelected] = useState(
+    categories.filter((x) => x.name === product?.category)[0]
+  );
 
   const [variations, setVariations] = useState({
-    sizes: [],
-    colors: [],
-    toppings: [],
-    doses: [],
+    sizes: product?.variations.sizes,
+    colors: product?.variations.colors,
+    toppings: product?.variations.toppings,
+    doses: product?.variations.doses,
   });
 
   const [loading, setLoading] = useState(false);
@@ -62,9 +64,9 @@ const EditProduct = ({ store }) => {
     try {
       const {
         data: { message },
-      } = await axios.post("http://localhost:3000/api/products", {
+      } = await axios.put(`http://localhost:3000/api/products/${product._id}`, {
         userId: session.userId,
-        storeId: store._id,
+        productId: product._id,
         name,
         image,
         price: parseInt(price),
@@ -73,7 +75,7 @@ const EditProduct = ({ store }) => {
         description,
         variations,
       });
-      if (message == "Success! Product Created") {
+      if (message == "Product Updated!") {
         toast.success(message, { toastId: message });
         router.push("/dashboard/provider/products");
       } else {
@@ -328,8 +330,8 @@ const EditProduct = ({ store }) => {
   );
 };
 
-export const getServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req });
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
   const userId = session?.userId;
 
   if (!session) {
@@ -350,28 +352,35 @@ export const getServerSideProps = async ({ req, res }) => {
     };
   }
 
-  if (session.userDetails.category !== "provider") {
+  const {
+    data: { store },
+  } = await axios.get("http://localhost:3000/api/store", {
+    params: {
+      userId: session.userId,
+    },
+  });
+
+  const {
+    data: { product },
+  } = await axios.get(`http://localhost:3000/api/products/${context.query.id}`);
+
+  if (session.userDetails.category !== "provider" || !store || !product) {
+    const category = session.userDetails.category;
     return {
       redirect: {
-        destination: `/dashboard/${session.userDetails.category}`,
+        destination:
+          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };
   }
 
-  const {
-    data: { store },
-  } = await axios.get("http://localhost:3000/api/store", {
-    params: {
-      userId: userId,
-    },
-  });
-
   return {
     props: {
       store,
+      product,
     },
   };
 };
 
-export default AddProduct;
+export default EditProduct;
