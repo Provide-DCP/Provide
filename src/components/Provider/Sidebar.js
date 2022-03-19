@@ -30,7 +30,7 @@ const navigation = [
   },
   {
     name: 'Products',
-    href: '/dashboard/provider/store/products',
+    href: '/dashboard/provider/products',
     icon: FolderIcon,
     current: false,
   },

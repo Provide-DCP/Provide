@@ -97,7 +97,7 @@ const StoreAdd = () => {
   };
 
   return (
-    <main className='md:ml-64 px-10'>
+    <main className='md:ml-[17%] mt-[2%] px-10'>
       <div className='space-y-6 max-w-7xl mx-auto my-10'>
         <h1 className='text-start my-10 text-3xl font-bold text-gray-600'>
           Create Store
