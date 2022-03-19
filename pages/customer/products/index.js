@@ -1,6 +1,6 @@
 import React from 'react';
 import { getSession } from 'next-auth/react';
-import { ProductList } from '../../../src/components/Customer/ProductList';
+import { ProductList } from '../../../src/components/Shared/ProductList';
 
 const index = () => {
   return (
