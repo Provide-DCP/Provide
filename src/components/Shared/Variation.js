@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 
 export const Variation = ({ title, extraOptions, handleExtraOptions, deleteOption }) => {

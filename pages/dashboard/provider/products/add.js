@@ -38,46 +38,6 @@ const AddProduct = ({ store }) => {
 
   const [loading, setLoading] = useState(false);
 
-  const handleSizes = (e) => {
-    setVariations({ ...variations, sizes: [...variations.sizes, extra] });
-  };
-  const handleColors = (e) => {
-    setVariations({ ...variations, colors: [...variations.colors, extra] });
-  };
-  const handleToppings = (e) => {
-    setVariations({ ...variations, toppings: [...variations.toppings, extra] });
-  };
-  const handleDoses = (e) => {
-    setVariations({ ...variations, doses: [...variations.doses, extra] });
-  };
-
-  const deleteToppings = (option) => {
-    setVariations({
-      ...variations,
-      toppings: variations.toppings.filter(
-        (x) => x.name !== option.name || x.price !== option.price
-      ),
-    });
-  };
-  const deleteSizes = (option) => {
-    setVariations({
-      ...variations,
-      sizes: variations.sizes.filter((x) => x.name !== option.name || x.price !== option.price),
-    });
-  };
-  const deleteColors = (option) => {
-    setVariations({
-      ...variations,
-      colors: variations.colors.filter((x) => x.name !== option.name || x.price !== option.price),
-    });
-  };
-  const deleteDoses = (option) => {
-    setVariations({
-      ...variations,
-      doses: variations.doses.filter((x) => x.name !== option.name || x.price !== option.price),
-    });
-  };
-
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
@@ -194,16 +154,21 @@ const AddProduct = ({ store }) => {
               </div>
 
               {selected.name === "Food" && (
-                <>
-                  <Variation
-                    title="Toppings"
-                    handleExtraInput={handleExtraInput}
-                    handleExtraOptions={handleToppings}
-                    deleteOption={deleteToppings}
-                    extra={extra}
-                    extraOptions={variations.toppings}
-                  />
-                </>
+                <Variation
+                  title="Toppings"
+                  handleExtraOptions={(extra) =>
+                    setVariations({ ...variations, sizes: [...variations.sizes, extra] })
+                  }
+                  deleteOption={(option) =>
+                    setVariations({
+                      ...variations,
+                      toppings: variations.toppings.filter(
+                        (x) => x.name !== option.name || x.price !== option.price
+                      ),
+                    })
+                  }
+                  extraOptions={variations.toppings}
+                />
               )}
 
               <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
