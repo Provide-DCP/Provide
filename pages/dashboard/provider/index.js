@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
-import { Layout } from "../../../src/components/Dashboard/Layout";
 import { Status } from "../../../src/components/Provider/Status";
 import axios from "axios";
 import { EmptyState } from "../../../src/components/Provider/EmptyState";
