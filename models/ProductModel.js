@@ -30,6 +30,32 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    variations: {
+      sizes: [
+        {
+          name: String,
+          extraPrice: Number,
+        },
+      ],
+      colors: [
+        {
+          name: String,
+          extraPrice: Number,
+        },
+      ],
+      toppings: [
+        {
+          name: String,
+          extraPrice: Number,
+        },
+      ],
+      doses: [
+        {
+          name: String,
+          extraPrice: Number,
+        },
+      ],
+    },
     ratings: [
       {
         user: { type: mongoose.Types.ObjectId, ref: "users" },

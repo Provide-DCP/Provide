@@ -15,8 +15,6 @@ const categoriesOptions = [
   { id: 1, title: "Food" },
   { id: 2, title: "Clothes" },
   { id: 3, title: "Medicines" },
-  { id: 4, title: "Furniture" },
-  { id: 5, title: "Books" },
 ];
 
 const StoreAdd = () => {

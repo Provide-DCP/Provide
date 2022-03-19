@@ -6,17 +6,19 @@ import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import Loader from "../../../../src/components/Layouts/Loader";
-import { reloadSession } from "../../../../src/lib/helper";
 import { Dropdown } from "../../../../src/components/Shared/Dropdown";
-import { RiCloseFill } from "react-icons/ri";
+import { Variation } from "../../../../src/components/Shared/Variation";
 
 const categories = [
   { id: 1, name: "Food" },
   { id: 2, name: "Clothes" },
   { id: 3, name: "Medicines" },
-  { id: 4, name: "Books" },
-  { id: 5, name: "Furniture" },
 ];
+
+const initialState = {
+  name: "",
+  price: 0,
+};
 
 const AddProduct = ({ store }) => {
   const { data: session, status } = useSession();
@@ -24,31 +26,56 @@ const AddProduct = ({ store }) => {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState("");
-  const [available, setAvailable] = useState(true);
   const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState(categories[0]);
-  const [extraOptions, setExtraOptions] = useState([]);
-  const [extra, setExtra] = useState({ text: "", price: "" });
 
-  console.log(extraOptions);
+  const [variations, setVariations] = useState({
+    sizes: [],
+    colors: [],
+    toppings: [],
+    doses: [],
+  });
 
-  const handleExtraInput = (e) => {
-    setExtra({ ...extra, [e.target.name]: e.target.value });
+  const [loading, setLoading] = useState(false);
+
+  const handleSizes = (e) => {
+    setVariations({ ...variations, sizes: [...variations.sizes, extra] });
+  };
+  const handleColors = (e) => {
+    setVariations({ ...variations, colors: [...variations.colors, extra] });
+  };
+  const handleToppings = (e) => {
+    setVariations({ ...variations, toppings: [...variations.toppings, extra] });
+  };
+  const handleDoses = (e) => {
+    setVariations({ ...variations, doses: [...variations.doses, extra] });
   };
 
-  const handleExtra = (e) => {
-    const initialState = {
-      text: "",
-      price: "",
-    };
-    setExtra(initialState);
-    setExtraOptions((prev) => [...prev, extra]);
+  const deleteToppings = (option) => {
+    setVariations({
+      ...variations,
+      toppings: variations.toppings.filter(
+        (x) => x.name !== option.name || x.price !== option.price
+      ),
+    });
   };
-
-  const deleteInput = (name) => {
-    setExtraOptions(extraOptions.filter((option) => option.text !== name));
+  const deleteSizes = (option) => {
+    setVariations({
+      ...variations,
+      sizes: variations.sizes.filter((x) => x.name !== option.name || x.price !== option.price),
+    });
+  };
+  const deleteColors = (option) => {
+    setVariations({
+      ...variations,
+      colors: variations.colors.filter((x) => x.name !== option.name || x.price !== option.price),
+    });
+  };
+  const deleteDoses = (option) => {
+    setVariations({
+      ...variations,
+      doses: variations.doses.filter((x) => x.name !== option.name || x.price !== option.price),
+    });
   };
 
   const uploadFileHandler = async (e) => {
@@ -79,11 +106,12 @@ const AddProduct = ({ store }) => {
         userId: session.userId,
         storeId: store._id,
         name,
-        image: "adfa",
+        image,
         price: parseInt(price),
-        category,
-        available,
+        category: selected.name,
+        available: true,
         description,
+        variations: {},
       });
       if (message == "Success! Product Created") {
         toast.success(message, { toastId: message });
@@ -156,68 +184,6 @@ const AddProduct = ({ store }) => {
                 </div>
               </div>
 
-              <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                <label
-                  htmlFor="extra"
-                  className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-                >
-                  Extra
-                </label>
-                <div>
-                  <div className="mt-1 flex items-center justify-between">
-                    <input
-                      className="max-w-lg mr-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                      type="text"
-                      placeholder="Item"
-                      value={extra.text}
-                      name="text"
-                      onChange={handleExtraInput}
-                    />
-                    <input
-                      className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md mr-2"
-                      type="number"
-                      placeholder="Price"
-                      name="price"
-                      value={extra.price}
-                      onChange={handleExtraInput}
-                    />
-                    <div
-                      className="bg-white py-2 px-4 rounded-md shadow-sm text-sm font-medium hover:bg-blue-500 bg-blue-700 cursor-pointer text-white"
-                      onClick={handleExtra}
-                    >
-                      Add
-                    </div>
-                  </div>
-                  <div className="flex flex-col w-full">
-                    {extraOptions.map((option) => (
-                      <div
-                        key={option.text}
-                        className="flex justify-between items-center border-2 my-1 px-4 py-2 rounded-md"
-                      >
-                        <div className="flex items-center">
-                          <p className="uppercase text-xs font-semibold tracking-wide">
-                            {option.text}
-                          </p>
-                          <span className="mx-5">-</span>
-                          <p className="text-sm font-semibold">
-                            Rs.{" "}
-                            <span className="text-sm font-semibold tracking-wide uppercase">
-                              {option.price}
-                            </span>
-                          </p>
-                        </div>
-                        <button
-                          onClick={() => deleteInput(option.text)}
-                          className="text-red-600 hover:text-red-400 text-lg"
-                        >
-                          <RiCloseFill />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
               <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
                 <Dropdown
                   heading="Categories"
@@ -226,6 +192,19 @@ const AddProduct = ({ store }) => {
                   setSelected={setSelected}
                 />
               </div>
+
+              {selected.name === "Food" && (
+                <>
+                  <Variation
+                    title="Toppings"
+                    handleExtraInput={handleExtraInput}
+                    handleExtraOptions={handleToppings}
+                    deleteOption={deleteToppings}
+                    extra={extra}
+                    extraOptions={variations.toppings}
+                  />
+                </>
+              )}
 
               <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                 <label

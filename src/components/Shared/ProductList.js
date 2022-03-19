@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { GridView } from "../Customer/GridView";
-import { ListView } from "../Customer/ListView";
+import { GridView } from "./GridView";
+import { ListView } from "./ListView";
 import { BsFillGrid3X3GapFill, BsList } from "react-icons/bs";
 import { Switch } from "@headlessui/react";
 
