@@ -71,7 +71,7 @@ const AddProduct = ({ store }) => {
         category: selected.name,
         available: true,
         description,
-        variations: {},
+        variations,
       });
       if (message == "Success! Product Created") {
         toast.success(message, { toastId: message });
@@ -157,7 +157,7 @@ const AddProduct = ({ store }) => {
                 <Variation
                   title="Toppings"
                   handleExtraOptions={(extra) =>
-                    setVariations({ ...variations, sizes: [...variations.sizes, extra] })
+                    setVariations({ ...variations, toppings: [...variations.toppings, extra] })
                   }
                   deleteOption={(option) =>
                     setVariations({
@@ -168,6 +168,60 @@ const AddProduct = ({ store }) => {
                     })
                   }
                   extraOptions={variations.toppings}
+                />
+              )}
+
+              {selected.name === "Clothes" && (
+                <Variation
+                  title="Sizes"
+                  handleExtraOptions={(extra) =>
+                    setVariations({ ...variations, sizes: [...variations.sizes, extra] })
+                  }
+                  deleteOption={(option) =>
+                    setVariations({
+                      ...variations,
+                      sizes: variations.sizes.filter(
+                        (x) => x.name !== option.name || x.price !== option.price
+                      ),
+                    })
+                  }
+                  extraOptions={variations.sizes}
+                />
+              )}
+
+              {selected.name === "Clothes" && (
+                <Variation
+                  title="Colors"
+                  handleExtraOptions={(extra) =>
+                    setVariations({ ...variations, colors: [...variations.colors, extra] })
+                  }
+                  deleteOption={(option) =>
+                    setVariations({
+                      ...variations,
+                      colors: variations.colors.filter(
+                        (x) => x.name !== option.name || x.price !== option.price
+                      ),
+                    })
+                  }
+                  extraOptions={variations.colors}
+                />
+              )}
+
+              {selected.name === "Medicines" && (
+                <Variation
+                  title="Doses"
+                  handleExtraOptions={(extra) =>
+                    setVariations({ ...variations, doses: [...variations.doses, extra] })
+                  }
+                  deleteOption={(option) =>
+                    setVariations({
+                      ...variations,
+                      doses: variations.doses.filter(
+                        (x) => x.name !== option.name || x.price !== option.price
+                      ),
+                    })
+                  }
+                  extraOptions={variations.doses}
                 />
               )}
 

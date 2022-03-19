@@ -31,7 +31,13 @@ export const Variation = ({ title, extraOptions, handleExtraOptions, deleteOptio
           />
           <div
             className="bg-white py-2 px-4 rounded-md shadow-sm text-sm font-medium hover:bg-blue-500 bg-blue-700 cursor-pointer text-white"
-            onClick={(e) => handleExtraOptions(extra)}
+            onClick={(e) => {
+              setExtra({
+                name: "",
+                price: 0,
+              });
+              handleExtraOptions(extra);
+            }}
           >
             Add
           </div>
