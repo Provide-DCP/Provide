@@ -6,8 +6,6 @@ import { getSession, useSession } from 'next-auth/react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { reloadSession } from '../../../src/lib/helper';
-import Loader from '../../../src/components/Layouts/Loader';
-import { FaCheckCircle } from 'react-icons/fa';
 
 const categories = [
   { id: 'customer', title: 'customer' },
