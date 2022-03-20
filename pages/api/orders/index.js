@@ -19,7 +19,7 @@ const createOrder = async (req, res) => {
   try {
     await connectDB();
 
-    const createOrder = new userDetails(req.body);
+    const createOrder = new Order(req.body);
 
     await createOrder.save();
     res.json({
@@ -40,14 +40,12 @@ const searchOrders = async (req, res) => {
       return res.status(400).json({ message: "Invalid Credentials" });
     }
 
-    const orders = await Order.find({
-      user: userId,
-    });
+    const orders = await Order.find({ user: userId }).populate("store").populate("product");
 
     if (orders) {
       return res.status(200).json({ message: "orders Found", orders });
     } else {
-      return res.status(200).json({ message: "orders not found", orders: false });
+      return res.status(200).json({ message: "orders not found", orders: [] });
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });
