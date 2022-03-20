@@ -1,5 +1,5 @@
 import connectDB from "../../../src/lib/connectDB.js";
-import StoreDetails from "../../../models/StoreDetailsModel.js";
+import Store from "../../../models/Store.js";
 
 export default async function handler(req, res) {
   switch (req.method) {
@@ -23,7 +23,7 @@ const searchStore = async (req, res) => {
     if (!userId) {
       return res.status(400).json({ message: "Invalid Credentials" });
     }
-    const store = await StoreDetails.findOne({
+    const store = await Store.findOne({
       user: userId,
     });
 
@@ -59,7 +59,7 @@ const createStore = async (req, res) => {
       return res.status(400).json({ message: "Invalid Credentials" });
     }
 
-    const store = new StoreDetails({
+    const store = new Store({
       user: userId,
       name,
       image,
@@ -106,7 +106,7 @@ const updateStore = async (req, res) => {
       return res.status(400).json({ message: "Invalid Credentials" });
     }
 
-    const store = await StoreDetails.findByIdAndUpdate(storeId, {
+    const store = await Store.findByIdAndUpdate(storeId, {
       user: userId,
       name,
       image,

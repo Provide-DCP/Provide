@@ -1,5 +1,5 @@
 import connectDB from "../../../src/lib/connectDB.js";
-import userDetails from "../../../models/UserDetailsModel";
+import userDetails from "../../../models/UserDetails";
 
 export default async function handler(req, res) {
   switch (req.method) {
@@ -29,9 +29,7 @@ const searchAddresses = async (req, res) => {
     });
 
     if (details) {
-      return res
-        .status(200)
-        .json({ message: "Details Found", addresses: details.addresses });
+      return res.status(200).json({ message: "Details Found", addresses: details.addresses });
     } else {
       return res.status(200).json({ message: "Details not found" });
     }
@@ -44,18 +42,8 @@ const addAddress = async (req, res) => {
   try {
     await connectDB();
 
-    const {
-      userId,
-      name,
-      phone,
-      pincode,
-      building,
-      area,
-      landmark,
-      city,
-      region,
-      country,
-    } = req.body;
+    const { userId, name, phone, pincode, building, area, landmark, city, region, country } =
+      req.body;
 
     if (!userId) {
       return res.status(400).json({ message: "Invalid Credentials" });
