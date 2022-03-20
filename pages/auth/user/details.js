@@ -1,25 +1,25 @@
 /* eslint-disable @next/next/link-passhref */
-import React, { useState, useEffect, Fragment } from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { getSession, useSession } from 'next-auth/react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { reloadSession } from '../../../src/lib/helper';
+import React, { useState, useEffect, Fragment } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { getSession, useSession } from "next-auth/react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { reloadSession } from "../../../src/lib/helper";
 
 const categories = [
-  { id: 'customer', title: 'customer' },
-  { id: 'volunteer', title: 'volunteer' },
-  { id: 'provider', title: 'provider' },
+  { id: "customer", title: "customer" },
+  { id: "volunteer", title: "volunteer" },
+  { id: "provider", title: "provider" },
 ];
 
 const Details = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [category, setCategory] = useState('customer');
-  const [phone, setPhone] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [category, setCategory] = useState("customer");
+  const [phone, setPhone] = useState("");
   // const [location, setLocation] = useState({
   //   loading: false,
   //   coordinates: undefined,
@@ -69,24 +69,20 @@ const Details = () => {
     e.preventDefault();
 
     try {
-      await axios.post('/api/users', {
+      await axios.post("/api/users", {
         userId: session.userId,
         firstName,
         lastName,
         image:
           session.user.image ||
-          'http://res.cloudinary.com/dj7nomqfd/image/upload/v1647117869/uploads/bphhxvmlcyyu2pntbikm.png',
+          "http://res.cloudinary.com/dj7nomqfd/image/upload/v1647117869/uploads/bphhxvmlcyyu2pntbikm.png",
         category,
         phone,
       });
 
       reloadSession();
 
-      router.push(
-        category === 'customer/products'
-          ? '/customer'
-          : `/dashboard/${category}`
-      );
+      router.push(category === "customer" ? "/customer" : `/dashboard/${category}`);
     } catch (error) {
       toast.error(error.message, {
         toastId: error,
@@ -95,7 +91,7 @@ const Details = () => {
   };
 
   function classNames(...classes) {
-    return classes.filter(Boolean).join(' ');
+    return classes.filter(Boolean).join(" ");
   }
 
   return (
@@ -124,7 +120,7 @@ const Details = () => {
                               id={category.id}
                               name='category'
                               type='radio'
-                              defaultChecked={category.id === 'customer'}
+                              defaultChecked={category.id === "customer"}
                               value={category.title}
                               onChange={(e) => handleCategory()}
                               className='h-4 w-4 text-indigo-600 border-gray-300'
@@ -196,10 +192,7 @@ const Details = () => {
                     </div>
 
                     <div className='col-span-6 sm:col-span-4 mt-4'>
-                      <label
-                        htmlFor='phone'
-                        className='block text-sm font-medium text-gray-700'
-                      >
+                      <label htmlFor='phone' className='block text-sm font-medium text-gray-700'>
                         Phone Number
                       </label>
                       <input
@@ -246,8 +239,8 @@ const Details = () => {
                         onClick={submitHandler}
                         className={`${
                           !location.coordinates && location.loading
-                            ? 'cursor-not-allowed'
-                            : 'hover:bg-blue-700'
+                            ? "cursor-not-allowed"
+                            : "hover:bg-blue-700"
                         } w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 `}
                       >
                         Submit
@@ -271,7 +264,7 @@ export const getServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: '/auth/signin',
+        destination: "/auth/signin",
         permanent: false,
       },
     };
@@ -281,9 +274,7 @@ export const getServerSideProps = async (context) => {
     return {
       redirect: {
         destination:
-          category === 'customer'
-            ? `/customer`
-            : `/dashboard/${session.userDetails.category}`,
+          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };
