@@ -3,6 +3,7 @@ import { GridView } from "./GridView";
 import { ListView } from "./ListView";
 import { BsFillGrid3X3GapFill, BsList } from "react-icons/bs";
 import { Switch } from "@headlessui/react";
+import { useSession } from "next-auth/react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -10,7 +11,7 @@ function classNames(...classes) {
 
 export const ProductList = ({ products }) => {
   const [gridView, setGridView] = useState(true);
-  const [enabled, setEnabled] = useState(false);
+  const { data: session } = useSession();
   return (
     <div className="mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between mt-5 mb-10">
@@ -33,12 +34,14 @@ export const ProductList = ({ products }) => {
         </p>
 
         <div className="flex items-center justify-between w-28">
-          <a
-            href="/dashboard/provider/products/add"
-            className={` ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700`}
-          >
-            Add
-          </a>
+          {session.userDetails.category === "provider" && (
+            <a
+              href="/dashboard/provider/products/add"
+              className={` ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700`}
+            >
+              Add
+            </a>
+          )}
         </div>
       </div>
 

@@ -6,9 +6,11 @@ import { Purpose } from "../../../../src/components/Provider/Purpose";
 import { AiFillStar } from "react-icons/ai";
 import { FaDirections } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const StoreSlug = ({ store }) => {
   const { data: session } = useSession();
+  const router = useRouter();
   return (
     <main className="md:ml-[14%] mt-[2%] sm:px-10">
       <div className="rounded-md max-w-[100%] mx-auto h-[450px] inset-0">
@@ -61,7 +63,7 @@ const StoreSlug = ({ store }) => {
           <FaDirections />
           <span className="ml-2 text-gray-800">Direction</span>
         </a>
-        {session.userDetails.category === "provider" ? (
+        {session?.userDetails.category === "provider" ? (
           <Link href={`/dashboard/provider/store/edit`}>
             <a
               className="inline-flex items-center border-2 mx-2 py-1 px-2 rounded-md text-blue-400 hover:bg-gray-100
@@ -84,7 +86,7 @@ const StoreSlug = ({ store }) => {
             </a>
           </Link>
         ) : (
-          <Link href={`/dashboard/provider/store/edit`}>
+          <Link href={`/customer/stores/${router.query.id}/products`}>
             <a
               className="inline-flex items-center border-2 mx-2 py-1 px-2 rounded-md text-blue-400 hover:bg-gray-100
     "

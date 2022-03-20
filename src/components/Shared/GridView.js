@@ -1,7 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import React from "react";
 
 export const GridView = ({ products }) => {
+  const { data: session } = useSession();
+  const router = useRouter();
   return (
     <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 xl:gap-x-5">
       {products.map((product) => (
@@ -16,7 +20,13 @@ export const GridView = ({ products }) => {
           <div className="mt-2 px-2 items-center flex justify-between">
             <div>
               <h3 className="text-[18px] text-gray-700">
-                <a href={`/dashboard/provider/products/${product._id}`}>
+                <a
+                  href={`${
+                    session.userDetails.category === "provider"
+                      ? "/dashboard/provider"
+                      : "/customer/stores/" + router.query.id
+                  }/products/${product._id}`}
+                >
                   <span aria-hidden="true" className="absolute inset-0" />
                   {product.name}
                 </a>

@@ -33,7 +33,10 @@ export const ProductOption = ({ name, options, selected, setSelected }) => {
             >
               {({ active, checked }) => (
                 <>
-                  <RadioGroup.Label as="p">{option.name}</RadioGroup.Label>
+                  <RadioGroup.Label as="p">
+                    {option.name} -{" "}
+                    <span className="text-sm font-normal text-lowercase">Rs. {option.price}</span>
+                  </RadioGroup.Label>
                   <div
                     className={classNames(
                       active ? "border" : "border-2",
