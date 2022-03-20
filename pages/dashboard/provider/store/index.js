@@ -2,7 +2,6 @@
 import React from 'react';
 import { getSession } from 'next-auth/react';
 import axios from 'axios';
-import { Purpose } from '../../../../src/components/Provider/Purpose';
 import { AiFillStar } from 'react-icons/ai';
 import { FaDirections } from 'react-icons/fa';
 import Link from 'next/link';
