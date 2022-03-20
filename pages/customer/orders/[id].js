@@ -11,7 +11,7 @@ const OrderSlug = () => {
   };
 
   return (
-    <main className='w-11/12 mx-auto'>
+    <main className='md:ml-[14%]'>
       <div className='flex justify-between items-center flex-row px-4 mt-10 border-b-2 border-gray-200'>
         <div>
           <h1 className='text-3xl font-bold'>Order Details</h1>

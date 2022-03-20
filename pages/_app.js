@@ -20,12 +20,13 @@ export default function App({
 
   return (
     <SessionProvider session={session}>
-      {router.pathname.split('/')[1] !== 'auth' &&
+      {/* {router.pathname.split('/')[1] !== 'auth' &&
         router.pathname !== '/' &&
         router.pathname.search('provider') === -1 && <Navbar />}
       {router.pathname.split('/')[1] !== 'auth' &&
         router.pathname !== '/' &&
-        router.pathname.search('provider') !== -1 && <Sidebar />}
+        router.pathname.search('provider') !== -1 && } */}
+      <Sidebar />
       <Component {...pageProps} />
       <ToastContainer />
     </SessionProvider>

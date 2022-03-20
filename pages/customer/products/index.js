@@ -1,12 +1,12 @@
-import React from "react";
-import { getSession } from "next-auth/react";
-import { ProductList } from "../../../src/components/Shared/ProductList";
+import React from 'react';
+import { getSession } from 'next-auth/react';
+import { ProductList } from '../../../src/components/Shared/ProductList';
 
 const index = () => {
   return (
-    <main className="mt-5">
-      <section className="flex flex-col lg:flex-row justify-evenly w-11/12 mx-auto">
-        <div className="w-full lg:w-11/12">
+    <main className='md:ml-[14%]'>
+      <section className='flex flex-col lg:flex-row justify-evenly w-11/12 mx-auto'>
+        <div className='w-full lg:w-11/12'>
           <ProductList />
         </div>
       </section>

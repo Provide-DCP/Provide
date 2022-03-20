@@ -63,7 +63,7 @@ const ProfileEdit = ({ details }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='mt-10'>
+      <main className='md:ml-[14%] mt-[2%]'>
         <form
           onSubmit={submitHandler}
           className='max-w-5xl mx-auto space-y-8 divide-y divide-gray-200 px-10'

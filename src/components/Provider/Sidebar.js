@@ -1,16 +1,89 @@
 /* eslint-disable @next/next/no-img-element */
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { FolderIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import {
+  FolderIcon,
+  MenuIcon,
+  XIcon,
+  HomeIcon,
+} from '@heroicons/react/outline';
 import { CgProfile } from 'react-icons/cg';
+import { BsCartFill } from 'react-icons/bs';
 import { FaStore } from 'react-icons/fa';
-import { MdSpaceDashboard } from 'react-icons/md';
+import { MdSpaceDashboard, MdMedicalServices } from 'react-icons/md';
 import { FiBriefcase } from 'react-icons/fi';
+import { FaMapMarkerAlt } from 'react-icons/fa';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 
-const navigation = [
+const providerNavigation = [
+  {
+    name: 'Dashboard',
+    href: '/dashboard/provider',
+    icon: MdSpaceDashboard,
+    current: false,
+  },
+  {
+    name: 'Store',
+    href: '/dashboard/provider/store',
+    icon: FaStore,
+    current: false,
+  },
+  {
+    name: 'Products',
+    href: '/dashboard/provider/products',
+    icon: FiBriefcase,
+    current: false,
+  },
+  {
+    name: 'Profile',
+    href: '/dashboard/provider/profile',
+    icon: CgProfile,
+    current: false,
+  },
+];
+
+const customerNavigation = [
+  {
+    name: 'Home',
+    href: '/customer',
+    icon: HomeIcon,
+    current: false,
+  },
+  {
+    name: 'Stores',
+    href: '/customer/store',
+    icon: FaStore,
+    current: false,
+  },
+  {
+    name: 'Services',
+    href: '/customer/services',
+    icon: MdMedicalServices,
+    current: false,
+  },
+  {
+    name: 'Orders',
+    href: '/customer/orders',
+    icon: BsCartFill,
+    current: false,
+  },
+  {
+    name: 'Addresses',
+    href: '/customer/orders',
+    icon: FaMapMarkerAlt,
+    current: false,
+  },
+  {
+    name: 'Profile',
+    href: '/customer/profile',
+    icon: CgProfile,
+    current: false,
+  },
+];
+
+const volunteerNavigation = [
   {
     name: 'Dashboard',
     href: '/dashboard/provider',
@@ -44,6 +117,16 @@ function classNames(...classes) {
 export const Sidebar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { data: session } = useSession();
+  const [navigation, setNavigation] = useState([]);
+
+  useEffect(() => {
+    if (!session) return;
+    if (session?.userDetails?.category === 'provider')
+      setNavigation(providerNavigation);
+    else if (session?.userDetails?.category === 'customer')
+      setNavigation(customerNavigation);
+    else setNavigation(volunteerNavigation);
+  }, [session]);
 
   return (
     <div>
