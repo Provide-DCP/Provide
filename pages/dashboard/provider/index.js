@@ -109,7 +109,7 @@ const Index = ({ store, products }) => {
               >
                 Congratulations your store have been approved!
               </h1>
-              <div id='popper' className='background min-h-[440px]'></div>
+              <div id='popper' className='popper min-h-[440px]'></div>
               <div id='addProduct' className='hidden absolute w-full top-20'>
                 <EmptyState
                   heading='Add Product'
@@ -122,10 +122,12 @@ const Index = ({ store, products }) => {
         </div>
       </div>
       <style>{`
-         .background {
-            background: url(https://res.cloudinary.com/dj7nomqfd/image/upload/v1647543911/uploads/11272-party-popper_w2qnxr.gif) no-repeat right;
+         .popper {
+            background-image: url(/popper-right.gif), url(/popper-left.gif);
+            background-position: right, left;
+            background-repeat: no-repeat;
           }
-          
+         
         }`}</style>
     </main>
   );
