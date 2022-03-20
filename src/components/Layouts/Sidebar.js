@@ -71,7 +71,7 @@ const customerNavigation = [
   },
   {
     name: 'Addresses',
-    href: '/customer/profile/address',
+    href: '/customer/address',
     icon: FaMapMarkerAlt,
     current: false,
   },
