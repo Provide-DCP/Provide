@@ -26,12 +26,17 @@ export const GridView = ({ products }) => {
                 className='w-full h-full object-center object-cover lg:w-full lg:h-full'
               />
             </div>
-            <div className='mt-2 px-2 items-center flex justify-between'>
-              <div>
+            <div className='mt-2 px-2 flex justify-between'>
+              <div className='w-[80%]'>
                 <h3 className='text-[18px] text-gray-700'>
                   <span aria-hidden='true' className='absolute inset-0' />
                   {product.name}
                 </h3>
+                <p className='truncate text-sm font-semibold text-gray-600 text-ellipsis'>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Beatae, perferendis repellat porro autem quos molestias atque
+                  tenetur doloribus quod est?
+                </p>
               </div>
               <p className='text-md font-semibold text-indigo-900'>
                 {'Rs. ' + product.price}
