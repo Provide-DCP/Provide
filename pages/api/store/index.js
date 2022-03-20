@@ -28,7 +28,7 @@ const searchStore = async (req, res) => {
       store = await Store.find({});
     }
 
-    if (store.length > 0) {
+    if (store) {
       return res.status(200).json({ message: 'store Found', store });
     } else {
       return res.status(200).json({ message: 'store not found', store: false });

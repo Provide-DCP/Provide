@@ -3,11 +3,14 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
 import { ProductOption } from '../Provider/ProductOption';
+import { useSession } from 'next-auth/react';
 
 export const OrderDetailsCard = ({ order }) => {
-  const status = 0;
+  const { data: session } = useSession();
+  const status = order.status;
   const [otp, setOtp] = useState('');
   useEffect(() => {
+    if (session?.userDetails?.category !== 'customer') return;
     (async () => {
       const {
         data: { otp },
@@ -36,20 +39,24 @@ export const OrderDetailsCard = ({ order }) => {
             </p>
           </div>
         </div>
-        <div className=''>
-          <div className='flex items-center'>
-            <span className='text-2xl font-semibold mr-2'>OTP &#58; </span>
-            <span className='text-2xl text-gray-500 font-bold'>{otp}</span>
+        {session?.userDetails?.category === 'customer' ? (
+          <div className=''>
+            <div className='flex items-center'>
+              <span className='text-2xl font-semibold mr-2'>OTP &#58; </span>
+              <span className='text-2xl text-gray-500 font-bold'>{otp}</span>
+            </div>
+            <p className='text-sm font-semibold text-gray-500'>
+              Share OTP to the provider while receiving order.
+            </p>
           </div>
-          <p className='text-sm font-semibold text-gray-500'>
-            Share OTP to the provider while receiving order.
-          </p>
-        </div>
+        ) : (
+          ''
+        )}
       </div>
       <div className='flex my-10 flex-row mt-5 bg-white px-4 py-5 sm:p-6'>
         <div className='h-[500px] w-[40%]'>
           <img
-            src='https://b.zmtcdn.com/data/pictures/3/93043/0307c6fdb751054fb51f876bb913cc16.jpg?output-format=webp&fit=around|771.75:416.25&crop=771.75:416.25;*,*'
+            src={order.product.image}
             alt='product-image'
             className='rounded-md object-cover h-full w-full'
           />
@@ -70,7 +77,7 @@ export const OrderDetailsCard = ({ order }) => {
               {order.variations.sizes.length > 0 && (
                 <ProductOption
                   name='Size'
-                  options={order.product.variations.sizes}
+                  options={order.variations.sizes}
                   selected={''}
                   setSelected={() => {}}
                 />
@@ -78,7 +85,7 @@ export const OrderDetailsCard = ({ order }) => {
               {order.variations.colors.length > 0 && (
                 <ProductOption
                   name='Color'
-                  options={order.product.variations.colors}
+                  options={order.variations.colors}
                   selected={''}
                   setSelected={() => {}}
                 />
@@ -86,7 +93,7 @@ export const OrderDetailsCard = ({ order }) => {
               {order.variations.toppings.length > 0 && (
                 <ProductOption
                   name='Topping'
-                  options={order.product.variations.toppings}
+                  options={order.variations.toppings}
                   selected={''}
                   setSelected={() => {}}
                 />
@@ -94,7 +101,7 @@ export const OrderDetailsCard = ({ order }) => {
               {order.variations.doses.length > 0 && (
                 <ProductOption
                   name='Dose'
-                  options={order.product.doses.sizes}
+                  options={order.doses.sizes}
                   selected={''}
                   setSelected={() => {}}
                 />
