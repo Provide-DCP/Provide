@@ -37,6 +37,12 @@ const providerNavigation = [
     current: false,
   },
   {
+    name: 'Orders',
+    href: '/dashboard/provider/orders',
+    icon: BsCartFill,
+    current: false,
+  },
+  {
     name: 'Profile',
     href: '/dashboard/provider/profile',
     icon: CgProfile,
