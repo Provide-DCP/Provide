@@ -19,7 +19,6 @@ export default function Product({ store, product }) {
       const {
         data: { message },
       } = await axios.delete(`http://localhost:3000/api/products/${product._id}`);
-      console.log(message);
       if (message === "Product Deleted!") {
         toast.success(message, { toastId: message });
         router.push("/dashboard/provider/products");
@@ -27,7 +26,7 @@ export default function Product({ store, product }) {
         toast.error(message, { toastId: message });
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e, { toastId: e });
     }
   };
 

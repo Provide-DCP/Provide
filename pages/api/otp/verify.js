@@ -6,8 +6,6 @@ export default async function handler(req, res) {
   const orderId = req.query.orderId,
     sentOtp = req.query.otp;
   const correctOtp = await OTP.findOne({ order: orderId });
-  console.log(correctOtp);
-  console.log(parseInt(sentOtp), parseInt(correctOtp.value));
   res.json({
     verified: parseInt(sentOtp) === parseInt(correctOtp.value),
   });

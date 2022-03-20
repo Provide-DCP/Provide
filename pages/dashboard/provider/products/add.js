@@ -80,7 +80,7 @@ const AddProduct = ({ store }) => {
         toast.error(message, { toastId: message });
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e, { toastId: e });
     }
   };
 
