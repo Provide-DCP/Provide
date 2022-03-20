@@ -41,7 +41,7 @@ export const getServerSideProps = async (context) => {
     };
   }
 
-  if (session.userDetails.category !== "provider" || !store) {
+  if (session.userDetails.category !== "provider" || !store || !store.approved) {
     const category = session.userDetails.category;
     return {
       redirect: {

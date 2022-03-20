@@ -1,40 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from 'react';
-import { StarIcon } from '@heroicons/react/solid';
-import { getSession, useSession } from 'next-auth/react';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-import { ProductOption } from '../../../../../src/components/Provider/ProductOption';
-import { useRouter } from 'next/router';
+import { useState } from "react";
+import { StarIcon } from "@heroicons/react/solid";
+import { getSession, useSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { ProductOption } from "../../../../../src/components/Provider/ProductOption";
+import { useRouter } from "next/router";
 
 export default function Product({ store, product }) {
   const router = useRouter();
-  const [selectedColor, setSelectedColor] = useState(
-    product.variations.colors.length > 0 ? product.variations.colors[0] : ''
-  );
-  const [selectedSize, setSelectedSize] = useState(
-    product.variations.sizes.length > 0 ? product.variations.sizes[0] : ''
-  );
-  const [selectedDose, setSelectedDose] = useState(
-    product.variations.doses.length > 0 ? product.variations.doses[0] : ''
-  );
-  const [selectedTopping, setSelectedTopping] = useState('');
 
   function classNames(...classes) {
-    return classes.filter(Boolean).join(' ');
+    return classes.filter(Boolean).join(" ");
   }
 
   const handleDelete = async () => {
     try {
       const {
         data: { message },
-      } = await axios.delete(
-        `http://localhost:3000/api/products/${product._id}`
-      );
+      } = await axios.delete(`http://localhost:3000/api/products/${product._id}`);
       console.log(message);
-      if (message === 'Product Deleted!') {
+      if (message === "Product Deleted!") {
         toast.success(message, { toastId: message });
-        router.push('/dashboard/provider/products');
+        router.push("/dashboard/provider/products");
       } else {
         toast.error(message, { toastId: message });
       }
@@ -48,23 +36,17 @@ export default function Product({ store, product }) {
       <div className='w-full relative flex items-center bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
         <div className='w-full grid grid-cols-1 gap-y-8 gap-x-6 items-start sm:grid-cols-12 lg:gap-x-8'>
           <div className='aspect-w-2 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden sm:col-span-4 lg:col-span-5'>
-            <img
-              src={product.image}
-              alt={''}
-              className='object-center object-cover'
-            />
+            <img src={product.image} alt={""} className='object-center object-cover' />
           </div>
           <div className='sm:col-span-8 lg:col-span-7'>
-            <h2 className='text-2xl font-extrabold text-gray-900 sm:pr-12'>
-              {product.name}
-            </h2>
+            <h2 className='text-2xl font-extrabold text-gray-900 sm:pr-12'>{product.name}</h2>
 
             <section aria-labelledby='information-heading' className='mt-2'>
               <h3 id='information-heading' className='sr-only'>
                 Product information
               </h3>
 
-              <p className='text-2xl text-gray-900'>{'Rs. ' + product.price}</p>
+              <p className='text-2xl text-gray-900'>{"Rs. " + product.price}</p>
 
               {/* Reviews */}
               <div className='mt-6'>
@@ -75,10 +57,8 @@ export default function Product({ store, product }) {
                       <StarIcon
                         key={rating}
                         className={classNames(
-                          product.rating > rating
-                            ? 'text-gray-900'
-                            : 'text-gray-200',
-                          'h-5 w-5 flex-shrink-0'
+                          product.rating > rating ? "text-gray-900" : "text-gray-200",
+                          "h-5 w-5 flex-shrink-0"
                         )}
                         aria-hidden='true'
                       />
@@ -105,32 +85,32 @@ export default function Product({ store, product }) {
                   <ProductOption
                     name='Size'
                     options={product.variations.sizes}
-                    selected={selectedSize}
-                    setSelected={setSelectedSize}
+                    selected={""}
+                    setSelected={() => {}}
                   />
                 )}
                 {product.variations.colors.length > 0 && (
                   <ProductOption
                     name='Color'
                     options={product.variations.colors}
-                    selected={selectedColor}
-                    setSelected={setSelectedColor}
+                    selected={""}
+                    setSelected={() => {}}
                   />
                 )}
                 {product.variations.toppings.length > 0 && (
                   <ProductOption
                     name='Topping'
                     options={product.variations.toppings}
-                    selected={selectedTopping}
-                    setSelected={setSelectedTopping}
+                    selected={""}
+                    setSelected={() => {}}
                   />
                 )}
                 {product.variations.doses.length > 0 && (
                   <ProductOption
                     name='Dose'
-                    options={product.doses.sizes}
-                    selected={selectedDose}
-                    setSelected={setSelectedDose}
+                    options={product.variations.doses}
+                    selected={""}
+                    setSelected={() => {}}
                   />
                 )}
 
@@ -161,7 +141,7 @@ export const getServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: '/auth/signin',
+        destination: "/auth/signin",
         permanent: false,
       },
     };
@@ -170,7 +150,7 @@ export const getServerSideProps = async (context) => {
   if (!session.userDetails) {
     return {
       redirect: {
-        destination: '/auth/user/details',
+        destination: "/auth/user/details",
         permanent: false,
       },
     };
@@ -178,7 +158,7 @@ export const getServerSideProps = async (context) => {
 
   const {
     data: { store },
-  } = await axios.get('http://localhost:3000/api/store', {
+  } = await axios.get("http://localhost:3000/api/store", {
     params: {
       userId: session.userId,
     },
@@ -188,14 +168,12 @@ export const getServerSideProps = async (context) => {
     data: { product },
   } = await axios.get(`http://localhost:3000/api/products/${context.query.id}`);
 
-  if (session.userDetails.category !== 'provider' || !store || !product) {
+  if (session.userDetails.category !== "provider" || !store || !product) {
     const category = session.userDetails.category;
     return {
       redirect: {
         destination:
-          category === 'customer'
-            ? `/customer`
-            : `/dashboard/${session.userDetails.category}`,
+          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };

@@ -5,9 +5,9 @@ import axios from "axios";
 
 const ProductIndex = ({ store, products }) => {
   return (
-    <main className="md:ml-[14%] mt-[2%]">
-      <section className="flex flex-col lg:flex-row justify-evenly mx-auto">
-        <div className="w-full lg:w-11/12">
+    <main className='md:ml-[14%] mt-[2%]'>
+      <section className='flex flex-col lg:flex-row justify-evenly mx-auto'>
+        <div className='w-full lg:w-11/12'>
           <ProductList products={products} />
         </div>
       </section>
@@ -43,7 +43,7 @@ export const getServerSideProps = async (context) => {
       userId: session.userId,
     },
   });
-  if (session.userDetails.category !== "provider" || !store) {
+  if (session.userDetails.category !== "provider" || !store || !store.approved) {
     const category = session.userDetails.category;
     return {
       redirect: {
