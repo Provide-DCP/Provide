@@ -82,7 +82,7 @@ const EditProduct = ({ store, product }) => {
         toast.error(message, { toastId: message });
       }
     } catch (e) {
-      console.log(e);
+      toast.error(e, { toastId: e });
     }
   };
 
