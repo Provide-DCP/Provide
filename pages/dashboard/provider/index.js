@@ -25,7 +25,6 @@ const Index = ({ store, products, orders }) => {
       const day = time.getDate();
       const month = time.getMonth();
       const year = time.getFullYear();
-      console.log(day);
       if (month === today.getMonth() && year === today.getFullYear())
         count[Math.floor(day / 5) - 1] += 1;
     });
