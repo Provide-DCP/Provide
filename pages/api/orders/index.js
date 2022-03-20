@@ -40,7 +40,10 @@ const searchOrders = async (req, res) => {
       return res.status(400).json({ message: "Invalid Credentials" });
     }
 
-    const orders = await Order.find({ user: userId }).populate("store").populate("product");
+    const orders = await Order.find({ user: userId })
+      .populate("store")
+      .populate("product")
+      .sort({ createdAt: -1 });
 
     if (orders) {
       return res.status(200).json({ message: "orders Found", orders });
