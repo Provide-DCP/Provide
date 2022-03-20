@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 export const Stats = ({ orders }) => {
   const [pendingOrders, setPendingOrders] = useState(0);
   const [finishedOrders, setFinishedOrders] = useState(0);
