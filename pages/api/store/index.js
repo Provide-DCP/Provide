@@ -1,15 +1,15 @@
-import connectDB from '../../../src/lib/connectDB.js';
-import Store from '../../../models/Store.js';
+import connectDB from "../../../src/lib/connectDB.js";
+import Store from "../../../models/Store.js";
 
 export default async function handler(req, res) {
   switch (req.method) {
-    case 'GET':
+    case "GET":
       await searchStore(req, res);
       break;
-    case 'POST':
+    case "POST":
       await createStore(req, res);
       break;
-    case 'PUT':
+    case "PUT":
       await updateStore(req, res);
       break;
   }
@@ -28,10 +28,10 @@ const searchStore = async (req, res) => {
       store = await Store.find({});
     }
 
-    if (store.length > 0) {
-      return res.status(200).json({ message: 'store Found', store });
+    if (store) {
+      return res.status(200).json({ message: "store Found", store });
     } else {
-      return res.status(200).json({ message: 'store not found', store: false });
+      return res.status(200).json({ message: "store not found", store: false });
     }
   } catch (error) {
     return res.status(200).json({ message: error.message });
@@ -57,7 +57,7 @@ const createStore = async (req, res) => {
     } = req.body;
 
     if (!userId) {
-      return res.status(400).json({ message: 'Invalid Credentials' });
+      return res.status(400).json({ message: "Invalid Credentials" });
     }
 
     const store = new Store({
@@ -76,7 +76,7 @@ const createStore = async (req, res) => {
 
     await store.save();
     res.json({
-      message: 'Success! Store Created',
+      message: "Success! Store Created",
       store,
     });
   } catch (error) {
@@ -104,7 +104,7 @@ const updateStore = async (req, res) => {
     } = req.body;
 
     if (!userId) {
-      return res.status(400).json({ message: 'Invalid Credentials' });
+      return res.status(400).json({ message: "Invalid Credentials" });
     }
 
     const store = await Store.findByIdAndUpdate(storeId, {
@@ -122,7 +122,7 @@ const updateStore = async (req, res) => {
     });
 
     res.json({
-      message: 'Success! Store Updated',
+      message: "Success! Store Updated",
       store,
     });
   } catch (error) {
