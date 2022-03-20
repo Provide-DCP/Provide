@@ -8,6 +8,7 @@ import { ProductOption } from "../../../../../src/components/Provider/ProductOpt
 import { useRouter } from "next/router";
 
 export default function Product({ store, product }) {
+  console.log(product);
   const router = useRouter();
   const { data: session } = useSession();
   const [selectedColor, setSelectedColor] = useState(

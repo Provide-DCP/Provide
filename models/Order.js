@@ -6,6 +6,32 @@ const orderSchema = new mongoose.Schema(
     store: { type: mongoose.Types.ObjectId, ref: "storeDetails" },
     product: { type: mongoose.Types.ObjectId, ref: "products" },
     customer: { type: mongoose.Types.ObjectId, ref: "customer" },
+    variations: {
+      sizes: [
+        {
+          name: String,
+          price: String,
+        },
+      ],
+      colors: [
+        {
+          name: String,
+          price: String,
+        },
+      ],
+      toppings: [
+        {
+          name: String,
+          price: String,
+        },
+      ],
+      doses: [
+        {
+          name: String,
+          price: String,
+        },
+      ],
+    },
     total: {
       type: String,
     },
