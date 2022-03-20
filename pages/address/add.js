@@ -44,7 +44,7 @@ const CustomerAdd = () => {
     router.push('/address');
   };
   return (
-    <div className='max-w-4xl mx-auto my-5'>
+    <div className='ml-[14%] mt-[2%]'>
       <form
         className='space-y-8 divide-y divide-gray-200'
         onSubmit={onSubmitHandler}

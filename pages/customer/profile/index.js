@@ -157,7 +157,7 @@ const Profile = () => {
                 <OptionCard
                   heading='Your Addresses'
                   description='Edit addresses for orders'
-                  href='/address'
+                  href='/customer/profile/address'
                   logo='/address_logo.png'
                 />
                 <OptionCard

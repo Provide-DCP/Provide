@@ -53,7 +53,7 @@ const customerNavigation = [
   },
   {
     name: 'Stores',
-    href: '/customer/store',
+    href: '/customer/stores',
     icon: FaStore,
     current: false,
   },
@@ -71,7 +71,7 @@ const customerNavigation = [
   },
   {
     name: 'Addresses',
-    href: '/customer/orders',
+    href: '/customer/profile/address',
     icon: FaMapMarkerAlt,
     current: false,
   },
