@@ -57,7 +57,7 @@ const Profile = () => {
                     ) : (
                       <img
                         onClick={openModal}
-                        className='h-48 w-48 rounded-full ring-4 ring-white sm:h-48 sm:w-48 object-cover'
+                        className='h-48 w-48 rounded-full ring-4 ring-white sm:h-48 sm:w-48 object-cover cursor-pointer'
                         src={session?.userDetails?.image}
                         alt='profile-image'
                       />
