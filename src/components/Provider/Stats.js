@@ -1,13 +1,24 @@
-const stats = [
-  { name: 'Total Orders', stat: '99' },
-  { name: 'Finished Orders', stat: '92' },
-  { name: 'Pending Orders', stat: '07' },
-];
+import { useEffect, useState } from 'react';
 
-export const Stats = () => {
+export const Stats = ({ orders }) => {
+  const [pendingOrders, setPendingOrders] = useState(0);
+  const [finishedOrders, setFinishedOrders] = useState(0);
+  useEffect(() => {
+    orders?.map((order) => {
+      if (order.status === 4) {
+        setFinishedOrders(finishedOrders + 1);
+      } else {
+        setPendingOrders(pendingOrders + 1);
+      }
+    });
+  }, [orders]);
+  const stats = [
+    { name: 'Total Orders', stat: orders?.length },
+    { name: 'Finished Orders', stat: finishedOrders },
+    { name: 'Pending Orders', stat: pendingOrders },
+  ];
   return (
     <div>
-      <h3 className='text-lg leading-6 font-medium text-gray-900'>Today</h3>
       <dl className='mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3'>
         {stats.map((item) => (
           <div
@@ -18,7 +29,7 @@ export const Stats = () => {
               {item.name}
             </dt>
             <dd className='mt-1 text-3xl font-semibold text-gray-900'>
-              {item.stat}
+              {item.stat.toString().length < 2 ? `0${item.stat}` : item.stat}
             </dd>
           </div>
         ))}

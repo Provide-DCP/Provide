@@ -41,7 +41,7 @@ const data = {
   ],
 };
 
-export const Chart = () => (
+export const Chart = ({ orders }) => (
   <div className='my-5 mx-auto'>
     <Line
       data={data}

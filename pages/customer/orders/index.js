@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React from 'react';
 import { OrderDetailsCard } from '../../../src/components/Customer/OderDetailsCard';
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
+
 const Orders = ({ orders }) => {
+  const { data: session } = useSession();
   return (
     <main className='md:ml-[14%]'>
       <h2 className='text-center my-10 text-4xl font-bold text-gray-600'>
@@ -11,7 +13,11 @@ const Orders = ({ orders }) => {
       <div className='flex flex-col'>
         {orders &&
           orders.map((order, index) => (
-            <OrderDetailsCard key={index} order={order} />
+            <OrderDetailsCard
+              key={index}
+              orderDetails={order}
+              session={session}
+            />
           ))}
       </div>
     </main>
@@ -61,6 +67,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       orders,
+      session,
     },
   };
 };
