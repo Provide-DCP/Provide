@@ -1,13 +1,13 @@
-import React from "react";
-import { ProductList } from "../../../../../src/components/Shared/ProductList";
-import { getSession } from "next-auth/react";
-import axios from "axios";
+import React from 'react';
+import { ProductList } from '../../../../../src/components/Shared/ProductList';
+import { getSession } from 'next-auth/react';
+import axios from 'axios';
 
 const ProductIndex = ({ store, products }) => {
   return (
-    <main className="md:ml-[14%] mt-[2%]">
-      <section className="flex flex-col lg:flex-row justify-evenly mx-auto">
-        <div className="w-full lg:w-11/12">
+    <main className='md:ml-[14%] mt-[2%]'>
+      <section className='flex flex-col lg:flex-row justify-evenly mx-auto'>
+        <div className='w-full'>
           <ProductList products={products} />
         </div>
       </section>
@@ -21,7 +21,7 @@ export const getServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: "/auth/signin",
+        destination: '/auth/signin',
         permanent: false,
       },
     };
@@ -30,7 +30,7 @@ export const getServerSideProps = async (context) => {
   if (!session.userDetails) {
     return {
       redirect: {
-        destination: "/auth/user/details",
+        destination: '/auth/user/details',
         permanent: false,
       },
     };
@@ -40,19 +40,21 @@ export const getServerSideProps = async (context) => {
     data: { store },
   } = await axios.get(`http://localhost:3000/api/store/${context.query.id}`);
 
-  if (session.userDetails.category !== "customer" || !store) {
+  if (session.userDetails.category !== 'customer' || !store) {
     const category = session.userDetails.category;
     return {
       redirect: {
         destination:
-          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
+          category === 'customer'
+            ? `/customer`
+            : `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };
   }
 
   let products = [];
-  const { data } = await axios.get("http://localhost:3000/api/products", {
+  const { data } = await axios.get('http://localhost:3000/api/products', {
     params: {
       storeId: context.query.id,
     },
