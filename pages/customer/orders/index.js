@@ -46,13 +46,9 @@ export const getServerSideProps = async (context) => {
   }
 
   if (session.userDetails.category !== 'customer') {
-    const category = session.userDetails.category;
     return {
       redirect: {
-        destination:
-          category === 'customer'
-            ? `/customer`
-            : `/dashboard/${session.userDetails.category}`,
+        destination: `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };
