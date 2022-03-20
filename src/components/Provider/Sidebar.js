@@ -2,16 +2,11 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import {
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuIcon,
-  UsersIcon,
-  XIcon,
-} from '@heroicons/react/outline';
+import { FolderIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import { CgProfile } from 'react-icons/cg';
+import { FaStore } from 'react-icons/fa';
+import { MdSpaceDashboard } from 'react-icons/md';
+import { FiBriefcase } from 'react-icons/fi';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 
@@ -19,25 +14,25 @@ const navigation = [
   {
     name: 'Dashboard',
     href: '/dashboard/provider',
-    icon: HomeIcon,
+    icon: MdSpaceDashboard,
     current: false,
   },
   {
     name: 'Store',
     href: '/dashboard/provider/store',
-    icon: UsersIcon,
+    icon: FaStore,
     current: false,
   },
   {
     name: 'Products',
     href: '/dashboard/provider/products',
-    icon: FolderIcon,
+    icon: FiBriefcase,
     current: false,
   },
   {
     name: 'Profile',
     href: '/dashboard/provider/profile',
-    icon: CalendarIcon,
+    icon: CgProfile,
     current: false,
   },
 ];
@@ -206,33 +201,35 @@ export const Sidebar = () => {
               ))}
             </nav>
           </div>
-          <div className='flex-shrink-0 flex border-t border-gray-200 p-4'>
-            <Link href='/'>
-              <a className='flex-shrink-0 w-full group block'>
-                <div className='flex items-center'>
-                  <div>
-                    <img
-                      className='inline-block h-9 w-9 rounded-full'
-                      src={session?.userDetails?.image}
-                      alt='profile-image'
-                    />
+          {session?.userDetails && (
+            <div className='flex-shrink-0 flex border-t border-gray-200 p-4'>
+              <Link href='/dashboard/provider'>
+                <a className='flex-shrink-0 w-full group block'>
+                  <div className='flex items-center'>
+                    <div>
+                      <img
+                        className='inline-block h-9 w-9 rounded-full'
+                        src={session?.userDetails?.image}
+                        alt='profile-image'
+                      />
+                    </div>
+                    <div className='ml-3'>
+                      <p className='text-sm font-medium text-gray-700 group-hover:text-gray-900'>
+                        {session?.userDetails?.firstName}{' '}
+                        {session?.userDetails?.lastName}
+                      </p>
+                      <p
+                        onClick={() => signOut()}
+                        className='text-xs font-medium text-gray-500 group-hover:text-gray-700'
+                      >
+                        Sign Out
+                      </p>
+                    </div>
                   </div>
-                  <div className='ml-3'>
-                    <p className='text-sm font-medium text-gray-700 group-hover:text-gray-900'>
-                      {session?.userDetails?.firstName}{' '}
-                      {session?.userDetails?.lastName}
-                    </p>
-                    <p
-                      onClick={() => signOut()}
-                      className='text-xs font-medium text-gray-500 group-hover:text-gray-700'
-                    >
-                      Sign Out
-                    </p>
-                  </div>
-                </div>
-              </a>
-            </Link>
-          </div>
+                </a>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       <div className='md:pl-64 flex flex-col flex-1'>
