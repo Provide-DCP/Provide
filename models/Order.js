@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const productSchema = new mongoose.Schema(
+const orderSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Types.ObjectId, ref: "users" },
     store: { type: mongoose.Types.ObjectId, ref: "storeDetails" },
@@ -22,4 +22,4 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.products || mongoose.model("products", productSchema);
+export default mongoose.models.orders || mongoose.model("orders", orderSchema);

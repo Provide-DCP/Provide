@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const storeDetailsSchema = new mongoose.Schema(
+const storeSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Types.ObjectId, ref: "users" },
     name: {
@@ -118,5 +118,4 @@ const storeDetailsSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.storeDetails ||
-  mongoose.model("storeDetails", storeDetailsSchema);
+export default mongoose.models.stores || mongoose.model("stores", storeSchema);
