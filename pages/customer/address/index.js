@@ -79,6 +79,15 @@ export const getServerSideProps = async (context) => {
     };
   }
 
+  if (session.userDetails.category !== 'customer') {
+    return {
+      redirect: {
+        destination: `/dashboard/${session.userDetails.category}`,
+        permanent: false,
+      },
+    };
+  }
+
   if (!session.userDetails) {
     return {
       redirect: {

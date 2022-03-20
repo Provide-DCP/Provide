@@ -40,6 +40,14 @@ export const getServerSideProps = async (context) => {
     data: { store },
   } = await axios.get(`http://localhost:3000/api/store/${context.query.id}`);
 
+  let products = [];
+  const { data } = await axios.get('http://localhost:3000/api/products', {
+    params: {
+      storeId: context.query.id,
+    },
+  });
+  products = data.products;
+
   if (session.userDetails.category !== 'customer' || !store) {
     const category = session.userDetails.category;
     return {
@@ -52,14 +60,6 @@ export const getServerSideProps = async (context) => {
       },
     };
   }
-
-  let products = [];
-  const { data } = await axios.get('http://localhost:3000/api/products', {
-    params: {
-      storeId: context.query.id,
-    },
-  });
-  products = data.products;
 
   return {
     props: {
