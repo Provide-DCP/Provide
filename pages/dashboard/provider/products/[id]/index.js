@@ -235,6 +235,8 @@ export const getServerSideProps = async (context) => {
     };
   }
 
+  console.log(reviews);
+
   return {
     props: {
       session,

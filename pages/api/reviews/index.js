@@ -1,5 +1,5 @@
 import connectDB from "../../../src/lib/connectDB.js";
-import Review from "../../../models/ReviewModel";
+import Review from "../../../models/Review";
 
 export default async function handler(req, res) {
   switch (req.method) {
