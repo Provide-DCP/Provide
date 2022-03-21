@@ -297,6 +297,8 @@ export const getServerSideProps = async (context) => {
     };
   }
 
+  console.log(store, product);
+
   return {
     props: {
       session,

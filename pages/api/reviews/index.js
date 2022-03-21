@@ -1,5 +1,5 @@
 import connectDB from "../../../src/lib/connectDB.js";
-import Review from "../../../models/ReviewModel";
+import Review from "../../../models/Review";
 
 export default async function handler(req, res) {
   switch (req.method) {
@@ -40,7 +40,7 @@ const searchReviews = async (req, res) => {
       reviews = await Review.find({ user: userId }).populate("user").sort({ createdAt: -1 });
     } else if (storeId) {
       reviews = await Review.find({ store: storeId }).populate("user").sort({ createdAt: -1 });
-    } else {
+    } else if (productId) {
       reviews = await Review.find({ product: productId }).populate("user").sort({ createdAt: -1 });
     }
 
