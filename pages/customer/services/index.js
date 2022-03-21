@@ -1,4 +1,5 @@
-import React from 'react';
+import { getSession } from "next-auth/react";
+import React from "react";
 
 const ServicesIndex = () => {
   return <main className='ml-[14%]'>ServicesIndex</main>;
@@ -10,13 +11,13 @@ export const getServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: '/auth/signin',
+        destination: "/auth/signin",
         permanent: false,
       },
     };
   }
 
-  if (session.userDetails.category !== 'customer') {
+  if (session.userDetails.category !== "customer") {
     return {
       redirect: {
         destination: `/dashboard/${session.userDetails.category}`,
@@ -28,7 +29,7 @@ export const getServerSideProps = async (context) => {
   if (!session.userDetails) {
     return {
       redirect: {
-        destination: '/auth/user/details',
+        destination: "/auth/user/details",
         permanent: false,
       },
     };

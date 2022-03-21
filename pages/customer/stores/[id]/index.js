@@ -1,16 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react';
-import { getSession, useSession } from 'next-auth/react';
-import axios from 'axios';
-import { Purpose } from '../../../../src/components/Provider/Purpose';
-import { AiFillStar } from 'react-icons/ai';
-import { FaDirections } from 'react-icons/fa';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import React, { useState } from "react";
+import { getSession, useSession } from "next-auth/react";
+import axios from "axios";
+import { Purpose } from "../../../../src/components/Provider/Purpose";
+import { AiFillStar } from "react-icons/ai";
+import { FaDirections } from "react-icons/fa";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { ProductList } from "../../../../src/components/Shared/ProductList";
 
-const StoreSlug = ({ store }) => {
+const tabs = [
+  { name: "Profile", href: "#", current: true },
+  { name: "Calendar", href: "#", current: false },
+  { name: "Recognition", href: "#", current: false },
+];
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+const StoreSlug = ({ store, products }) => {
   const { data: session } = useSession();
   const router = useRouter();
+  const [showProducts, setShowProducts] = useState(true);
   return (
     <main className='md:ml-[14%] mt-[2%] sm:px-10'>
       <div className='rounded-md max-w-[100%] mx-auto h-[450px] inset-0'>
@@ -28,7 +40,7 @@ const StoreSlug = ({ store }) => {
             <AiFillStar />
           </div>
           <p className='text-sm font-semibold text-gray-600'>
-            {' '}
+            {" "}
             {store?.reviews?.length} <span>Reviews</span>
           </p>
         </div>
@@ -63,7 +75,7 @@ const StoreSlug = ({ store }) => {
           <FaDirections />
           <span className='ml-2 text-gray-800'>Direction</span>
         </a>
-        {session?.userDetails.category === 'provider' ? (
+        {session?.userDetails.category === "provider" && (
           <Link href={`/dashboard/provider/store/edit`}>
             <a
               className='inline-flex items-center border-2 mx-2 py-1 px-2 rounded-md text-blue-400 hover:bg-gray-100
@@ -85,44 +97,59 @@ const StoreSlug = ({ store }) => {
               <span className='ml-2 text-gray-800'>Edit</span>
             </a>
           </Link>
-        ) : (
-          <Link href={`/customer/stores/${router.query.id}/products`}>
-            <a
-              className='inline-flex items-center border-2 mx-2 py-1 px-2 rounded-md text-blue-400 hover:bg-gray-100
-    '
-            >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-5 w-5'
-                viewBox='0 0 20 20'
-                fill='currentColor'
-              >
-                <path d='M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z' />
-                <path
-                  fillRule='evenodd'
-                  d='M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z'
-                  clipRule='evenodd'
-                />
-              </svg>
-              <span className='ml-2 text-gray-800'>Products</span>
-            </a>
-          </Link>
         )}
       </div>
-      <div className='my-5'>
-        <h1 className='text-center text-3xl font-bold text-gray-500'>
-          Store Reviews
-        </h1>
-        <div className='my-10'>
-          {store?.reviews?.length === 0 ? (
-            <p className='px-2 text-lg tracking-wide font-semibold text-gray-700'>
-              No Reviews Yet
-            </p>
-          ) : (
-            ''
-          )}
+      <div className='mt-6 sm:mt-2 2xl:mt-5'>
+        <div className='border-b border-gray-200'>
+          <div className='px-4 sm:px-6 lg:px-8'>
+            <nav className='-mb-px flex space-x-8' aria-label='Tabs'>
+              <button
+                onClick={() => setShowProducts(true)}
+                className={classNames(
+                  showProducts
+                    ? "border-pink-500 text-gray-900"
+                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300",
+                  "whitespace-nowrap py-4 px-1 border-b-2 font-medium text-md"
+                )}
+                aria-current={showProducts ? "page" : undefined}
+              >
+                Products
+              </button>
+              <button
+                onClick={() => setShowProducts(false)}
+                className={classNames(
+                  !showProducts
+                    ? "border-pink-500 text-gray-900"
+                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300",
+                  "whitespace-nowrap py-4 px-1 border-b-2 font-medium text-md"
+                )}
+                aria-current={!showProducts ? "page" : undefined}
+              >
+                Reviews
+              </button>
+            </nav>
+          </div>
         </div>
       </div>
+      {showProducts === true ? (
+        <div className='my-10'>
+          {products?.length === 0 ? (
+            <p className='px-2 text-lg tracking-wide font-semibold text-gray-700'>
+              No Products Yet
+            </p>
+          ) : (
+            <ProductList products={products} />
+          )}
+        </div>
+      ) : (
+        <div className='my-10'>
+          {store?.reviews?.length === 0 ? (
+            <p className='px-2 text-lg tracking-wide font-semibold text-gray-700'>No Reviews Yet</p>
+          ) : (
+            ""
+          )}
+        </div>
+      )}
     </main>
   );
 };
@@ -136,7 +163,7 @@ export const getServerSideProps = async (context) => {
   if (!session) {
     return {
       redirect: {
-        destination: '/auth/signin',
+        destination: "/auth/signin",
         permanent: false,
       },
     };
@@ -145,28 +172,36 @@ export const getServerSideProps = async (context) => {
   if (!session.userDetails) {
     return {
       redirect: {
-        destination: '/auth/user/details',
+        destination: "/auth/user/details",
         permanent: false,
       },
     };
   }
 
-  if (session.userDetails.category !== 'customer' || !store) {
+  if (session.userDetails.category !== "customer" || !store) {
     const category = session.userDetails.category;
     return {
       redirect: {
         destination:
-          category === 'customer'
-            ? `/customer`
-            : `/dashboard/${session.userDetails.category}`,
+          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };
   }
 
+  let products = [];
+  const { data } = await axios.get("http://localhost:3000/api/products", {
+    params: {
+      storeId: context.query.id,
+    },
+  });
+  products = data.products;
+
   return {
     props: {
       store,
+      products,
+      session,
     },
   };
 };

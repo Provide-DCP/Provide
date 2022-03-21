@@ -2,18 +2,27 @@ import axios from "axios";
 import React from "react";
 import { OrderDetailsCard } from "../../../src/components/Customer/OderDetailsCard";
 import { getSession, useSession } from "next-auth/react";
+import Link from "next/link";
+import { NoOrderProductState } from "../../../src/components/Shared/NoOrderProductState";
 
 const Orders = ({ orders }) => {
-  console.log(orders);
   const { data: session } = useSession();
   return (
-    <main className="md:ml-[14%]">
-      <h2 className="text-center my-10 text-4xl font-bold text-gray-600">Store Orders</h2>
-      <div className="flex flex-col">
-        {orders &&
+    <main className='md:ml-[14%]'>
+      <h2 className='text-center my-10 text-4xl font-bold text-gray-600'>Store Orders</h2>
+      <div className='flex flex-col'>
+        {orders?.length > 0 ? (
           orders.map((order, index) => (
             <OrderDetailsCard key={index} orderDetails={order} session={session} />
-          ))}
+          ))
+        ) : (
+          <NoOrderProductState
+            heading={`Looks like you haven't made any order yet.`}
+            href={"/customer/orders"}
+            buttonText='Go To Stores'
+            image='/empty_cart.svg'
+          />
+        )}
       </div>
     </main>
   );

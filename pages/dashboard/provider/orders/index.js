@@ -7,8 +7,16 @@ const Orders = ({ orders }) => {
     <main className='md:ml-[14%]'>
       <h2 className='text-center my-10 text-4xl font-bold text-gray-600'>Your Orders</h2>
       <div className='flex flex-col'>
-        {orders &&
-          orders.map((order, index) => <OrderDetailsCard key={index} orderDetails={order} />)}
+        {orders?.length > 0 ? (
+          orders.map((order, index) => <OrderDetailsCard key={index} orderDetails={order} />)
+        ) : (
+          <NoOrderProductState
+            heading={`Looks like no one have made any order from your store yet.`}
+            href={"/dashboard/provider"}
+            buttonText='Go To Dashboard'
+            image='/empty_cart.svg'
+          />
+        )}
       </div>
     </main>
   );
@@ -16,12 +24,6 @@ const Orders = ({ orders }) => {
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
-  const { data } = await axios.get("http://localhost:3000/api/store", {
-    params: {
-      userId: session.userId,
-    },
-  });
-  const { store } = data;
 
   if (!session) {
     return {
@@ -51,6 +53,13 @@ export const getServerSideProps = async (context) => {
       },
     };
   }
+
+  const { data } = await axios.get("http://localhost:3000/api/store", {
+    params: {
+      userId: session.userId,
+    },
+  });
+  const { store } = data;
 
   const {
     data: { orders },
