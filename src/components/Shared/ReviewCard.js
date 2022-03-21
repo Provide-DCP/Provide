@@ -3,7 +3,7 @@ import React from "react";
 import { AiTwotoneStar } from "react-icons/ai";
 export const ReviewCard = ({ review }) => {
   return (
-    <div className="w-full mb-5 shadow p-4 border rounded-md border-gray-200">
+    <div className="w-full mb-5 shadow p-4 border rounded-md border-gray-100">
       <div className="flex justify-start">
         <div className="mr-3">
           <img
