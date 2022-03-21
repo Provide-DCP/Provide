@@ -138,12 +138,14 @@ const StoreSlug = ({ store, products, reviews }) => {
             // <p className='px-2 text-lg tracking-wide font-semibold text-gray-700'>
             //   No Products Yet
             // </p>
-            <NoOrderProductState
-              heading={`Looks like store owner haven't added any product.`}
-              href={"/customer/stores"}
-              buttonText={"Go To Stores"}
-              image={"/empty_cart.svg"}
-            />
+            <div className='my-40'>
+              <NoOrderProductState
+                heading={`Looks like store owner haven't added any product.`}
+                href={"/customer/stores"}
+                buttonText={"Go To Stores"}
+                image={"/empty_cart.svg"}
+              />
+            </div>
           ) : (
             <ProductList products={products} />
           )}
@@ -151,12 +153,14 @@ const StoreSlug = ({ store, products, reviews }) => {
       ) : (
         <div className='my-10'>
           {store?.reviews?.length === 0 ? (
-            <NoOrderProductState
-              heading={`No reviews yet.`}
-              href={"/customer/stores"}
-              buttonText={"Go To Stores"}
-              image={"/empty_review.svg"}
-            />
+            <div className='my-40'>
+              <NoOrderProductState
+                heading={`No reviews yet.`}
+                href={"/customer/stores"}
+                buttonText={"Go To Stores"}
+                image={"/empty_review.svg"}
+              />
+            </div>
           ) : (
             ""
           )}

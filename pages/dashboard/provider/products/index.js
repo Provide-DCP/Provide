@@ -7,6 +7,7 @@ import { NoOrderProductState } from "../../../../src/components/Shared/NoOrderPr
 const ProductIndex = ({ store, products }) => {
   return (
     <main className='md:ml-[14%] mt-[2%]'>
+      <h2 className='text-center my-10 text-4xl font-bold text-gray-600'>Your Products</h2>
       {products?.length > 0 ? (
         <section className='flex flex-col lg:flex-row justify-evenly mx-auto'>
           <div className='w-full lg:w-11/12'>

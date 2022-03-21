@@ -33,11 +33,14 @@ const searchReviews = async (req, res) => {
     await connectDB();
     const userId = req.query.userId;
     const storeId = req.query.storeId;
+    const productId = req.query.productId;
     let reviews = [];
     if (userId) {
       reviews = await Review.find({ user: userId }).populate("user").sort({ createdAt: -1 });
     } else if (storeId) {
       reviews = await Review.find({ store: storeId }).populate("user").sort({ createdAt: -1 });
+    } else {
+      reviews = await Review.find({ product: productId }).populate("user").sort({ createdAt: -1 });
     }
 
     if (reviews) {
