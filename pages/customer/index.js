@@ -1,8 +1,14 @@
 import { getSession } from "next-auth/react";
 import React from "react";
+import { Navbar } from "../../src/components/Layouts/Navbar";
 
 const CustomerIndex = () => {
-  return <main className='ml-[14%]'>CustomerIndex</main>;
+  return (
+    <main className=''>
+      <Navbar />
+      <div className='h-[1000px]'></div>
+    </main>
+  );
 };
 
 export const getServerSideProps = async (context) => {

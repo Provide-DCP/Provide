@@ -4,25 +4,32 @@ import { OrderDetailsCard } from "../../../src/components/Customer/OderDetailsCa
 import { getSession, useSession } from "next-auth/react";
 import Link from "next/link";
 import { NoOrderProductState } from "../../../src/components/Shared/NoOrderProductState";
+import { Header } from "../../../src/components/Layouts/Header";
 
 const Orders = ({ orders }) => {
   const { data: session } = useSession();
   return (
-    <main className="md:ml-[14%]">
-      <h2 className="text-center my-10 text-4xl font-bold text-gray-600">Store Orders</h2>
-      <div className="flex flex-col">
-        {orders?.length > 0 ? (
-          orders.map((order, index) => (
-            <OrderDetailsCard key={index} orderDetails={order} session={session} />
-          ))
-        ) : (
-          <NoOrderProductState
-            heading={`Looks like you haven't made any order yet.`}
-            href={"/customer/stores"}
-            buttonText="Go To Stores"
-            image="/empty_cart.svg"
-          />
-        )}
+    <main className=''>
+      <Header heading={"Your Orders"} />
+      <div className='relative -mt-40'>
+        <div className='w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle'>
+          <div className='rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
+            <div className='flex flex-col items-center justify-between w-full '>
+              {orders?.length > 0 ? (
+                orders.map((order, index) => (
+                  <OrderDetailsCard key={index} orderDetails={order} session={session} />
+                ))
+              ) : (
+                <NoOrderProductState
+                  heading={`Looks like you haven't made any order yet.`}
+                  href={"/customer/stores"}
+                  buttonText='Go To Stores'
+                  image='/empty_cart.svg'
+                />
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );
