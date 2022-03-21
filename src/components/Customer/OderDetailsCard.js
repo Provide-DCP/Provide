@@ -97,7 +97,7 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
             {order.status === 2 && (
               <input
                 type='text'
-                className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md'
+                className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md mr-2'
                 placeholder='Enter OTP'
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
@@ -105,7 +105,7 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
             )}
             <div
               onClick={handleNext}
-              className={` ml-3 inline-flex justify-center cursor-pointer py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700`}
+              className={`mb-2 inline-flex justify-center cursor-pointer py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700`}
             >
               {order.status < 2 ? "Next" : "Submit"}
             </div>
