@@ -35,6 +35,7 @@ const searchReviews = async (req, res) => {
     const storeId = req.query.storeId;
     const productId = req.query.productId;
     let reviews = [];
+
     if (userId) {
       reviews = await Review.find({ user: userId }).populate("user").sort({ createdAt: -1 });
     } else if (storeId) {
