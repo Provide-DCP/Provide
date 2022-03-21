@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StarIcon } from "@heroicons/react/solid";
 import { getSession, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
@@ -7,6 +7,7 @@ import axios from "axios";
 import { ProductOption } from "../../../../../src/components/Provider/ProductOption";
 import { useRouter } from "next/router";
 import { Disclosure } from "@headlessui/react";
+import { AiTwotoneStar } from "react-icons/ai";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -29,6 +30,16 @@ export default function Product({ store, product, reviews }) {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
+
+  const [averageRating, setAverageRating] = useState(0);
+
+  useEffect(() => {
+    const totalRating = 0;
+    reviews.forEach((x) => {
+      totalRating += parseInt(x.rating);
+    });
+    setAverageRating(totalRating / reviews.length);
+  }, []);
 
   const handleDelete = async () => {
     try {
@@ -147,23 +158,27 @@ export default function Product({ store, product, reviews }) {
                       <h4 className="sr-only">Reviews</h4>
                       <div className="flex items-center">
                         <div className="flex items-center">
-                          {[0, 1, 2, 3, 4].map((rating) => (
-                            <StarIcon
-                              key={rating}
-                              className={classNames(
-                                product.rating > rating ? "text-gray-900" : "text-gray-200",
-                                "h-5 w-5 flex-shrink-0"
-                              )}
-                              aria-hidden="true"
-                            />
-                          ))}
+                          {[1, 2, 3, 4, 5].map((x) => {
+                            return (
+                              <div
+                                key={x}
+                                className={`${
+                                  x <= averageRating ? "text-yellow-400" : "text-gray-200"
+                                }`}
+                                onClick={() => setRating(x)}
+                              >
+                                <AiTwotoneStar size={32} />
+                              </div>
+                            );
+                          })}
                         </div>
 
+                        <p className="sr-only">{averageRating} out of 5 stars</p>
                         <a
                           href="#"
                           className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
                         >
-                          {reviews?.length} reviews
+                          {reviews.length} reviews
                         </a>
                       </div>
                     </div>
