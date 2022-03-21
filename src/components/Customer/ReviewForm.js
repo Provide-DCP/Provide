@@ -4,7 +4,7 @@ export const ReviewForm = ({ rating, review, setRating, setReview, handleCreate 
   return (
     <div>
       <div className="flex mb-2 justify-between">
-        {[1, 2, 3, 4, 5, 6].map((x) => {
+        {[1, 2, 3, 4, 5].map((x) => {
           return (
             <div
               key={x}
