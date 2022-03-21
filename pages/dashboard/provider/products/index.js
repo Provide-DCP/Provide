@@ -6,20 +6,20 @@ import { NoOrderProductState } from "../../../../src/components/Shared/NoOrderPr
 
 const ProductIndex = ({ store, products }) => {
   return (
-    <main className='md:ml-[14%] mt-[2%]'>
-      <h2 className='text-center my-10 text-4xl font-bold text-gray-600'>Your Products</h2>
+    <main className="md:ml-[14%] mt-[2%]">
+      <h2 className="text-center my-10 text-4xl font-bold text-gray-600">Your Products</h2>
       {products?.length > 0 ? (
-        <section className='flex flex-col lg:flex-row justify-evenly mx-auto'>
-          <div className='w-full lg:w-11/12'>
+        <section className="flex flex-col lg:flex-row justify-evenly mx-auto">
+          <div className="w-full lg:w-11/12">
             <ProductList products={products} />
           </div>
         </section>
       ) : (
-        <div className='mt-20'>
+        <div className="mt-20">
           <NoOrderProductState
             heading={`Looks like you haven't added any product to your store.`}
             href={"/dashboard/provider/products/add"}
-            buttonText='Add Product'
+            buttonText="Add Product"
             image={"/empty_store.svg"}
           />
         </div>
@@ -51,7 +51,7 @@ export const getServerSideProps = async (context) => {
 
   const {
     data: { store },
-  } = await axios.get("http://localhost:3000/api/store", {
+  } = await axios.get(process.env.HOST_URL + "/api/store", {
     params: {
       userId: session.userId,
     },
@@ -70,7 +70,7 @@ export const getServerSideProps = async (context) => {
   let products = [];
 
   if (store) {
-    const { data } = await axios.get("http://localhost:3000/api/products", {
+    const { data } = await axios.get(process.env.HOST_URL + "/api/products", {
       params: {
         storeId: store._id,
       },

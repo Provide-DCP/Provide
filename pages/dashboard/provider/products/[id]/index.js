@@ -217,7 +217,7 @@ export const getServerSideProps = async (context) => {
 
   const {
     data: { store },
-  } = await axios.get("http://localhost:3000/api/store", {
+  } = await axios.get(process.env.HOST_URL + "/api/store", {
     params: {
       userId: session.userId,
     },
@@ -229,7 +229,7 @@ export const getServerSideProps = async (context) => {
 
   let reviews = [];
   if (product) {
-    const { data } = await axios.get("http://localhost:3000/api/reviews", {
+    const { data } = await axios.get(process.env.HOST_URL + "/api/reviews", {
       params: {
         productId: product._id,
       },

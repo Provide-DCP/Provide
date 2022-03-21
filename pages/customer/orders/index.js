@@ -8,9 +8,9 @@ import { NoOrderProductState } from "../../../src/components/Shared/NoOrderProdu
 const Orders = ({ orders }) => {
   const { data: session } = useSession();
   return (
-    <main className='md:ml-[14%]'>
-      <h2 className='text-center my-10 text-4xl font-bold text-gray-600'>Store Orders</h2>
-      <div className='flex flex-col'>
+    <main className="md:ml-[14%]">
+      <h2 className="text-center my-10 text-4xl font-bold text-gray-600">Store Orders</h2>
+      <div className="flex flex-col">
         {orders?.length > 0 ? (
           orders.map((order, index) => (
             <OrderDetailsCard key={index} orderDetails={order} session={session} />
@@ -19,8 +19,8 @@ const Orders = ({ orders }) => {
           <NoOrderProductState
             heading={`Looks like you haven't made any order yet.`}
             href={"/customer/stores"}
-            buttonText='Go To Stores'
-            image='/empty_cart.svg'
+            buttonText="Go To Stores"
+            image="/empty_cart.svg"
           />
         )}
       </div>
@@ -60,7 +60,7 @@ export const getServerSideProps = async (context) => {
 
   const {
     data: { orders },
-  } = await axios.get("http://localhost:3000/api/orders", {
+  } = await axios.get(process.env.HOST_URL + "/api/orders", {
     params: { userId: session.userId },
   });
 

@@ -41,7 +41,7 @@ const ProfileEdit = ({ details }) => {
     e.preventDefault();
     const {
       data: { message },
-    } = await axios.put("http://localhost:3000/api/users", {
+    } = await axios.put(process.env.HOST_URL + "/api/users", {
       userId: session.userId,
       firstName,
       lastName,
@@ -71,9 +71,7 @@ const ProfileEdit = ({ details }) => {
         >
           <div className="space-y-6 sm:space-y-5">
             <div>
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Personal Information
-              </h3>
+              <h3 className="text-lg leading-6 font-medium text-gray-900">Personal Information</h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
                 Use a permanent address where you can receive mail.
               </p>
@@ -187,21 +185,15 @@ const ProfileEdit = ({ details }) => {
           <div className="pt-8 space-y-8 divide-y divide-gray-200 sm:space-y-5">
             <div>
               <div>
-                <h3 className="text-lg leading-6 font-medium text-gray-900">
-                  Profile
-                </h3>
+                <h3 className="text-lg leading-6 font-medium text-gray-900">Profile</h3>
                 <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                  This information will be displayed publicly so be careful what
-                  you share.
+                  This information will be displayed publicly so be careful what you share.
                 </p>
               </div>
 
               <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
-                  <label
-                    htmlFor="photo"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <label htmlFor="photo" className="block text-sm font-medium text-gray-700">
                     Photo
                   </label>
                   <div className="mt-1 sm:mt-0 sm:col-span-2 ">
@@ -294,15 +286,13 @@ export const getServerSideProps = async ({ req, res }) => {
     return {
       redirect: {
         destination:
-          category === "customer"
-            ? `/customer`
-            : `/dashboard/${session.userDetails.category}`,
+          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };
   }
 
-  const { data } = await axios.get("http://localhost:3000/api/users", {
+  const { data } = await axios.get(process.env.HOST_URL + "/api/users", {
     params: {
       userId: userId,
     },
