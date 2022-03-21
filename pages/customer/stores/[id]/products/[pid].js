@@ -164,7 +164,7 @@ export default function Product({ store, product }) {
                           href="#"
                           className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
                         >
-                          {product && product.reviews.length} reviews
+                          {/* {product && product.reviews.length} reviews */}
                         </a>
                       </div>
                     </div>
