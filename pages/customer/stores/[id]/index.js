@@ -176,13 +176,13 @@ export const getServerSideProps = async (context) => {
     data: { store },
   } = await axios.get(`http://localhost:3000/api/store/${context.query.id}`);
 
-  // const {
-  //   data: { reviews },
-  // } = await axios.get("http://localhost:3000/api/reviews", {
-  //   params: {
-  //     storeId: context.query.id,
-  //   },
-  // });
+  const {
+    data: { reviews },
+  } = await axios.get("http://localhost:3000/api/reviews", {
+    params: {
+      storeId: context.query.id,
+    },
+  });
 
   if (!session) {
     return {
@@ -228,6 +228,7 @@ export const getServerSideProps = async (context) => {
       store,
       products,
       session,
+      reviews,
     },
   };
 };

@@ -70,7 +70,7 @@ export const OrderDetailsCard = ({ orderDetails }) => {
   const handleReviewCreate = async () => {
     try {
       const { data } = await axios.post("/api/reviews", {
-        user: session.userId,
+        userdetails: session.userDetails._id,
         product: order.product._id,
         store: order.store._id,
         rating: rating,

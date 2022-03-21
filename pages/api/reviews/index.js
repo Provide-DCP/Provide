@@ -31,17 +31,23 @@ const createReview = async (req, res) => {
 const searchReviews = async (req, res) => {
   try {
     await connectDB();
-    const userId = req.query.userId;
+    const userdetailsId = req.query.userdetailsId;
     const storeId = req.query.storeId;
     const productId = req.query.productId;
     let reviews = [];
 
-    if (userId) {
-      reviews = await Review.find({ user: userId }).populate("user").sort({ createdAt: -1 });
+    if (userdetailsId) {
+      reviews = await Review.find({ userdetails: userdetailsId })
+        .populate("userdetails")
+        .sort({ createdAt: -1 });
     } else if (storeId) {
-      reviews = await Review.find({ store: storeId }).populate("user").sort({ createdAt: -1 });
+      reviews = await Review.find({ store: storeId })
+        .populate("userdetails")
+        .sort({ createdAt: -1 });
     } else if (productId) {
-      reviews = await Review.find({ product: productId }).populate("user").sort({ createdAt: -1 });
+      reviews = await Review.find({ product: productId })
+        .populate("userdetails")
+        .sort({ createdAt: -1 });
     }
 
     if (reviews) {

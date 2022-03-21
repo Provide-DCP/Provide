@@ -26,6 +26,8 @@ export const getServerSideProps = async (context) => {
   const { data } = await axios.get("http://localhost:3000/api/store");
   const stores = data.store;
 
+  console.log(stores);
+
   if (!session) {
     return {
       redirect: {
