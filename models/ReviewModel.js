@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const reviewSchema = new mongoose.Schema(
+const reviewsSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
     product: { type: mongoose.Types.ObjectId, ref: "products" },
@@ -19,4 +19,4 @@ const reviewSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.reviews || mongoose.model("reviews", reviewSchema);
+export default mongoose.models.reviews || mongoose.model("reviews", reviewsSchema);
