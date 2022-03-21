@@ -53,7 +53,7 @@ export default function Product({ store, product }) {
       total = total + (selectedColor === "" ? 0 : parseInt(selectedColor.price));
       total = total + (selectedSize === "" ? 0 : parseInt(selectedSize.price));
       total = total + (selectedDose === "" ? 0 : parseInt(selectedDose.price));
-      selectedToppings.forEach((topping) => (total += topping.price));
+      selectedToppings.forEach((topping) => (total += parseInt(topping.price)));
       const {
         data: { message, order },
       } = await axios.post(`http://localhost:3000/api/orders`, {
@@ -61,10 +61,10 @@ export default function Product({ store, product }) {
         store: store._id,
         product: product._id,
         variations: {
-          sizes: [selectedSize],
-          colors: [selectedColor],
+          sizes: selectedSize === "" ? [] : [selectedSize],
+          colors: selectedColor === "" ? [] : [selectedColor],
           toppings: [...selectedToppings],
-          doses: [selectedDose],
+          doses: selectedDose === "" ? [] : [selectedDose],
         },
         total,
         status: 0,
@@ -207,7 +207,7 @@ export default function Product({ store, product }) {
                       {product.variations.doses.length > 0 && (
                         <ProductOption
                           name="Dose"
-                          options={product.doses.sizes}
+                          options={product.variations.doses}
                           selected={selectedDose}
                           setSelected={setSelectedDose}
                         />

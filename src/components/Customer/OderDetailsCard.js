@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { FaDirections } from "react-icons/fa";
+import { ProductOptionDisplay } from "../Shared/ProductOptionDisplay";
 
 export const OrderDetailsCard = ({ orderDetails, session }) => {
   const [otp, setOtp] = useState(null);
@@ -136,52 +137,32 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
             </p>
             <div>
               {order.variations.sizes.length > 0 && (
-                <ProductOption
-                  name='Size'
-                  options={order.variations.sizes}
-                  selected={""}
-                  setSelected={() => {}}
-                />
+                <ProductOptionDisplay name='Size' options={order.variations.sizes} />
               )}
               {order.variations.colors.length > 0 && (
-                <ProductOption
-                  name='Color'
-                  options={order.variations.colors}
-                  selected={""}
-                  setSelected={() => {}}
-                />
+                <ProductOptionDisplay name='Color' options={order.variations.colors} />
               )}
               {order.variations.toppings.length > 0 && (
-                <ProductOption
-                  name='Topping'
-                  options={order.variations.toppings}
-                  selected={""}
-                  setSelected={() => {}}
-                />
+                <ProductOptionDisplay name='Topping' options={order.variations.toppings} />
               )}
               {order.variations.doses.length > 0 && (
-                <ProductOption
-                  name='Dose'
-                  options={order.doses.sizes}
-                  selected={""}
-                  setSelected={() => {}}
-                />
+                <ProductOptionDisplay name='Dose' options={order.variations.doses} />
               )}
             </div>
-            <div className='flex items-center flex-col lg:flex-row lg:justify-around flex-wrap mt-6'>
-              <div className='w-full h-32 text-center my-2 lg:text-left lg:w-auto font-semibold text-gray-400 inline-block rounded-md shadow bg-white shadow p-4'>
+            <div className='flex flex-col lg:flex-row lg:justify-around flex-wrap mt-6'>
+              <div className='w-full lg:w-[30%]  text-center my-2 lg:text-left lg:w-auto font-semibold text-gray-400 inline-block rounded-md shadow bg-gray-100 shadow p-4'>
                 <h4 className='text-gray-800 mb-2'>Pickup Address</h4>
-                <button className='flex items-center justify-between px-1 rounded-md py-2 border-2 w-36 mx-auto'>
-                  <span className='font-semibold'>Get Direction</span>
-                  <FaDirections size={22} />
-                </button>
+                <p className='text-sm font-semibold tracking-wide'>
+                  {order?.store?.addresses[0]?.building}, {order?.store?.addresses[0]?.city},{" "}
+                  {order?.store?.addresses[0]?.region}, {order?.store?.addresses[0]?.country}.
+                </p>
               </div>
-              <div className='w-full h-32 text-center my-2 lg:text-left lg:w-auto font-semibold text-gray-400 inline-block rounded-md bg-gray-100 shadow p-4'>
+              <div className='w-full text-center my-2 lg:text-left lg:w-auto font-semibold text-gray-400 inline-block rounded-md bg-gray-100 shadow p-4'>
                 <h4 className='text-gray-800 mb-2'>Payment Information</h4>
                 <p className='text-sm text-gray-600 tracking-wider'>At Store</p>
                 <p className='text-sm tracking-wider'>Cash On Delivery</p>
               </div>
-              <div className='w-full h-32 my-2 flex flex-col text-gray-600 font-semibold justify-center lg:w-[40%] rounded-md bg-gray-100 shadow p-4'>
+              <div className='w-full my-2 flex flex-col text-gray-600 font-semibold justify-center lg:w-[40%] rounded-md bg-gray-100 shadow p-4'>
                 <div className='border-b border-gray-300 flex justify-between'>
                   <p>Total</p>
                   <p>Rs.{order.total}</p>
