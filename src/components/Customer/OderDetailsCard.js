@@ -1,38 +1,39 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import axios from 'axios';
-import { ProductOption } from '../Provider/ProductOption';
-import Loader from '../Layouts/Loader';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import axios from "axios";
+import { ProductOption } from "../Provider/ProductOption";
+import Loader from "../Layouts/Loader";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { FaDirections } from "react-icons/fa";
 
 export const OrderDetailsCard = ({ orderDetails, session }) => {
   const [otp, setOtp] = useState(null);
   const [order, setOrder] = useState(orderDetails);
   const router = useRouter();
   useEffect(() => {
-    if (session?.userDetails?.category !== 'customer') return;
+    if (session?.userDetails?.category !== "customer") return;
     (async () => {
       const {
         data: { otp },
-      } = await axios.get('/api/otp', {
+      } = await axios.get("/api/otp", {
         params: { orderId: order._id },
       });
       setOtp(otp.value);
     })();
   }, [order, session]);
   const statusClass = (index) => {
-    if (index - order.status < 1) return '';
-    if (index - order.status === 1) return 'animateProgress';
-    if (index - order.status > 1) return 'undone';
+    if (index - order.status < 1) return "";
+    if (index - order.status === 1) return "animateProgress";
+    if (index - order.status > 1) return "undone";
   };
   const handleNext = async () => {
     if (order.status < 2) {
       const {
         data: { newstate },
-      } = await axios.put('/api/orders', {
+      } = await axios.put("/api/orders", {
         ...order,
         status: order.status + 1,
       });
@@ -40,7 +41,7 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
     } else {
       const {
         data: { verified },
-      } = await axios.get('/api/otp/verify', {
+      } = await axios.get("/api/otp/verify", {
         params: {
           otp: otp,
           orderId: order._id,
@@ -49,36 +50,32 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
       if (verified) {
         const {
           data: { newstate },
-        } = await axios.put('/api/orders', {
+        } = await axios.put("/api/orders", {
           ...order,
           status: order.status + 1,
         });
-        toast.success('Success! Correct OTP', {
-          toastId: 'Success! Correct OTP',
+        toast.success("Success! Correct OTP", {
+          toastId: "Success! Correct OTP",
         });
         setOrder(newstate);
       } else {
-        toast.error('Enter Correct OTP', { toastId: 'Enter Correct OTP' });
+        toast.error("Enter Correct OTP", { toastId: "Enter Correct OTP" });
       }
     }
   };
   return (
     <div className='my-10 shadow rounded-lg mx-4 mt-4'>
-      <div className='flex justify-between items-center flex-row px-2 pt-2 mx-4 border-b-2 border-gray-100'>
+      <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center flex-row px-2 pt-2 mx-4 border-b-2 border-gray-100'>
         <div>
           <h1 className='text-3xl font-bold'>Order Details</h1>
-          <div className='flex items-center mt-2 mb-4'>
-            <p className='text-md font-semibold text-gray-400 mr-2'>
-              Order number
-            </p>
-            <p className='font-semibold'>{order._id}</p>
-            <span className='mx-4 text-gray-400'>&middot;</span>
+          <div className='flex flex-col lg:flex-row lg:items-center mt-2 mb-4'>
+            <p className='text-md font-semibold text-gray-400 mr-2'>Order number</p>
             <p className='font-semibold'>
-              {new Date(order.createdAt).toDateString()}
+              {order._id} &middot; {new Date(order.createdAt).toDateString()}
             </p>
           </div>
         </div>
-        {session?.userDetails?.category === 'customer' ? (
+        {session?.userDetails?.category === "customer" ? (
           <div className=''>
             <div className='flex items-center'>
               <span className='text-2xl font-semibold mr-2'>OTP &#58; </span>
@@ -109,34 +106,30 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
               onClick={handleNext}
               className={` ml-3 inline-flex justify-center cursor-pointer py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700`}
             >
-              {order.status < 2 ? 'Next' : 'Submit'}
+              {order.status < 2 ? "Next" : "Submit"}
             </div>
           </div>
         ) : (
           <div
             onClick={handleNext}
-            className={` ml-3 inline-flex justify-center cursor-pointer py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700`}
+            className={`inline-flex justify-center cursor-pointer py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700`}
           >
             Finished
           </div>
         )}
       </div>
-      <div className='flex my-10 flex-row mt-5 bg-white px-4 py-5 sm:p-6'>
-        <div className='h-[500px] w-[40%]'>
+      <div className='flex flex-col my-10 lg:flex-row mt-5 bg-white px-4 py-5 sm:p-6'>
+        <div className='h-[300px] lg:h-[500px] w-full lg:w-[40%]'>
           <img
             src={order.product.image}
             alt='product-image'
             className='rounded-md object-cover h-full w-full'
           />
         </div>
-        <div className='grid content-between ml-10 w-[60%]'>
+        <div className='grid content-between mt-5 lg:mt-0 lg:ml-10 w-full lg:w-[60%]'>
           <div>
-            <h3 className='text-xl font-bold tracking-wide'>
-              {order.product.name}
-            </h3>
-            <p className='my-1 text-md font-bold text-gray-600'>
-              Rs.{order.product.price}
-            </p>
+            <h3 className='text-xl font-bold tracking-wide'>{order.product.name}</h3>
+            <p className='my-1 text-md font-bold text-gray-600'>Rs.{order.product.price}</p>
             <p className='text-md text-gray-500 my-2'>
               {order.product.description.charAt(0).toUpperCase() +
                 order.product.description.slice(1)}
@@ -146,7 +139,7 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
                 <ProductOption
                   name='Size'
                   options={order.variations.sizes}
-                  selected={''}
+                  selected={""}
                   setSelected={() => {}}
                 />
               )}
@@ -154,7 +147,7 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
                 <ProductOption
                   name='Color'
                   options={order.variations.colors}
-                  selected={''}
+                  selected={""}
                   setSelected={() => {}}
                 />
               )}
@@ -162,7 +155,7 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
                 <ProductOption
                   name='Topping'
                   options={order.variations.toppings}
-                  selected={''}
+                  selected={""}
                   setSelected={() => {}}
                 />
               )}
@@ -170,30 +163,25 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
                 <ProductOption
                   name='Dose'
                   options={order.doses.sizes}
-                  selected={''}
+                  selected={""}
                   setSelected={() => {}}
                 />
               )}
             </div>
-            <div className='flex justify-between flex-wrap mt-6'>
-              <div className='font-semibold text-gray-400  inline-block rounded-md bg-gray-100 shadow p-4'>
-                <h4 className='text-gray-800 mb-2'>Delivery Address</h4>
-                <p className='text-sm tracking-wider'>
-                  {order.store.addresses[0].area}
-                </p>
-                <p className='text-sm tracking-wider'>
-                  {order.store.addresses[0].city}
-                </p>
-                <p className='text-sm tracking-wider'>
-                  {order.store.addresses[0].region}
-                </p>
+            <div className='flex items-center flex-col lg:flex-row lg:justify-around flex-wrap mt-6'>
+              <div className='w-full h-32 text-center my-2 lg:text-left lg:w-auto font-semibold text-gray-400 inline-block rounded-md shadow bg-white shadow p-4'>
+                <h4 className='text-gray-800 mb-2'>Pickup Address</h4>
+                <button className='flex items-center justify-between px-1 rounded-md py-2 border-2 w-36 mx-auto'>
+                  <span className='font-semibold'>Get Direction</span>
+                  <FaDirections size={22} />
+                </button>
               </div>
-              <div className='font-semibold text-gray-400 inline-block rounded-md bg-gray-100 shadow p-4'>
+              <div className='w-full h-32 text-center my-2 lg:text-left lg:w-auto font-semibold text-gray-400 inline-block rounded-md bg-gray-100 shadow p-4'>
                 <h4 className='text-gray-800 mb-2'>Payment Information</h4>
-                <p className='text-sm text-gray-600 tracking-wider'>Online</p>
+                <p className='text-sm text-gray-600 tracking-wider'>At Store</p>
                 <p className='text-sm tracking-wider'>Cash On Delivery</p>
               </div>
-              <div className='flex flex-col text-gray-600 font-semibold justify-center w-[40%]  rounded-md bg-gray-100 shadow p-4'>
+              <div className='w-full h-32 my-2 flex flex-col text-gray-600 font-semibold justify-center lg:w-[40%] rounded-md bg-gray-100 shadow p-4'>
                 <div className='border-b border-gray-300 flex justify-between'>
                   <p>Total</p>
                   <p>Rs.{order.total}</p>
@@ -210,11 +198,7 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
             </div>
           </div>
           <div className='mt-5 flex flex-wrap justify-between items-center'>
-            <div
-              className={`${statusClass(
-                0
-              )} flex flex-col justify-center items-center`}
-            >
+            <div className={`${statusClass(0)} flex flex-col justify-center items-center`}>
               <Image
                 width={40}
                 height={40}
@@ -233,18 +217,8 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
                 />
               </div>
             </div>
-            <div
-              className={`${statusClass(
-                1
-              )} flex flex-col justify-center items-center`}
-            >
-              <Image
-                width={40}
-                height={40}
-                src='/img/bike.png'
-                className=''
-                alt='ready-image'
-              />
+            <div className={`${statusClass(1)} flex flex-col justify-center items-center`}>
+              <Image width={40} height={40} src='/img/bike.png' className='' alt='ready-image' />
               <span className='my-1'>Ready</span>
               <div className='checkedIcon'>
                 <Image
@@ -256,18 +230,8 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
                 />
               </div>
             </div>
-            <div
-              className={`${statusClass(
-                2
-              )} flex flex-col justify-center items-center`}
-            >
-              <Image
-                width={40}
-                height={40}
-                src='/img/paid.png'
-                className=''
-                alt='paid-image'
-              />
+            <div className={`${statusClass(2)} flex flex-col justify-center items-center`}>
+              <Image width={40} height={40} src='/img/paid.png' className='' alt='paid-image' />
               <span className='my-1'>Paid</span>
               <div className='checkedIcon'>
                 <Image
@@ -279,11 +243,7 @@ export const OrderDetailsCard = ({ orderDetails, session }) => {
                 />
               </div>
             </div>
-            <div
-              className={`${statusClass(
-                3
-              )} flex flex-col justify-center items-center`}
-            >
+            <div className={`${statusClass(3)} flex flex-col justify-center items-center`}>
               <Image
                 width={40}
                 height={40}

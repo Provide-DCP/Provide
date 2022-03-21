@@ -151,6 +151,7 @@ const EditProduct = ({ store, product }) => {
                   heading='Categories'
                   options={categories}
                   selected={selected}
+                  disabled={true}
                   setSelected={setSelected}
                 />
               </div>
