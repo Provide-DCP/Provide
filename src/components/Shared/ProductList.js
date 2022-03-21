@@ -4,6 +4,7 @@ import { ListView } from "./ListView";
 import { BsFillGrid3X3GapFill, BsList } from "react-icons/bs";
 import { Switch } from "@headlessui/react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -35,12 +36,12 @@ export const ProductList = ({ products }) => {
 
         <div className="flex items-center justify-between w-28">
           {session.userDetails.category === "provider" && (
-            <a
+            <Link
               href="/dashboard/provider/products/add"
               className={` ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700`}
             >
               Add
-            </a>
+            </Link>
           )}
         </div>
       </div>

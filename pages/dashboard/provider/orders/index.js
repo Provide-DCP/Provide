@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { OrderDetailsCard } from "../../../../src/components/Customer/OderDetailsCard";
 import { getSession } from "next-auth/react";
+import { NoOrderProductState } from "../../../../src/components/Shared/NoOrderProductState";
 const Orders = ({ orders }) => {
   return (
     <main className="md:ml-[14%]">
