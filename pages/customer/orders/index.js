@@ -18,7 +18,7 @@ const Orders = ({ orders }) => {
         ) : (
           <NoOrderProductState
             heading={`Looks like you haven't made any order yet.`}
-            href={"/customer/orders"}
+            href={"/customer/stores"}
             buttonText='Go To Stores'
             image='/empty_cart.svg'
           />

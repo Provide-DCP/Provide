@@ -43,17 +43,6 @@ export const getServerSideProps = async (context) => {
     };
   }
 
-  if (session.userDetails.category !== "provider" || !store || !store.approved) {
-    const category = session.userDetails.category;
-    return {
-      redirect: {
-        destination:
-          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
-        permanent: false,
-      },
-    };
-  }
-
   const { data } = await axios.get("http://localhost:3000/api/store", {
     params: {
       userId: session.userId,
@@ -66,6 +55,17 @@ export const getServerSideProps = async (context) => {
   } = await axios.get("http://localhost:3000/api/orders", {
     params: { storeId: store._id },
   });
+
+  if (session.userDetails.category !== "provider" || !store || !store.approved) {
+    const category = session.userDetails.category;
+    return {
+      redirect: {
+        destination:
+          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {

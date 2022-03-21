@@ -2,15 +2,27 @@ import React from "react";
 import { ProductList } from "../../../../src/components/Shared/ProductList";
 import { getSession } from "next-auth/react";
 import axios from "axios";
+import { NoOrderProductState } from "../../../../src/components/Shared/NoOrderProductState";
 
 const ProductIndex = ({ store, products }) => {
   return (
     <main className='md:ml-[14%] mt-[2%]'>
-      <section className='flex flex-col lg:flex-row justify-evenly mx-auto'>
-        <div className='w-full lg:w-11/12'>
-          <ProductList products={products} />
+      {products?.length > 0 ? (
+        <section className='flex flex-col lg:flex-row justify-evenly mx-auto'>
+          <div className='w-full lg:w-11/12'>
+            <ProductList products={products} />
+          </div>
+        </section>
+      ) : (
+        <div className='mt-20'>
+          <NoOrderProductState
+            heading={`Looks like you haven't added any product to your store.`}
+            href={"/dashboard/provider/products/add"}
+            buttonText='Add Product'
+            image={"/empty_store.svg"}
+          />
         </div>
-      </section>
+      )}
     </main>
   );
 };

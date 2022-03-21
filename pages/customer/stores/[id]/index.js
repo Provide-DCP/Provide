@@ -8,6 +8,7 @@ import { FaDirections } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ProductList } from "../../../../src/components/Shared/ProductList";
+import { NoOrderProductState } from "../../../../src/components/Shared/NoOrderProductState";
 
 const tabs = [
   { name: "Profile", href: "#", current: true },
@@ -19,7 +20,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const StoreSlug = ({ store, products }) => {
+const StoreSlug = ({ store, products, reviews }) => {
   const { data: session } = useSession();
   const router = useRouter();
   const [showProducts, setShowProducts] = useState(true);
@@ -134,9 +135,15 @@ const StoreSlug = ({ store, products }) => {
       {showProducts === true ? (
         <div className='my-10'>
           {products?.length === 0 ? (
-            <p className='px-2 text-lg tracking-wide font-semibold text-gray-700'>
-              No Products Yet
-            </p>
+            // <p className='px-2 text-lg tracking-wide font-semibold text-gray-700'>
+            //   No Products Yet
+            // </p>
+            <NoOrderProductState
+              heading={`Looks like store owner haven't added any product.`}
+              href={"/customer/stores"}
+              buttonText={"Go To Stores"}
+              image={"/empty_cart.svg"}
+            />
           ) : (
             <ProductList products={products} />
           )}
@@ -144,7 +151,12 @@ const StoreSlug = ({ store, products }) => {
       ) : (
         <div className='my-10'>
           {store?.reviews?.length === 0 ? (
-            <p className='px-2 text-lg tracking-wide font-semibold text-gray-700'>No Reviews Yet</p>
+            <NoOrderProductState
+              heading={`No reviews yet.`}
+              href={"/customer/stores"}
+              buttonText={"Go To Stores"}
+              image={"/empty_review.svg"}
+            />
           ) : (
             ""
           )}
@@ -159,6 +171,14 @@ export const getServerSideProps = async (context) => {
   const {
     data: { store },
   } = await axios.get(`http://localhost:3000/api/store/${context.query.id}`);
+
+  const {
+    data: { reviews },
+  } = await axios.get("http://localhost:3000/api/reviews", {
+    params: {
+      storeId: context.query.id,
+    },
+  });
 
   if (!session) {
     return {
@@ -197,11 +217,14 @@ export const getServerSideProps = async (context) => {
   });
   products = data.products;
 
+  console.log(reviews);
+
   return {
     props: {
       store,
       products,
       session,
+      reviews,
     },
   };
 };

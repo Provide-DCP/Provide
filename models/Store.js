@@ -46,24 +46,6 @@ const storeSchema = new mongoose.Schema(
         required: true,
       },
     },
-    ratings: [
-      {
-        user: { type: mongoose.Types.ObjectId, ref: "users" },
-        rating: {
-          type: Number,
-          required: true,
-        },
-      },
-    ],
-    reviews: [
-      {
-        user: { type: mongoose.Types.ObjectId, ref: "users" },
-        review: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
     addresses: [
       {
         name: {

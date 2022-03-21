@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import { getSession } from "next-auth/react";
 import React from "react";
 
+=======
+import React from "react";
+import { getSession } from "next-auth/react";
+>>>>>>> 209401d0e75034c63ea9e610924e92cf7f1340e1
 const ServicesIndex = () => {
-  return <main className='ml-[14%]'>ServicesIndex</main>;
+  return <main className="ml-[14%]">ServicesIndex</main>;
 };
 
 export const getServerSideProps = async (context) => {
