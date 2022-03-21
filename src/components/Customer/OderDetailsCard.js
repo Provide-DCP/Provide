@@ -100,7 +100,7 @@ export const OrderDetailsCard = ({ orderDetails }) => {
           </div>
         </div>
         {session?.userDetails?.category === "customer" ? (
-          order.status !== 4 ? (
+          order.status < 3 ? (
             <div className="">
               <div className="flex items-center">
                 <span className="text-2xl font-semibold mr-2">OTP &#58; </span>

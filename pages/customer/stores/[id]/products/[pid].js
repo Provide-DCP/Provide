@@ -12,7 +12,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Product({ store, product }) {
+export default function Product({ store, product, reviews }) {
   const router = useRouter();
   const { data: session } = useSession();
   const [selectedColor, setSelectedColor] = useState(
@@ -159,12 +159,11 @@ export default function Product({ store, product }) {
                           ))}
                         </div>
 
-                        <p className="sr-only">{product.rating} out of 5 stars</p>
                         <a
                           href="#"
                           className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
                         >
-                          {/* {product && product.reviews.length} reviews */}
+                          {reviews?.length} reviews
                         </a>
                       </div>
                     </div>
@@ -277,6 +276,16 @@ export const getServerSideProps = async (context) => {
     data: { product },
   } = await axios.get(`http://localhost:3000/api/products/${context.query.pid}`);
 
+  let reviews = [];
+  if (product) {
+    const { data } = await axios.get("http://localhost:3000/api/reviews", {
+      params: {
+        productId: product._id,
+      },
+    });
+    reviews = data.reviews;
+  }
+
   if (session.userDetails.category !== "customer" || !store || !product) {
     const category = session.userDetails.category;
     return {
@@ -293,6 +302,7 @@ export const getServerSideProps = async (context) => {
       session,
       store,
       product,
+      reviews,
     },
   };
 };
