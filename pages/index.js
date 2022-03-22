@@ -81,6 +81,21 @@ const content = [
   },
 ];
 
+const volunteerFlow = [
+  {
+    description:
+      "The volunteer registers with website for free. The volunteer can be any retired medical officer or any other experienced personnel with apt medical knowledge..",
+  },
+  {
+    description:
+      "The customer creates an account and registers himself with the website first and sends a request at the time of emergency using the website. He can either use the address that he has registered with or the current location.",
+  },
+  {
+    description:
+      "The volunteer reaches to the patients’ destination and gives him a first aid preventing from further deterioration in the health condition of the victim.",
+  },
+];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -135,53 +150,90 @@ export default function Example() {
           </div>
         </div>
 
-        <section className='flex flex-col items-center justify-center bg-gray-100'>
+        <section
+          id='flows'
+          className='overflow-hidden flex flex-col items-center justify-center bg-gray-100'
+        >
           <h3 className='font-semibold text-3xl text-gray-700 mt-10'>How it works</h3>
-          <div className='w-full flex flex-wrap justify-center items-center my-16 mx-10'>
-            {content &&
-              content.map((card, key) => {
-                return (
-                  <a
-                    key={key}
-                    className={`w-full mx-10 my-2 px-10 py-5 md:w-96 lg:w-72 relative flex flex-row md:flex-col items-stretch md:text-center bg-white md:mx-10 md:my-5 lg:mx-1 rounded-xl shadow-lg cursor-pointer border border-white hover:border-blue-600`}
-                  >
-                    <div className='flex flex-col h-32 justify-center md:items-stretch'>
-                      {key != 3 ? (
-                        <div
-                          id='hello'
-                          className={`hidden lg:block rounded-full w-8 h-8 bg-blue-100 absolute top-[65px] -right-6 z-10`}
-                        >
-                          <span className='absolute inset-1/4'>
-                            <FcNext />
-                          </span>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                      <p className='text-medium text-gray-500 mt-2'>{card.description}</p>
-                    </div>
-                  </a>
-                );
-              })}
+          <div>
+            <h4 className='text-2xl text-center font-bold text-gray-500 mt-10'>Provider Flow</h4>
+            <div className='w-full flex flex-wrap justify-center items-center mx-10'>
+              {content &&
+                content.map((card, key) => {
+                  return (
+                    <a
+                      key={key}
+                      className={`w-full mx-10 my-2 px-10 py-5 md:w-96 lg:w-72 relative flex flex-row md:flex-col items-stretch md:text-center bg-white md:mx-10 md:my-5 lg:mx-1 rounded-xl shadow-lg cursor-pointer border border-white hover:border-blue-600`}
+                    >
+                      <div className='flex flex-col h-32 justify-center md:items-stretch'>
+                        {key != 3 ? (
+                          <div
+                            id='hello'
+                            className={`hidden lg:block rounded-full w-8 h-8 bg-blue-100 absolute top-[65px] -right-6 z-10`}
+                          >
+                            <span className='absolute inset-1/4'>
+                              <FcNext />
+                            </span>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                        <p className='text-medium text-gray-500 mt-2'>{card.description}</p>
+                      </div>
+                    </a>
+                  );
+                })}
+            </div>
+          </div>
+          <div>
+            <h4 className='text-2xl text-center font-bold text-gray-500 mt-10'>Volunteer Flow</h4>
+            <div className='w-full flex flex-wrap justify-center items-center mx-10'>
+              {volunteerFlow &&
+                volunteerFlow.map((card, key) => {
+                  return (
+                    <a
+                      key={key}
+                      className={`w-full mx-10 my-2 px-10 py-5 md:w-96 lg:w-96 relative flex flex-row md:flex-col items-stretch md:text-center bg-white md:mx-10 md:my-5 lg:mx-1 rounded-xl shadow-lg cursor-pointer border border-white hover:border-blue-600`}
+                    >
+                      <div className='flex flex-col h-52 justify-center md:items-stretch'>
+                        {key != 2 ? (
+                          <div
+                            id='hello'
+                            className={`hidden lg:block rounded-full w-8 h-8 bg-blue-100 absolute top-[110px] -right-6 z-10`}
+                          >
+                            <span className='absolute inset-1/4'>
+                              <FcNext />
+                            </span>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                        <p className='text-medium text-gray-500 mt-2'>{card.description}</p>
+                      </div>
+                    </a>
+                  );
+                })}
+            </div>
           </div>
         </section>
 
-        <section>
-          <div className='max-w-7xl mx-auto flex justify-center items-center text-center lg:justify-between lg:text-left my-5'>
-            <div className='w-full px-10 lg:w-1/2 lg:px-6'>
-              <h3 className='text-gray-600 text-3xl font-bold mb-5'>Customer Feedback</h3>
-              <p className='text-lg text-gray-500 mb-5'>
-                We consider the feedbacks or reviews given by the customers to the providers and
-                take the right action.
-              </p>
-            </div>
-            <div className='hidden lg:block lg:max-w-sm'>
-              <img src='customerFeedback.png' alt='' />
-            </div>
+        <div
+          id='reviews'
+          className='max-w-7xl mx-auto flex justify-center items-center text-center lg:justify-between lg:text-left my-5'
+        >
+          <div className='w-full px-10 lg:w-1/2 lg:px-6'>
+            <h3 className='text-gray-600 text-3xl font-bold mb-5'>Customer Feedback</h3>
+            <p className='text-lg text-gray-500 mb-5'>
+              We consider the feedbacks or reviews given by the customers to the providers and take
+              the right action.
+            </p>
           </div>
-        </section>
+          <div className='hidden lg:block lg:max-w-sm'>
+            <img src='customerFeedback.png' alt='' />
+          </div>
+        </div>
 
-        <div className='bg-gray-50'>
+        <div id='faq' className='bg-gray-50'>
           <div className='max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8'>
             <div className='max-w-3xl mx-auto divide-y-2 divide-gray-200'>
               <h2 className='text-center text-3xl font-extrabold text-gray-900 sm:text-4xl'>

@@ -132,8 +132,20 @@ const landingNavigation = [
     current: false,
   },
   {
-    name: "Footers",
-    href: "#footer",
+    name: "Flows",
+    href: "#flows",
+    icon: MdSpaceDashboard,
+    current: false,
+  },
+  {
+    name: "Reviews",
+    href: "#flows",
+    icon: MdSpaceDashboard,
+    current: false,
+  },
+  {
+    name: "FAQ",
+    href: "#faq",
     icon: MdSpaceDashboard,
     current: false,
   },
