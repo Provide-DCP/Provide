@@ -64,6 +64,7 @@ const AddRequest = () => {
         latitude: location.coordinates.latitude,
         longitude: location.coordinates.longitude,
       },
+      finished: false,
     });
     if (request) {
       const {

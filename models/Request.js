@@ -67,6 +67,10 @@ const requestSchema = new mongoose.Schema(
         type: Number,
       },
     },
+    finished: {
+      type: Boolean,
+      required: true,
+    },
   },
   {
     timestamps: true,

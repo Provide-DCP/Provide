@@ -1,10 +1,12 @@
+import axios from "axios";
 import { getSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { Header } from "../../../src/components/Layouts/Header";
 import Loader from "../../../src/components/Layouts/Loader";
+import { RequestDetailsCard } from "../../../src/components/Volunteer/RequestDetailsCard";
 
-const ServicesIndex = () => {
+const ServicesIndex = ({ requests }) => {
   useEffect(() => {
     if (document !== undefined) {
       var animateButton = function (e) {
@@ -27,18 +29,27 @@ const ServicesIndex = () => {
   return (
     <>
       <Header heading={"Get Help"} />
-      <main className='relative -mt-40'>
-        <div className='w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle'>
-          <div className='rounded-lg shadow w-full relative bg-gray-50 px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
-            <div className='flex flex-col items-center justify-center'>
-              <h1 className='text-5xl font-bold text-gray-800'>Emergency help needed?</h1>
-              <p className='my-5 text-2xl font-bold text-gray-500'>Push the button</p>
-              <Link href='/customer/services/add'>
-                <button className='mt-10 font-black shadow text-2xl bubbly-button'>
+      <main className="relative -mt-40">
+        <div className="w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle">
+          <div className="rounded-lg shadow w-full relative bg-gray-50 px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+            <div className="flex flex-col items-center justify-center">
+              <h1 className="text-5xl font-bold text-gray-800">Emergency help needed?</h1>
+              <p className="my-5 text-2xl font-bold text-gray-500">Push the button</p>
+              <Link href="/customer/services/add">
+                <button className="mt-10 font-black shadow text-2xl bubbly-button">
                   Emergency
                 </button>
               </Link>
             </div>
+          </div>
+        </div>
+        <div className="w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle">
+          <div className="rounded-lg shadow w-full relative bg-gray-50 px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+            <h1>Current Pending Requests</h1>
+            {requests &&
+              requests.map((request, index) => {
+                return <RequestDetailsCard key={index} requestDetails={request} />;
+              })}
           </div>
         </div>
         <style>{`
@@ -160,9 +171,16 @@ export const getServerSideProps = async (context) => {
     };
   }
 
+  const {
+    data: { requests },
+  } = await axios.get(process.env.HOST_URL + "/api/requests", {
+    params: { userId: session.userId },
+  });
+
   return {
     props: {
       session,
+      requests,
     },
   };
 };

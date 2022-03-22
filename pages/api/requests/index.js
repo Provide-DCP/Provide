@@ -37,9 +37,22 @@ const createRequest = async (req, res) => {
 const searchRequests = async (req, res) => {
   try {
     await connectDB();
-    const requests = await Request.find({ pending: true })
-      .populate("userdetails")
-      .sort({ createdAt: -1 });
+    const volunteerId = req.query.volunteerId;
+    const userId = req.query.userId;
+    let requests = [];
+    if (volunteerId) {
+      requests = await Request.find({ pending: false, volunteer: volunteerId })
+        .populate("userdetails")
+        .sort({ createdAt: -1 });
+    } else if (userId) {
+      requests = await Request.find({ user: userId })
+        .populate("userdetails")
+        .sort({ createdAt: -1 });
+    } else {
+      requests = await Request.find({ pending: true })
+        .populate("userdetails")
+        .sort({ createdAt: -1 });
+    }
 
     if (requests) {
       return res.status(200).json({ message: "requests Found", requests });
