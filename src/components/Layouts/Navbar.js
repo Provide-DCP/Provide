@@ -148,13 +148,14 @@ export const Navbar = () => {
           </Popover.Button>
         </div>
         <Popover.Group as='nav' className='hidden md:flex space-x-10'>
-          {navigation.map((option) => (
-            <Link href={option.href}>
-              <a className='text-base font-medium text-gray-500 hover:text-gray-900'>
-                {option.name}
-              </a>
-            </Link>
-          ))}
+          {session &&
+            navigation.map((option) => (
+              <Link href={option.href}>
+                <a className='text-base font-medium text-gray-500 hover:text-gray-900'>
+                  {option.name}
+                </a>
+              </Link>
+            ))}
         </Popover.Group>
         <div className='hidden md:flex items-center justify-end md:flex-1 lg:w-0'>
           {session ? (
@@ -209,13 +210,14 @@ export const Navbar = () => {
             </div>
             <div className='py-6 px-5'>
               <div className='grid grid-cols-2 gap-4'>
-                {navigation.map((option) => (
-                  <Link href={option.href}>
-                    <a className='text-base font-medium text-gray-900 hover:text-gray-700'>
-                      {option.name}
-                    </a>
-                  </Link>
-                ))}
+                {session &&
+                  navigation.map((option) => (
+                    <Link href={option.href}>
+                      <a className='text-base font-medium text-gray-900 hover:text-gray-700'>
+                        {option.name}
+                      </a>
+                    </Link>
+                  ))}
               </div>
               <div className='mt-6'>
                 <a

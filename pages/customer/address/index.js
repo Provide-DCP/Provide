@@ -13,7 +13,7 @@ const AddressIndex = () => {
         <div className='w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle'>
           <div className='rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
             <div className='w-11/12 my-10 mx-auto grid grid-cols-4 gap-4 w-full'>
-              <Link href={"/address/add"}>
+              <Link href={"/customer/address/add"}>
                 <a className='flex flex-col items-center justify-center border-2 border-dashed border-gray-300 shadow-md rounded-md hover:bg-gray-50 w-80 h-64'>
                   <FaPlus color='#ccc' size={35} />
                   <h1 className='mt-2 text-lg font-bold text-gray-400'>Add Address</h1>
