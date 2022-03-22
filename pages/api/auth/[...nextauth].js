@@ -10,6 +10,7 @@ import axios from "axios";
 
 export default async function auth(req, res) {
   return await NextAuth(req, res, {
+    secret: process.env.SECRET,
     session: {
       strategy: "jwt",
       maxAge: 30 * 24 * 60 * 60, // 30 days
@@ -25,11 +26,7 @@ export default async function auth(req, res) {
           },
         },
         from: process.env.EMAIL_FROM,
-        async sendVerificationRequest({
-          identifier: email,
-          url,
-          provider: { server, from },
-        }) {
+        async sendVerificationRequest({ identifier: email, url, provider: { server, from } }) {
           const { host } = new URL(url);
           const transport = nodemailer.createTransport(server);
           await transport.sendMail({
