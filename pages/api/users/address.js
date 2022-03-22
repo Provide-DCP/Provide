@@ -42,8 +42,19 @@ const addAddress = async (req, res) => {
   try {
     await connectDB();
 
-    const { userId, name, phone, pincode, building, area, landmark, city, region, country } =
-      req.body;
+    const {
+      userId,
+      name,
+      phone,
+      pincode,
+      building,
+      area,
+      landmark,
+      city,
+      region,
+      country,
+      location,
+    } = req.body;
 
     if (!userId) {
       return res.status(400).json({ message: "Invalid Credentials" });
@@ -62,6 +73,7 @@ const addAddress = async (req, res) => {
       city,
       region,
       country,
+      location,
     });
 
     const updatedAddresses = await userDetails.findOneAndUpdate(
