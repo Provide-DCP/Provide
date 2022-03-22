@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 const requestSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Types.ObjectId, ref: "users" },
-    userdetails: { type: mongoose.Schema.Types.ObjectId, ref: "userdetails" },
+    user: { type: mongoose.Types.ObjectId, ref: "User" },
+    userdetails: { type: mongoose.Schema.Types.ObjectId, ref: "Userdetail" },
     pending: {
       type: Boolean,
       required: true,
     },
-    volunteer: { type: mongoose.Types.ObjectId, ref: "users" },
+    volunteer: { type: mongoose.Types.ObjectId, ref: "User" },
     category: {
       type: String,
       required: true,
@@ -82,4 +82,4 @@ const requestSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.requests || mongoose.model("requests", requestSchema);
+export default mongoose.models.requests || mongoose.model("Request", requestSchema);

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const rotpSchema = new mongoose.Schema(
   {
-    request: { type: mongoose.Types.ObjectId, ref: "requests" },
+    request: { type: mongoose.Types.ObjectId, ref: "Request" },
     value: {
       type: Number,
     },
@@ -13,4 +13,4 @@ const rotpSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.rotps || mongoose.model("rotps", rotpSchema);
+export default mongoose.models.rotps || mongoose.model("Rotp", rotpSchema);
