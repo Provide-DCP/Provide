@@ -41,7 +41,7 @@ const searchRequests = async (req, res) => {
     const userId = req.query.userId;
     let requests = [];
     if (volunteerId) {
-      requests = await Request.find({ pending: false, volunteer: volunteerId })
+      requests = await Request.find({ volunteer: volunteerId })
         .populate("userdetails")
         .sort({ createdAt: -1 });
     } else if (userId) {

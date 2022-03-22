@@ -3,7 +3,7 @@ import React from "react";
 import { OrderDetailsCard } from "../../../../src/components/Customer/OderDetailsCard";
 import { getSession } from "next-auth/react";
 import { Header } from "../../../../src/components/Layouts/Header";
-import { NoOrderProductState } from "";
+import { NoOrderProductState } from "../../../../src/components/Shared/NoOrderProductState";
 const Orders = ({ orders }) => {
   return (
     <>

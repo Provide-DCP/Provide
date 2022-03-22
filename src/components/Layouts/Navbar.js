@@ -134,7 +134,7 @@ export const Navbar = () => {
   }, [session]);
 
   return (
-    <Popover className="fixed top-0 left-0 z-10 w-full bg-white shadow">
+    <Popover className="fixed top-0 left-0 z-10 w-full h-[10vh] bg-white shadow">
       <div className="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10">
         <div className="flex justify-start lg:w-0 lg:flex-1">
           <a href="#">

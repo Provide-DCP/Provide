@@ -137,15 +137,6 @@ export const getServerSideProps = async (context) => {
     };
   }
 
-  if (session.userDetails.category !== "provider" || !store || !store.approved) {
-    return {
-      redirect: {
-        destination: `/dashboard/${session.userDetails.category}`,
-        permanent: false,
-      },
-    };
-  }
-
   const { data } = await axios.get(process.env.HOST_URL + "/api/store", {
     params: {
       userId: session.userId,
@@ -161,6 +152,15 @@ export const getServerSideProps = async (context) => {
       },
     });
     reviews = data.reviews;
+  }
+
+  if (session.userDetails.category !== "provider" || !store || !store.approved) {
+    return {
+      redirect: {
+        destination: `/dashboard/${session.userDetails.category}`,
+        permanent: false,
+      },
+    };
   }
 
   return {
