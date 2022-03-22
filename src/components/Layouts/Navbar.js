@@ -105,6 +105,12 @@ const volunteerNavigation = [
     current: false,
   },
   {
+    name: "Active",
+    href: "/dashboard/volunteer/active",
+    icon: FiBriefcase,
+    current: false,
+  },
+  {
     name: "Profile",
     href: "/dashboard/volunteer/profile",
     icon: CgProfile,

@@ -1,25 +1,49 @@
 import axios from "axios";
 import { getSession, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
+import { toast } from "react-toastify";
 
 const Index = ({ requests }) => {
   console.log(requests);
   const { data: session } = useSession();
+  const router = useRouter();
   const handleAcceptRequest = async (req) => {
     try {
-      const { data: request } = await axios.put("/api/requests", {
+      const {
+        data: { message, request },
+      } = await axios.put("/api/requests", {
         request: {
           ...req,
           pending: false,
           volunteer: session.userId,
         },
       });
+      if (request) {
+        toast.success(message, { toastId: message });
+        router.push("/dashboard/volunteer/active");
+      } else {
+        toast.error(message, { toastId: message });
+      }
     } catch (e) {
       console.log(e);
     }
   };
-  return <p className="mt-20">handle Requests</p>;
+  return (
+    <div className="mt-20">
+      <h1>Handle Requests</h1>
+      {requests.map((request, index) => {
+        return (
+          <div key={index} className="mb-10">
+            <p>{request.userdetails.firstName}</p>
+            <p>{request.category}</p>
+            <button onClick={() => handleAcceptRequest(request)}>accept</button>
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export const getServerSideProps = async (context) => {
