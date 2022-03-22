@@ -17,7 +17,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
 
   return (
     <SessionProvider session={session}>
-      {router.pathname.split("/")[1] !== "auth" && <Navbar />}
+      {router.pathname.split("/")[1] !== "auth" && <Navbar session={session} />}
       <div className={router.pathname.split("/")[1] === "auth" ? "mt-0" : "mt-[11vh]"}>
         <Component {...pageProps} />
         <ToastContainer />

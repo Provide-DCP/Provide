@@ -118,23 +118,44 @@ const volunteerNavigation = [
   },
 ];
 
+const landingNavigation = [
+  {
+    name: "Home",
+    href: "#home",
+    icon: MdSpaceDashboard,
+    current: false,
+  },
+  {
+    name: "Features",
+    href: "#features",
+    icon: MdSpaceDashboard,
+    current: false,
+  },
+  {
+    name: "Footers",
+    href: "#footer",
+    icon: MdSpaceDashboard,
+    current: false,
+  },
+];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export const Navbar = () => {
   const { data: session } = useSession();
-  const [navigation, setNavigation] = useState([]);
+  const [navigation, setNavigation] = useState(landingNavigation);
 
   useEffect(() => {
-    if (!session) return;
-    if (session?.userDetails?.category === "provider") setNavigation(providerNavigation);
+    if (!session) setNavigation(landingNavigation);
+    else if (session?.userDetails?.category === "provider") setNavigation(providerNavigation);
     else if (session?.userDetails?.category === "customer") setNavigation(customerNavigation);
     else setNavigation(volunteerNavigation);
   }, [session]);
 
   return (
-    <Popover className='fixed top-0 left-0 z-10 w-full bg-white shadow'>
+    <Popover className='fixed top-0 left-0 z-40 w-full bg-white shadow'>
       <div className='flex justify-between items-center px-4 py-2 sm:px-6 md:justify-start md:space-x-10'>
         <div className='flex justify-start lg:w-0 lg:flex-1'>
           <Link href={"/"} passHref>
@@ -150,14 +171,13 @@ export const Navbar = () => {
           </Popover.Button>
         </div>
         <Popover.Group as='nav' className='hidden md:flex space-x-10'>
-          {session &&
-            navigation.map((option, index) => (
-              <Link key={index} href={option.href}>
-                <a className='text-base font-medium text-gray-500 hover:text-gray-900'>
-                  {option.name}
-                </a>
-              </Link>
-            ))}
+          {navigation.map((option, index) => (
+            <Link key={index} href={option.href}>
+              <a className='text-base font-medium text-gray-500 hover:text-gray-900'>
+                {option.name}
+              </a>
+            </Link>
+          ))}
         </Popover.Group>
         <div className='hidden md:flex items-center justify-end md:flex-1 lg:w-0'>
           {session ? (
@@ -218,28 +238,20 @@ export const Navbar = () => {
             </div>
             <div className='py-6 px-5'>
               <div className='grid grid-cols-2 gap-4'>
-                {session &&
-                  navigation.map((option, index) => (
-                    <Link key={index} href={option.href}>
-                      <a className='text-base font-medium text-gray-900 hover:text-gray-700'>
-                        {option.name}
-                      </a>
-                    </Link>
-                  ))}
+                {navigation.map((option, index) => (
+                  <Link key={index} href={option.href}>
+                    <a className='text-base font-medium text-gray-900 hover:text-gray-700'>
+                      {option.name}
+                    </a>
+                  </Link>
+                ))}
               </div>
               <div className='mt-6'>
-                <a
-                  href='#'
-                  className='w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700'
-                >
-                  Sign up
-                </a>
-                <p className='mt-6 text-center text-base font-medium text-gray-500'>
-                  Existing customer?{" "}
-                  <a href='#' className='text-blue-600 hover:text-blue-500'>
-                    Sign in
+                <Link href={"/auth/signin"}>
+                  <a className='w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700'>
+                    Sign In
                   </a>
-                </p>
+                </Link>
               </div>
             </div>
           </div>
