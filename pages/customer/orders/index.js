@@ -65,11 +65,16 @@ export const getServerSideProps = async (context) => {
     };
   }
 
-  const {
-    data: { orders },
-  } = await axios.get(process.env.HOST_URL + "/api/orders", {
-    params: { userId: session.userId },
-  });
+  const orders = [];
+  if (session) {
+    const {
+      data: { orders },
+    } = await axios.get(process.env.HOST_URL + "/api/orders", {
+      params: { userId: session.userId },
+    });
+
+    orders = data.orders;
+  }
 
   return {
     props: {

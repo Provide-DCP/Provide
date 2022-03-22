@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const storeSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Types.ObjectId, ref: "users" },
+    user: { type: mongoose.Types.ObjectId, ref: "User" },
     name: {
       type: String,
       required: true,
@@ -100,4 +100,4 @@ const storeSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.stores || mongoose.model("stores", storeSchema);
+export default mongoose.models.stores || mongoose.model("Store", storeSchema);

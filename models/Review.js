@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const reviewsSchema = new mongoose.Schema(
   {
-    userdetails: { type: mongoose.Schema.Types.ObjectId, ref: "userdetails" },
-    product: { type: mongoose.Types.ObjectId, ref: "products" },
-    store: { type: mongoose.Types.ObjectId, ref: "stores" },
+    userdetails: { type: mongoose.Schema.Types.ObjectId, ref: "Userdetail" },
+    product: { type: mongoose.Types.ObjectId, ref: "Product" },
+    store: { type: mongoose.Types.ObjectId, ref: "Store" },
     rating: {
       type: Number,
       required: true,
@@ -19,4 +19,4 @@ const reviewsSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.reviews || mongoose.model("reviews", reviewsSchema);
+export default mongoose.models.reviews || mongoose.model("Review", reviewsSchema);

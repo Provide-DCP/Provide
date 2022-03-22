@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Types.ObjectId, ref: "users" },
-    store: { type: mongoose.Types.ObjectId, ref: "stores" },
+    user: { type: mongoose.Types.ObjectId, ref: "User" },
+    store: { type: mongoose.Types.ObjectId, ref: "Store" },
     name: {
       type: String,
       required: true,
@@ -62,4 +62,4 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.products || mongoose.model("products", productSchema);
+export default mongoose.models.products || mongoose.model("Product", productSchema);

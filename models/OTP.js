@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const otpSchema = new mongoose.Schema(
   {
-    order: { type: mongoose.Types.ObjectId, ref: "orders" },
+    order: { type: mongoose.Types.ObjectId, ref: "Order" },
     value: {
       type: Number,
     },
@@ -13,4 +13,4 @@ const otpSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.otps || mongoose.model("otps", otpSchema);
+export default mongoose.models.otps || mongoose.model("Otps", otpSchema);
