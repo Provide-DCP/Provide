@@ -5,12 +5,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { MdEdit } from "react-icons/md";
 import { getSession, useSession } from "next-auth/react";
-<<<<<<< HEAD
-// import { Modal } from "../../../../src/components/Student/Profile/Modal";
-
-=======
 import { Modal } from "../../../../src/components/Layouts/Modal";
->>>>>>> f364a9a2c3a891f1803c4de34a86d6ffee3bb046
 const tabs = [{ name: "Profile", href: "#", current: true }];
 
 function classNames(...classes) {
@@ -34,11 +29,7 @@ const Profile = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-<<<<<<< HEAD
-      <main>
-=======
       <main className=" ">
->>>>>>> f364a9a2c3a891f1803c4de34a86d6ffee3bb046
         <div className="flex-1 relative z-0 flex overflow-hidden">
           <div className="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
             <div>
@@ -52,20 +43,12 @@ const Profile = () => {
               <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="-mt-24 sm:-mt-24 sm:flex sm:items-end sm:space-x-5">
                   <div className="flex">
-<<<<<<< HEAD
-                    {/* <Modal
-=======
                     <Modal
->>>>>>> f364a9a2c3a891f1803c4de34a86d6ffee3bb046
                       isOpen={isOpen}
                       setIsOpen={setIsOpen}
                       openModal={openModal}
                       closeModal={closeModal}
-<<<<<<< HEAD
-                    /> */}
-=======
                     />
->>>>>>> f364a9a2c3a891f1803c4de34a86d6ffee3bb046
                     {status === "loading" ? (
                       <div className="animate-pulse flex space-x-4">
                         <div className="rounded-full bg-gray-200 h-48 w-48"></div>
@@ -73,11 +56,7 @@ const Profile = () => {
                     ) : (
                       <img
                         onClick={openModal}
-<<<<<<< HEAD
-                        className="h-48 w-48 rounded-full ring-4 ring-white sm:h-48 sm:w-48 object-cover"
-=======
                         className="h-48 w-48 rounded-full ring-4 ring-white sm:h-48 sm:w-48 object-cover cursor-pointer"
->>>>>>> f364a9a2c3a891f1803c4de34a86d6ffee3bb046
                         src={session?.userDetails?.image}
                         alt="profile-image"
                       />
@@ -90,11 +69,7 @@ const Profile = () => {
                       </h1>
                     </div>
                     <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-<<<<<<< HEAD
-                      <Link href="/dashboard/student/profile/edit">
-=======
                       <Link href="/dashboard/volunteer/profile/edit">
->>>>>>> f364a9a2c3a891f1803c4de34a86d6ffee3bb046
                         <button
                           type="button"
                           className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
@@ -153,19 +128,8 @@ const Profile = () => {
                   </dd>
                 </div>
                 <div className="sm:col-span-1">
-<<<<<<< HEAD
-                  <dt className="text-md font-medium text-gray-500">Registered Email</dt>
-                  <dd className=" font-semibold text-md text-gray-900">{session?.user?.email}</dd>
-                </div>
-                <div className="sm:col-span-1">
-                  <dt className="text-md font-medium text-gray-500">Given Email</dt>
-                  <dd className=" font-semibold text-md text-gray-900">
-                    {session?.userDetails?.emailList[0]}
-                  </dd>
-=======
                   <dt className="text-md font-medium text-gray-500">Email</dt>
                   <dd className=" font-semibold text-md text-gray-900">{session?.user?.email}</dd>
->>>>>>> f364a9a2c3a891f1803c4de34a86d6ffee3bb046
                 </div>
                 <div className="sm:col-span-1">
                   <dt className="text-md font-medium text-gray-500">Mobile Number</dt>
@@ -208,13 +172,9 @@ export const getServerSideProps = async (context) => {
     return {
       redirect: {
         destination:
-<<<<<<< HEAD
-          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
-=======
           category === "customer"
             ? `/customer/stores`
             : `/dashboard/${session.userDetails.category}`,
->>>>>>> f364a9a2c3a891f1803c4de34a86d6ffee3bb046
         permanent: false,
       },
     };
