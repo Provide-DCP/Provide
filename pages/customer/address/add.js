@@ -7,6 +7,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { Header } from "../../../src/components/Layouts/Header";
+import { FaCheckCircle } from "react-icons/fa";
+import Loader from "../../../src/components/Layouts/Loader";
 
 const country = [{ id: 1, name: "India" }];
 
@@ -80,13 +82,13 @@ const CustomerAdd = () => {
       city,
       country: selectedCountry.name,
       location: {
-        latitude: coordinates.latitude,
-        longitude: coordinates.longitude,
+        latitude: location.coordinates.latitude,
+        longitude: location.coordinates.longitude,
       },
     });
     reloadSession();
     toast.success(data.message, { toastId: data.message });
-    router.push("/address");
+    router.push("/customer/address");
   };
   return (
     <>
@@ -215,7 +217,7 @@ const CustomerAdd = () => {
                     </div>
                     <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
-                        htmlFor='street-address'
+                        htmlFor='area'
                         className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                       >
                         Area
@@ -223,18 +225,18 @@ const CustomerAdd = () => {
                       <div className='mt-1 sm:mt-0 sm:col-span-2'>
                         <input
                           type='text'
-                          name='street-address'
-                          id='street-address'
+                          name='area'
+                          id='area'
                           value={area}
                           onChange={(e) => setArea(e.target.value)}
-                          autoComplete='street-address'
+                          autoComplete='address-line1'
                           className='block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
                     <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
-                        htmlFor='street-address'
+                        htmlFor='landmark'
                         className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                       >
                         Landmark
@@ -242,11 +244,11 @@ const CustomerAdd = () => {
                       <div className='mt-1 sm:mt-0 sm:col-span-2'>
                         <input
                           type='text'
-                          name='street-address'
-                          id='street-address'
+                          name='landmark'
+                          id='landmark'
                           value={landmark}
                           onChange={(e) => setLandmark(e.target.value)}
-                          autoComplete='street-address'
+                          autoComplete='address-line2'
                           className='block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
