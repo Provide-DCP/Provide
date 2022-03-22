@@ -9,7 +9,6 @@ import { NoOrderProductState } from "../../../../src/components/Shared/NoOrderPr
 import { RequestDetailsCard } from "../../../../src/components/Volunteer/RequestDetailsCard";
 
 const Index = ({ requests }) => {
-  console.log(requests);
   const { data: session } = useSession();
   const router = useRouter();
   const handleAcceptRequest = async (req) => {
@@ -49,6 +48,7 @@ const Index = ({ requests }) => {
                           key={index}
                           requestDetails={request}
                           handleAcceptRequest={handleAcceptRequest}
+                          session={session}
                         />
                       )
                     );
@@ -111,6 +111,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       requests,
+      session,
     },
   };
 };

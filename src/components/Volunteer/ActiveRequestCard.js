@@ -46,29 +46,29 @@ export const Active = ({ request, setRequests }) => {
         <div>
           <input
             type='text'
-            className='mt-1 focus:ring-blue-500 focus:border-blue-500 shadow-sm sm:text-sm border-gray-300 rounded-md mr-2'
+            className='my-2 w-full xl:my-0 xl:w-auto focus:ring-blue-500 focus:border-blue-500 shadow-sm sm:text-sm border-gray-300 rounded-md mr-2'
             placeholder='Enter OTP'
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
           />
           <div
             onClick={() => handleVerify(request)}
-            className={`inline-flex justify-center cursor-pointer py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700`}
+            className={`my-2 w-full xl:w-auto xl:my-0 inline-flex justify-center cursor-pointer py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700`}
           >
             Close Request
           </div>
         </div>
       </div>
       <div className='flex flex-col my-10 lg:flex-row justify-between items-center mt-5 bg-white px-4 py-4'>
-        <div className='h-[10%] w-[10%] rounded-full'>
+        <div className='lg:h-[10%] lg:w-[10%] rounded-full'>
           <img
             src={request.userdetails.image}
             alt='product-image'
             className='rounded-full object-cover h-full w-full'
           />
         </div>
-        <div className='w-[90%] grid content-between mt-5 lg:mt-0 lg:ml-10'>
-          <div className='flex justify-between w-full'>
+        <div className='w-[90%] mt-5 lg:mt-0 lg:ml-10'>
+          <div className='flex flex-col items-center lg:flex-row lg:justify-between w-full'>
             <div className='flex flex-col item-center justify-center'>
               <h3 className='text-lg font-semibold tracking-wide'>
                 Name :-{" "}
@@ -81,7 +81,7 @@ export const Active = ({ request, setRequests }) => {
                 <span className='text-lg font-bold tracking-wide'>{request.category}</span>
               </h3>
             </div>
-            <div className=' w-[25%] flex flex-col lg:flex-row lg:justify-between flex-wrap'>
+            <div className='w-full lg:w-[25%] flex flex-col lg:flex-row lg:justify-between flex-wrap'>
               {request?.address && (
                 <div className='text-center my-2 lg:text-left lg:w-auto font-semibold text-gray-400 inline-block rounded-md shadow bg-gray-100 shadow p-4'>
                   <h4 className='text-gray-800 mb-2'>Location</h4>
