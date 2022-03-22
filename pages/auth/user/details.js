@@ -82,7 +82,7 @@ const Details = () => {
 
       reloadSession();
 
-      router.push(category === "customer" ? "/customer" : `/dashboard/${category}`);
+      router.push(category === "customer" ? "/customer/store" : `/dashboard/${category}`);
     } catch (error) {
       toast.error(error.message, {
         toastId: error,

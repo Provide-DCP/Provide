@@ -720,7 +720,9 @@ export const getServerSideProps = async (context) => {
     return {
       redirect: {
         destination:
-          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
+          category === "customer"
+            ? `/customer/stores`
+            : `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };

@@ -1,5 +1,5 @@
 import { getSession, useSession } from "next-auth/react";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { reloadSession } from "../../../src/lib/helper";
@@ -7,6 +7,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { Header } from "../../../src/components/Layouts/Header";
+import { FaCheckCircle } from "react-icons/fa";
+import Loader from "../../../src/components/Layouts/Loader";
 
 const country = [{ id: 1, name: "India" }];
 
@@ -26,6 +28,46 @@ const CustomerAdd = () => {
   const [state, setState] = useState("");
   const [pincode, setPincode] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(country[0]);
+  const [location, setLocation] = useState({
+    loading: false,
+    coordinates: { latitude: null, longitude: null },
+  });
+
+  const handlelocation = () => {
+    setLocation({
+      loading: true,
+    });
+
+    const onSuccess = (location) => {
+      setLocation({
+        loading: false,
+        coordinates: {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        },
+      });
+    };
+
+    const onError = (error) => {
+      toast.error(error.message, { toastId: error.message });
+      setLocation({
+        loading: true,
+        error,
+      });
+    };
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  };
+
+  useEffect(() => {
+    if (!("geolocation" in navigator)) {
+      onError({
+        code: 0,
+        message: "Geolocation doesn't support your browser.",
+      });
+    }
+  }, []);
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const { data } = await axios.post("/api/users/address", {
@@ -39,10 +81,14 @@ const CustomerAdd = () => {
       region: state,
       city,
       country: selectedCountry.name,
+      location: {
+        latitude: location.coordinates.latitude,
+        longitude: location.coordinates.longitude,
+      },
     });
     reloadSession();
     toast.success(data.message, { toastId: data.message });
-    router.push("/address");
+    router.push("/customer/address");
   };
   return (
     <>
@@ -171,7 +217,7 @@ const CustomerAdd = () => {
                     </div>
                     <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
-                        htmlFor='street-address'
+                        htmlFor='area'
                         className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                       >
                         Area
@@ -179,18 +225,18 @@ const CustomerAdd = () => {
                       <div className='mt-1 sm:mt-0 sm:col-span-2'>
                         <input
                           type='text'
-                          name='street-address'
-                          id='street-address'
+                          name='area'
+                          id='area'
                           value={area}
                           onChange={(e) => setArea(e.target.value)}
-                          autoComplete='street-address'
+                          autoComplete='address-line1'
                           className='block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
                     <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
-                        htmlFor='street-address'
+                        htmlFor='landmark'
                         className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                       >
                         Landmark
@@ -198,11 +244,11 @@ const CustomerAdd = () => {
                       <div className='mt-1 sm:mt-0 sm:col-span-2'>
                         <input
                           type='text'
-                          name='street-address'
-                          id='street-address'
+                          name='landmark'
+                          id='landmark'
                           value={landmark}
                           onChange={(e) => setLandmark(e.target.value)}
-                          autoComplete='street-address'
+                          autoComplete='address-line2'
                           className='block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
@@ -284,6 +330,94 @@ const CustomerAdd = () => {
                           autoComplete='tel'
                           className='max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                         />
+                      </div>
+                    </div>
+                    <div className='mt-4 grid grid-cols-6 gap-6 border-t py-5'>
+                      <div className='col-span-6 sm:col-span-3'>
+                        <label
+                          htmlFor='latitude'
+                          className='block text-sm font-medium text-gray-700'
+                        >
+                          Latitude
+                        </label>
+                        <input
+                          type='text'
+                          name='latitude'
+                          id='latitude'
+                          required
+                          value={location.coordinates?.latitude || ""}
+                          onChange={(e) =>
+                            setLocation({
+                              ...location,
+                              coordinates: {
+                                ...coordinates,
+                                latitude: e.target.value,
+                              },
+                            })
+                          }
+                          autoComplete='lat'
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                        />
+                      </div>
+
+                      <div className='col-span-6 sm:col-span-3'>
+                        <label
+                          htmlFor='longitude'
+                          className='block text-sm font-medium text-gray-700'
+                        >
+                          Longitude
+                        </label>
+                        <input
+                          type='text'
+                          name='longitude'
+                          id='longitude'
+                          required
+                          value={location.coordinates?.longitude || ""}
+                          onChange={(e) =>
+                            setLocation({
+                              ...location,
+                              coordinates: {
+                                ...coordinates,
+                                longitude: e.target.value,
+                              },
+                            })
+                          }
+                          autoComplete='long'
+                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                        />
+                      </div>
+                    </div>
+                    <div className='my-5 relative'>
+                      <div className='absolute inset-0 flex items-center' aria-hidden='true'>
+                        <div className='w-full border-t border-gray-300' />
+                      </div>
+                      <div className='relative flex justify-center'>
+                        <span className='px-2 bg-white text-sm text-gray-500'>OR</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div
+                        onClick={handlelocation}
+                        disabled={location.coordinates?.latitude && location.coordinates?.longitude}
+                        className='w-full flex justify-center border border-transparent rounded-md shadow-sm text-sm font-medium bg-gray-200 cursor-pointer'
+                      >
+                        {!location.loading ? (
+                          location.coordinates?.latitude && location.coordinates?.longitude ? (
+                            <div className='py-2 px-4 flex justify-center items-center cursor-not-allowed w-full'>
+                              <FaCheckCircle size={24} color={"green"} />
+                              <p className='ml-3 text-base'>Location Granted</p>
+                            </div>
+                          ) : (
+                            <div className='py-2 px-4 flex justify-center items-center hover:bg-gray-300 w-full'>
+                              Grant Location Permission
+                            </div>
+                          )
+                        ) : (
+                          <div className='py-2 px-4 flex justify-center items-center cursor-not-allowed w-full'>
+                            <Loader width={6} height={6} color='white' />
+                            <p>Fetching...</p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
