@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { FaCheckCircle } from "react-icons/fa";
-import Loader from "../../../../src/components/Layouts/Loader";
-
+import Loader from "../../../src/components/Layouts/Loader";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 const AddRequest = () => {
   const { data: session } = useSession();
+  const router = useRouter();
   const [category, setCategory] = useState("");
-  const [address, setAddress] = useState();
+  const [address, setAddress] = useState({});
   const [location, setLocation] = useState({
     loading: false,
     coordinates: { latitude: null, longitude: null },
@@ -45,7 +47,8 @@ const AddRequest = () => {
       });
     }
   }, []);
-  const handleCreateRequest = async () => {
+  const handleCreateRequest = async (e) => {
+    e.preventDefault();
     const {
       data: { request },
     } = await axios.post("/api/requests", {
@@ -73,9 +76,9 @@ const AddRequest = () => {
     }
   };
   return (
-    <form onSubmit={handleCreateRequest} className="mt-20">
+    <form onSubmit={handleCreateRequest} className="mt-28">
       <div>
-        <input value={category} onChange={(e) => setCategory(e.target.value)} />
+        <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} />
       </div>
       <div></div>
       <div className="mt-4 grid grid-cols-6 gap-6 border-t py-5">

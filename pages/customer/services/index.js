@@ -1,8 +1,9 @@
 import { getSession } from "next-auth/react";
+import Link from "next/link";
 import React from "react";
 
 const ServicesIndex = () => {
-  return <main className='ml-[14%]'>ServicesIndex</main>;
+  return <Link href="/customer/services/add">Get Help</Link>;
 };
 
 export const getServerSideProps = async (context) => {

@@ -25,39 +25,30 @@ const requestSchema = new mongoose.Schema(
     address: {
       name: {
         type: String,
-        required: true,
       },
       phone: {
         type: Number,
-        required: true,
       },
       pincode: {
         type: Number,
-        required: true,
       },
       building: {
         type: String,
-        required: true,
       },
       area: {
         type: String,
-        required: true,
       },
       landmark: {
         type: String,
-        required: true,
       },
       city: {
         type: String,
-        required: true,
       },
       region: {
         type: String,
-        required: true,
       },
       country: {
         type: String,
-        required: true,
       },
       location: {
         latitude: {

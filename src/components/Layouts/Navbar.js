@@ -65,12 +65,12 @@ const customerNavigation = [
     icon: FaStore,
     current: false,
   },
-  // {
-  //   name: "Services",
-  //   href: "/customer/services",
-  //   icon: MdMedicalServices,
-  //   current: false,
-  // },
+  {
+    name: "Services",
+    href: "/customer/services",
+    icon: MdMedicalServices,
+    current: false,
+  },
   {
     name: "Orders",
     href: "/customer/orders",
