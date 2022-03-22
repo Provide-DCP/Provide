@@ -100,4 +100,4 @@ const storeSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.stores || mongoose.model("Store", storeSchema);
+export default mongoose.models.Store || mongoose.model("Store", storeSchema);

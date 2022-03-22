@@ -81,4 +81,4 @@ const userDetailsSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.userdetails || mongoose.model("Userdetail", userDetailsSchema);
+export default mongoose.models.Userdetail || mongoose.model("Userdetail", userDetailsSchema);

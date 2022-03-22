@@ -82,4 +82,4 @@ const requestSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.requests || mongoose.model("Request", requestSchema);
+export default mongoose.models.Request || mongoose.model("Request", requestSchema);

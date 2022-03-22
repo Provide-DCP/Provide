@@ -13,4 +13,4 @@ const rotpSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.rotps || mongoose.model("Rotp", rotpSchema);
+export default mongoose.models.Rotp || mongoose.model("Rotp", rotpSchema);

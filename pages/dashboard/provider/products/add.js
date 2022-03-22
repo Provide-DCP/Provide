@@ -63,7 +63,7 @@ const AddProduct = ({ store }) => {
     try {
       const {
         data: { message },
-      } = await axios.post(process.env.HOST_URL + "/api/products", {
+      } = await axios.post("/api/products", {
         userId: session.userId,
         storeId: store._id,
         name,
