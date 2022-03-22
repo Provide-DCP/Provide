@@ -2,7 +2,7 @@ import { getSession, useSession } from "next-auth/react";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
-import { reloadSession } from "../../../src/lib/helper";
+import { reloadSession } from "../../../../src/lib/helper";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
