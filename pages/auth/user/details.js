@@ -123,7 +123,7 @@ const Details = () => {
                               defaultChecked={category.id === "customer"}
                               value={category.title}
                               onChange={(e) => handleCategory()}
-                              className='h-4 w-4 text-indigo-600 border-gray-300'
+                              className='h-4 w-4 text-blue-600 border-gray-300'
                             />
                             <label
                               htmlFor={category.id}

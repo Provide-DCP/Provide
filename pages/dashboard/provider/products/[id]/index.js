@@ -81,7 +81,7 @@ export default function Product({ store, product, reviews }) {
                         <p className='sr-only'>{averageRating} out of 5 stars</p>
                         <a
                           href='#'
-                          className='ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500'
+                          className='ml-3 text-sm font-medium text-blue-600 hover:text-blue-500'
                         >
                           {reviews.length} reviews
                         </a>

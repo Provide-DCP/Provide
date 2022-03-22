@@ -233,14 +233,14 @@ export default function Example() {
                   src='https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100'
                   alt='People working on laptops'
                 /> */}
-                <div className='absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-200 mix-blend-multiply' />
+                <div className='absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-200 mix-blend-multiply' />
               </div>
               <div className='relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8'>
                 <h1 className='text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl'>
                   <span className='block text-white'>Take control of your</span>
-                  <span className='block text-indigo-200'>customer support</span>
+                  <span className='block text-blue-200'>customer support</span>
                 </h1>
-                <p className='mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl'>
+                <p className='mt-6 max-w-lg mx-auto text-center text-xl text-blue-200 sm:max-w-3xl'>
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
                   commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
                 </p>
@@ -248,13 +248,13 @@ export default function Example() {
                   <div className='space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5'>
                     <a
                       href='#'
-                      className='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-700 bg-white hover:bg-indigo-50 sm:px-8'
+                      className='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-blue-700 bg-white hover:bg-blue-50 sm:px-8'
                     >
                       Get started
                     </a>
                     <a
                       href='#'
-                      className='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-500 bg-opacity-60 hover:bg-opacity-70 sm:px-8'
+                      className='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-500 bg-opacity-60 hover:bg-opacity-70 sm:px-8'
                     >
                       Live demo
                     </a>
@@ -322,7 +322,7 @@ export default function Example() {
               <div className='px-4 max-w-xl mx-auto sm:px-6 lg:py-16 lg:max-w-none lg:mx-0 lg:px-0'>
                 <div>
                   <div>
-                    <span className='h-12 w-12 rounded-md flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600'>
+                    <span className='h-12 w-12 rounded-md flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-600'>
                       <InboxIcon className='h-6 w-6 text-white' aria-hidden='true' />
                     </span>
                   </div>
@@ -339,7 +339,7 @@ export default function Example() {
                     <div className='mt-6'>
                       <a
                         href='#'
-                        className='inline-flex bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white hover:from-purple-700 hover:to-indigo-700'
+                        className='inline-flex bg-gradient-to-r from-purple-600 to-blue-600 bg-origin-border px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white hover:from-purple-700 hover:to-blue-700'
                       >
                         Get started
                       </a>
@@ -387,7 +387,7 @@ export default function Example() {
               <div className='px-4 max-w-xl mx-auto sm:px-6 lg:py-32 lg:max-w-none lg:mx-0 lg:px-0 lg:col-start-2'>
                 <div>
                   <div>
-                    <span className='h-12 w-12 rounded-md flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600'>
+                    <span className='h-12 w-12 rounded-md flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-600'>
                       <SparklesIcon className='h-6 w-6 text-white' aria-hidden='true' />
                     </span>
                   </div>
@@ -404,7 +404,7 @@ export default function Example() {
                     <div className='mt-6'>
                       <a
                         href='#'
-                        className='inline-flex bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white hover:from-purple-700 hover:to-indigo-700'
+                        className='inline-flex bg-gradient-to-r from-purple-600 to-blue-600 bg-origin-border px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white hover:from-purple-700 hover:to-blue-700'
                       >
                         Get started
                       </a>
@@ -426,7 +426,7 @@ export default function Example() {
         </div>
 
         {/* Gradient Feature Section */}
-        <div className='bg-gradient-to-r from-purple-800 to-indigo-700'>
+        <div className='bg-gradient-to-r from-purple-800 to-blue-700'>
           <div className='max-w-4xl mx-auto px-4 py-16 sm:px-6 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:pt-24 lg:px-8'>
             <h2 className='text-3xl font-extrabold text-white tracking-tight'>
               Inbox support built for efficiency
@@ -473,7 +473,7 @@ export default function Example() {
           <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8 xl:grid xl:grid-cols-2 xl:grid-flow-col-dense xl:gap-x-8'>
             <div className='relative pt-12 pb-64 sm:pt-24 sm:pb-64 xl:col-start-1 xl:pb-24'>
               <h2 className='text-sm font-semibold tracking-wide uppercase'>
-                <span className='bg-gradient-to-r from-purple-300 to-indigo-300 bg-clip-text text-transparent'>
+                <span className='bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent'>
                   Valuable Metrics
                 </span>
               </h2>
@@ -505,20 +505,20 @@ export default function Example() {
           <div className='max-w-4xl mx-auto py-16 px-4 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 lg:flex lg:items-center lg:justify-between'>
             <h2 className='text-4xl font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
               <span className='block'>Ready to get started?</span>
-              <span className='-mb-1 pb-1 block bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent'>
+              <span className='-mb-1 pb-1 block bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent'>
                 Get in touch or create an account.
               </span>
             </h2>
             <div className='mt-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-5'>
               <a
                 href='#'
-                className='flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white hover:from-purple-700 hover:to-indigo-700'
+                className='flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-600 bg-origin-border px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white hover:from-purple-700 hover:to-blue-700'
               >
                 Learn more
               </a>
               <a
                 href='#'
-                className='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-800 bg-indigo-50 hover:bg-indigo-100'
+                className='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-blue-800 bg-blue-50 hover:bg-blue-100'
               >
                 Get started
               </a>
@@ -612,13 +612,13 @@ export default function Example() {
                   id='email-address'
                   autoComplete='email'
                   required
-                  className='appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:placeholder-gray-400'
+                  className='appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:placeholder-gray-400'
                   placeholder='Enter your email'
                 />
                 <div className='mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0'>
                   <button
                     type='submit'
-                    className='w-full flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white hover:from-purple-700 hover:to-indigo-700'
+                    className='w-full flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-600 bg-origin-border px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white hover:from-purple-700 hover:to-blue-700'
                   >
                     Subscribe
                   </button>

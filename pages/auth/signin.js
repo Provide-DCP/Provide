@@ -1,28 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
-import Head from 'next/head';
-import { getCsrfToken, getSession, signIn } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
-import { BsFacebook, BsGithub, BsGoogle } from 'react-icons/bs';
+import React, { useState } from "react";
+import Head from "next/head";
+import { getCsrfToken, getSession, signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { BsFacebook, BsGithub, BsGoogle } from "react-icons/bs";
 
 const Signin = ({ csrfToken }) => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const { error } = useRouter().query;
 
   const errors = {
-    Signin: 'Try signing with a different account.',
-    OAuthSignin: 'Try signing with a different account.',
-    OAuthCallback: 'Try signing with a different account.',
-    OAuthCreateAccount: 'Try signing with a different account.',
-    EmailCreateAccount: 'Try signing with a different account.',
-    Callback: 'Try signing with a different account.',
+    Signin: "Try signing with a different account.",
+    OAuthSignin: "Try signing with a different account.",
+    OAuthCallback: "Try signing with a different account.",
+    OAuthCreateAccount: "Try signing with a different account.",
+    EmailCreateAccount: "Try signing with a different account.",
+    Callback: "Try signing with a different account.",
     OAuthAccountNotLinked:
-      'To confirm your identity, sign in with the same account you used originally.',
-    EmailSignin: 'Check your email address.',
-    CredentialsSignin:
-      'Sign in failed. Check the details you provided are correct.',
-    default: 'Unable to sign in.',
+      "To confirm your identity, sign in with the same account you used originally.",
+    EmailSignin: "Check your email address.",
+    CredentialsSignin: "Sign in failed. Check the details you provided are correct.",
+    default: "Unable to sign in.",
   };
 
   const errorMessage = error && (errors[error] ?? errors.default);
@@ -42,15 +41,15 @@ const Signin = ({ csrfToken }) => {
           <div className='sm:mx-auto sm:w-full sm:max-w-md'>
             <img
               className='mx-auto h-12 w-auto'
-              src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
+              src='https://tailwindui.com/img/logos/workflow-mark-blue-600.svg'
               alt='Workflow'
             />
             <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
               Sign in to your account
             </h2>
             <p className='mt-2 text-center text-sm text-gray-600'>
-              Or{' '}
-              <a className='font-medium text-indigo-600 hover:text-indigo-500'>
+              Or{" "}
+              <a className='font-medium text-blue-600 hover:text-blue-500'>
                 start your 14-day free trial
               </a>
             </p>
@@ -65,10 +64,7 @@ const Signin = ({ csrfToken }) => {
               >
                 <input type='hidden' name='csrfToken' value={csrfToken} />
                 <div>
-                  <label
-                    htmlFor='email'
-                    className='block text-sm font-medium text-gray-700'
-                  >
+                  <label htmlFor='email' className='block text-sm font-medium text-gray-700'>
                     Email address
                   </label>
                   <div className='mt-1'>
@@ -80,7 +76,7 @@ const Signin = ({ csrfToken }) => {
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                      className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm'
                     />
                   </div>
                 </div>
@@ -88,7 +84,7 @@ const Signin = ({ csrfToken }) => {
                 <div>
                   <button
                     type='submit'
-                    className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                   >
                     Sign in with Email
                   </button>
@@ -101,9 +97,7 @@ const Signin = ({ csrfToken }) => {
                     <div className='w-full border-t border-gray-300' />
                   </div>
                   <div className='relative flex justify-center text-sm'>
-                    <span className='px-2 bg-white text-gray-500'>
-                      Or continue with
-                    </span>
+                    <span className='px-2 bg-white text-gray-500'>Or continue with</span>
                   </div>
                 </div>
 
@@ -111,7 +105,7 @@ const Signin = ({ csrfToken }) => {
                   <div>
                     <button
                       onClick={() =>
-                        signIn('facebook', {
+                        signIn("facebook", {
                           callbackUrl: process.env.CALLBACK_URL,
                         })
                       }
@@ -125,7 +119,7 @@ const Signin = ({ csrfToken }) => {
                   <div>
                     <button
                       onClick={() =>
-                        signIn('google', {
+                        signIn("google", {
                           callbackUrl: process.env.CALLBACK_URL,
                         })
                       }
@@ -139,7 +133,7 @@ const Signin = ({ csrfToken }) => {
                   <div>
                     <button
                       onClick={() =>
-                        signIn('github', {
+                        signIn("github", {
                           callbackUrl: process.env.CALLBACK_URL,
                         })
                       }
@@ -165,7 +159,7 @@ export const getServerSideProps = async (context) => {
   if (session) {
     return {
       redirect: {
-        destination: '/auth/user/details',
+        destination: "/auth/user/details",
         permanent: false,
       },
     };

@@ -82,7 +82,7 @@ const CustomerAdd = () => {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           autoComplete='given-name'
-                          className='max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
+                          className='max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
@@ -95,7 +95,7 @@ const CustomerAdd = () => {
                               Country
                             </Listbox.Label>
                             <div className='mt-1 relative'>
-                              <Listbox.Button className='bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
+                              <Listbox.Button className='bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm'>
                                 <span className='block truncate'>{selectedCountry.name}</span>
                                 <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
                                   <SelectorIcon
@@ -118,7 +118,7 @@ const CustomerAdd = () => {
                                       key={person.id}
                                       className={({ active }) =>
                                         classNames(
-                                          active ? "text-white bg-indigo-600" : "text-gray-900",
+                                          active ? "text-white bg-blue-600" : "text-gray-900",
                                           "cursor-default select-none relative py-2 pl-3 pr-9"
                                         )
                                       }
@@ -138,7 +138,7 @@ const CustomerAdd = () => {
                                           {selectedCountry ? (
                                             <span
                                               className={classNames(
-                                                active ? "text-white" : "text-indigo-600",
+                                                active ? "text-white" : "text-blue-600",
                                                 "absolute inset-y-0 right-0 flex items-center pr-4"
                                               )}
                                             >
@@ -172,7 +172,7 @@ const CustomerAdd = () => {
                           value={building}
                           onChange={(e) => setBuilding(e.target.value)}
                           autoComplete='street-address'
-                          className='block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md'
+                          className='block max-w-lg w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
@@ -191,7 +191,7 @@ const CustomerAdd = () => {
                           value={area}
                           onChange={(e) => setArea(e.target.value)}
                           autoComplete='street-address'
-                          className='block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md'
+                          className='block max-w-lg w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
@@ -210,7 +210,7 @@ const CustomerAdd = () => {
                           value={landmark}
                           onChange={(e) => setLandmark(e.target.value)}
                           autoComplete='street-address'
-                          className='block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md'
+                          className='block max-w-lg w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
@@ -230,7 +230,7 @@ const CustomerAdd = () => {
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
                           autoComplete='address-level2'
-                          className='max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
+                          className='max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
@@ -250,7 +250,7 @@ const CustomerAdd = () => {
                           value={state}
                           onChange={(e) => setState(e.target.value)}
                           autoComplete='address-level1'
-                          className='max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
+                          className='max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
@@ -270,7 +270,7 @@ const CustomerAdd = () => {
                           value={pincode}
                           onChange={(e) => setPincode(e.target.value)}
                           autoComplete='postal-code'
-                          className='max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
+                          className='max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
@@ -289,7 +289,7 @@ const CustomerAdd = () => {
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
                           autoComplete='tel'
-                          className='max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
+                          className='max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
@@ -301,13 +301,13 @@ const CustomerAdd = () => {
                 <div className='flex justify-end'>
                   <button
                     type='button'
-                    className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                   >
                     Cancel
                   </button>
                   <button
                     type='submit'
-                    className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                   >
                     Save
                   </button>

@@ -13,9 +13,9 @@ export const ProductList = ({ products }) => {
   const [gridView, setGridView] = useState(true);
   const { data: session } = useSession();
   return (
-    <div className="mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-between mt-5 mb-10">
-        <div className="flex w-16 justify-between">
+    <div className='mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='flex items-center justify-between mt-5 mb-10'>
+        <div className='flex w-16 justify-between'>
           <button
             className={gridView === true ? "bg-gray-800 rounded-md text-white p-1" : ""}
             onClick={() => setGridView(true)}
@@ -29,15 +29,15 @@ export const ProductList = ({ products }) => {
             <BsList size={24} />
           </button>
         </div>
-        <p className="hidden md:block text-lg font-semibold text-gray-700">
+        <p className='hidden md:block text-lg font-semibold text-gray-700'>
           {products?.length} Products Found
         </p>
 
-        <div className="flex items-center justify-between w-28">
+        <div className='flex items-center justify-between w-28'>
           {session.userDetails.category === "provider" && (
             <a
-              href="/dashboard/provider/products/add"
-              className={` ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700`}
+              href='/dashboard/provider/products/add'
+              className={` ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700`}
             >
               Add
             </a>
