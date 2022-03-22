@@ -1,5 +1,7 @@
 import connectDB from "../../../src/lib/connectDB.js";
 import Order from "../../../models/Order";
+import Store from "../../../models/Store";
+import Product from "../../../models/Product";
 
 export default async function handler(req, res) {
   switch (req.method) {
@@ -55,7 +57,7 @@ const searchOrders = async (req, res) => {
     if (orders) {
       return res.status(200).json({ message: "orders Found", orders });
     } else {
-      return res.status(200).json({ message: "orders not found", orders: [] });
+      return res.status(500).json({ message: "orders not found", orders: [] });
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });

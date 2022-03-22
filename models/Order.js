@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Types.ObjectId, ref: "users" },
-    store: { type: mongoose.Schema.Types.ObjectId, ref: "stores" },
-    product: { type: mongoose.Schema.Types.ObjectId, ref: "products" },
+    user: { type: mongoose.Types.ObjectId, ref: "User" },
+    store: { type: mongoose.Schema.Types.ObjectId, ref: "Store" },
+    product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
     variations: {
       sizes: [
         {
@@ -47,4 +47,4 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.orders || mongoose.model("orders", orderSchema);
+export default mongoose.models.Order || mongoose.model("Order", orderSchema);

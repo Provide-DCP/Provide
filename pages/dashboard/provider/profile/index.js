@@ -29,7 +29,7 @@ const Profile = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='md:ml-[14%]'>
+      <main className=' '>
         <div className='flex-1 relative z-0 flex overflow-hidden'>
           <div className='flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last'>
             <div>
@@ -172,7 +172,9 @@ export const getServerSideProps = async (context) => {
     return {
       redirect: {
         destination:
-          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
+          category === "customer"
+            ? `/customer/stores`
+            : `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userDetailsSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Types.ObjectId, ref: "users" },
+    user: { type: mongoose.Types.ObjectId, ref: "User" },
     firstName: {
       type: String,
       required: true,
@@ -81,4 +81,4 @@ const userDetailsSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.userdetails || mongoose.model("userdetails", userDetailsSchema);
+export default mongoose.models.Userdetail || mongoose.model("Userdetail", userDetailsSchema);

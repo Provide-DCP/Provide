@@ -3,28 +3,35 @@ import { ProductList } from "../../../../src/components/Shared/ProductList";
 import { getSession } from "next-auth/react";
 import axios from "axios";
 import { NoOrderProductState } from "../../../../src/components/Shared/NoOrderProductState";
+import { Header } from "../../../../src/components/Layouts/Header";
 
 const ProductIndex = ({ store, products }) => {
   return (
-    <main className="md:ml-[14%] mt-[2%]">
-      <h2 className="text-center my-10 text-4xl font-bold text-gray-600">Your Products</h2>
-      {products?.length > 0 ? (
-        <section className="flex flex-col lg:flex-row justify-evenly mx-auto">
-          <div className="w-full lg:w-11/12">
-            <ProductList products={products} />
+    <>
+      <Header heading={"Your Products"} />
+      <main className='relative -mt-40'>
+        <div className='w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle'>
+          <div className='rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
+            {products?.length > 0 ? (
+              <section className='flex flex-col lg:flex-row justify-evenly mx-auto'>
+                <div className='w-full lg:w-11/12'>
+                  <ProductList products={products} />
+                </div>
+              </section>
+            ) : (
+              <div className='mt-20'>
+                <NoOrderProductState
+                  heading={`Looks like you haven't added any product to your store.`}
+                  href={"/dashboard/provider/products/add"}
+                  buttonText='Add Product'
+                  image={"/empty_store.svg"}
+                />
+              </div>
+            )}
           </div>
-        </section>
-      ) : (
-        <div className="mt-20">
-          <NoOrderProductState
-            heading={`Looks like you haven't added any product to your store.`}
-            href={"/dashboard/provider/products/add"}
-            buttonText="Add Product"
-            image={"/empty_store.svg"}
-          />
         </div>
-      )}
-    </main>
+      </main>
+    </>
   );
 };
 
@@ -61,7 +68,9 @@ export const getServerSideProps = async (context) => {
     return {
       redirect: {
         destination:
-          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
+          category === "customer"
+            ? `/customer/stores`
+            : `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };

@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-const otpSchema = new mongoose.Schema(
+const rotpSchema = new mongoose.Schema(
   {
-    order: { type: mongoose.Types.ObjectId, ref: "Order" },
+    request: { type: mongoose.Types.ObjectId, ref: "Request" },
     value: {
       type: Number,
     },
@@ -13,4 +13,4 @@ const otpSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.Otp || mongoose.model("Otp", otpSchema);
+export default mongoose.models.Rotp || mongoose.model("Rotp", rotpSchema);

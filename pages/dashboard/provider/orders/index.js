@@ -2,24 +2,31 @@ import axios from "axios";
 import React from "react";
 import { OrderDetailsCard } from "../../../../src/components/Customer/OderDetailsCard";
 import { getSession } from "next-auth/react";
+import { Header } from "../../../../src/components/Layouts/Header";
 import { NoOrderProductState } from "../../../../src/components/Shared/NoOrderProductState";
 const Orders = ({ orders }) => {
   return (
-    <main className="md:ml-[14%]">
-      <h2 className="text-center my-10 text-4xl font-bold text-gray-600">Your Orders</h2>
-      <div className="flex flex-col">
-        {orders?.length > 0 ? (
-          orders.map((order, index) => <OrderDetailsCard key={index} orderDetails={order} />)
-        ) : (
-          <NoOrderProductState
-            heading={`Looks like no one have made any order from your store yet.`}
-            href={"/dashboard/provider"}
-            buttonText="Go To Dashboard"
-            image="/empty_cart.svg"
-          />
-        )}
-      </div>
-    </main>
+    <>
+      <Header heading={"Store Orders"} />
+      <main className="relative -mt-40">
+        <div className="w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle">
+          <div className="rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+            <div className="flex flex-col">
+              {orders?.length > 0 ? (
+                orders.map((order, index) => <OrderDetailsCard key={index} orderDetails={order} />)
+              ) : (
+                <NoOrderProductState
+                  heading={`Looks like no one have made any order from your store yet.`}
+                  href={"/dashboard/provider"}
+                  buttonText="Go To Dashboard"
+                  image="/empty_cart.svg"
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
   );
 };
 
@@ -62,7 +69,9 @@ export const getServerSideProps = async (context) => {
     return {
       redirect: {
         destination:
-          category === "customer" ? `/customer` : `/dashboard/${session.userDetails.category}`,
+          category === "customer"
+            ? `/customer/stores`
+            : `/dashboard/${session.userDetails.category}`,
         permanent: false,
       },
     };
