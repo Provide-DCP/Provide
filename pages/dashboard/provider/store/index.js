@@ -118,22 +118,6 @@ const Store = ({ store, reviews }) => {
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
-  const { data } = await axios.get(process.env.HOST_URL + "/api/store", {
-    params: {
-      userId: session.userId,
-    },
-  });
-  const { store } = data;
-
-  let reviews = [];
-  if (store) {
-    const { data } = await axios.get(process.env.HOST_URL + "/api/reviews", {
-      params: {
-        storeId: store._id,
-      },
-    });
-    reviews = data.reviews;
-  }
 
   if (!session) {
     return {
@@ -160,6 +144,23 @@ export const getServerSideProps = async (context) => {
         permanent: false,
       },
     };
+  }
+
+  const { data } = await axios.get(process.env.HOST_URL + "/api/store", {
+    params: {
+      userId: session.userId,
+    },
+  });
+  const { store } = data;
+
+  let reviews = [];
+  if (store) {
+    const { data } = await axios.get(process.env.HOST_URL + "/api/reviews", {
+      params: {
+        storeId: store._id,
+      },
+    });
+    reviews = data.reviews;
   }
 
   return {
