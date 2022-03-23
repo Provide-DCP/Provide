@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useState, useEffect } from "react";
+import Loader from "./Loader";
 import { Popover, Transition } from "@headlessui/react";
 import {
   ChartBarIcon,
@@ -192,16 +193,15 @@ export const Navbar = () => {
           ))}
         </Popover.Group>
         <div className='hidden md:flex items-center justify-end md:flex-1 lg:w-0'>
+          {session?.userDetails?.image ? (
+            <div className='hidden sm:ml-6 sm:flex sm:items-center'>
+              <img className='h-8 w-8 rounded-full' src={session?.userDetails?.image} alt='' />
+            </div>
+          ) : (
+            <Loader height='6' width='6' color='gray' />
+          )}
           {session ? (
             <>
-              <div className='hidden sm:ml-6 sm:flex sm:items-center'>
-                <img
-                  className='h-8 w-8 rounded-full'
-                  src={session?.userDetails?.image}
-                  alt='profile-image'
-                />
-              </div>
-
               {/* Profile dropdown */}
               <LoginDropdown />
             </>
