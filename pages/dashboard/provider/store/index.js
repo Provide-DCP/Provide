@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
 import axios from "axios";
 import { AiFillStar } from "react-icons/ai";
@@ -10,6 +10,19 @@ import { Header } from "../../../../src/components/Layouts/Header";
 import { ReviewCard } from "../../../../src/components/Shared/ReviewCard";
 
 const Store = ({ store, reviews }) => {
+  const [averageRating, setAverageRating] = useState(0);
+
+  useEffect(() => {
+    const totalRating = 0;
+    reviews.forEach((x) => {
+      totalRating += parseInt(x.rating);
+    });
+    setAverageRating(totalRating / reviews.length);
+  }, []);
+
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
   return (
     <>
       <Header heading={"Your Store"} />
@@ -27,7 +40,7 @@ const Store = ({ store, reviews }) => {
               <h1 className="text-4xl font-semibold text-gray-800">{store?.name}</h1>
               <div className="flex items-center">
                 <div className="my-2 md:my-0 w-16 flex items-center justify-between px-3 rounded-md bg-green-600 mr-2 text-white py-1">
-                  <span className="font-bold mr-1">0.0</span>
+                  <span className="font-bold mr-1">{averageRating}</span>
                   <AiFillStar />
                 </div>
                 <p className="text-sm font-semibold text-gray-600">
