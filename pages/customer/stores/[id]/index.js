@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getSession, useSession } from "next-auth/react";
 import axios from "axios";
 import { Purpose } from "../../../../src/components/Provider/Purpose";
@@ -23,6 +23,7 @@ function classNames(...classes) {
 }
 
 const StoreSlug = ({ store, products, reviews }) => {
+  console.log(reviews);
   const { data: session } = useSession();
   const router = useRouter();
   const [showProducts, setShowProducts] = useState(true);
@@ -33,7 +34,7 @@ const StoreSlug = ({ store, products, reviews }) => {
     reviews.forEach((x) => {
       totalRating += parseInt(x.rating);
     });
-    setAverageRating(totalRating / reviews.length);
+    if (reviews.length !== 0) setAverageRating(totalRating / reviews.length);
   }, []);
   return (
     <>

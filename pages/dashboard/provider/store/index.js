@@ -17,7 +17,7 @@ const Store = ({ store, reviews }) => {
     reviews.forEach((x) => {
       totalRating += parseInt(x.rating);
     });
-    setAverageRating(totalRating / reviews.length);
+    if (reviews.length !== 0) setAverageRating(totalRating / reviews.length);
   }, []);
 
   function classNames(...classes) {
