@@ -47,11 +47,11 @@ export default async function auth(req, res) {
         clientSecret: process.env.GOOGLE_SECRET,
       }),
     ],
-    // pages: {
-    //   signIn: "/auth/signin",
-    //   error: "/auth/signin",
-    //   verifyRequest: "/auth/verify",
-    // },
+    pages: {
+      signIn: "/auth/signin",
+      error: "/auth/signin",
+      verifyRequest: "/auth/verify",
+    },
     adapter: MongoDBAdapter(clientPromise),
     callbacks: {
       session: async ({ session, token }) => {
