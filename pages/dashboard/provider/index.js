@@ -146,7 +146,7 @@ const Index = ({ store, products, orders }) => {
                 id="popperHead"
                 className="relative md:top-[100px] text-center text-lg md:text-3xl font-bold tracking-wide text-green-500"
               >
-                Congratulations your store have been approved!
+                Congratulations your store has been approved!
               </h1>
               <div id="popper" className="popper min-h-[440px]"></div>
               <div id="addProduct" className="hidden absolute w-full top-20">
