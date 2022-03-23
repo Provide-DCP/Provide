@@ -23,7 +23,6 @@ function classNames(...classes) {
 }
 
 const StoreSlug = ({ store, products, reviews }) => {
-  console.log(reviews);
   const { data: session } = useSession();
   const router = useRouter();
   const [showProducts, setShowProducts] = useState(true);
@@ -34,7 +33,7 @@ const StoreSlug = ({ store, products, reviews }) => {
     reviews.forEach((x) => {
       totalRating += parseInt(x.rating);
     });
-    if (reviews.length !== 0) setAverageRating(totalRating / reviews.length);
+    setAverageRating(totalRating / reviews.length);
   }, []);
   return (
     <>
@@ -81,6 +80,12 @@ const StoreSlug = ({ store, products, reviews }) => {
                 <br />
                 {store?.addresses[0]?.region}, {store?.addresses[0]?.country}.
               </div>
+            </div>
+            <div className='flex items-center mx-3'>
+              <h5 className='text-xl font-bold text-gray-700'>Store Timings: </h5>
+              <p className='tracking-wide text-lg mt-1 ml-2 font-bold text-gray-400'>
+                {store?.timings?.from} - {store?.timings?.to}
+              </p>
             </div>
             <div className='flex items-center mt-3'>
               <a
