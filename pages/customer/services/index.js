@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { Header } from "../../../src/components/Layouts/Header";
 import Loader from "../../../src/components/Layouts/Loader";
+import { NoOrderProductState } from "../../../src/components/Shared/NoOrderProductState";
 import { RequestDetailsCard } from "../../../src/components/Volunteer/RequestDetailsCard";
 
 const ServicesIndex = ({ requests }) => {
@@ -45,11 +46,23 @@ const ServicesIndex = ({ requests }) => {
         </div>
         <div className='w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle'>
           <div className='rounded-lg shadow w-full relative bg-gray-50 px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
-            <h1>Current Pending Requests</h1>
-            {requests &&
+            <h1 className='text-center text-3xl font-bold text-gray-600'>
+              Current Pending Requests
+            </h1>
+            {requests.length > 0 ? (
               requests.map((request, index) => {
                 return <RequestDetailsCard key={index} requestDetails={request} />;
-              })}
+              })
+            ) : (
+              <div className='mt-10'>
+                <NoOrderProductState
+                  heading={`Looks like you have no pending requests.`}
+                  href='/customer/services'
+                  image={"/empty_requests.svg"}
+                  buttonText={"Go To Services"}
+                />
+              </div>
+            )}
           </div>
         </div>
         <style jsx>{`

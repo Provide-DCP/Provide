@@ -11,11 +11,22 @@ import { FcNext } from "react-icons/fc";
 
 const faqs = [
   {
-    question: "What's the best thing about Switzerland?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+    question: "What is Provide?",
+    answer: "A web application based on charity, service and profit.",
   },
-  // More questions...
+  {
+    question: "What is motto we take forward?",
+    answer: "No one has ever become poor by giving by Anne Frank.",
+  },
+  {
+    question: "What is idea behind the provide?",
+    answer:
+      "This idea can make a huge impact to the needful as it can help them get required products at a lower price.",
+  },
+  {
+    question: "Who are the different users?",
+    answer: "Customer, provider and volunteer.",
+  },
 ];
 
 const features = [
