@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getSession, useSession } from "next-auth/react";
 import axios from "axios";
 import { Purpose } from "../../../../src/components/Provider/Purpose";
@@ -26,6 +26,15 @@ const StoreSlug = ({ store, products, reviews }) => {
   const { data: session } = useSession();
   const router = useRouter();
   const [showProducts, setShowProducts] = useState(true);
+  const [averageRating, setAverageRating] = useState(0);
+
+  useEffect(() => {
+    const totalRating = 0;
+    reviews.forEach((x) => {
+      totalRating += parseInt(x.rating);
+    });
+    setAverageRating(totalRating / reviews.length);
+  }, []);
   return (
     <>
       <Header heading={"Store Details"} />
@@ -43,7 +52,7 @@ const StoreSlug = ({ store, products, reviews }) => {
               <h1 className='text-4xl font-semibold text-gray-800'>{store?.name}</h1>
               <div className='flex items-center'>
                 <div className='my-2 md:my-0 w-16 flex items-center justify-between px-3 rounded-md bg-green-600 mr-2 text-white py-1'>
-                  <span className='font-bold mr-1'>0.0</span>
+                  <span className='font-bold mr-1'>{averageRating}</span>
                   <AiFillStar />
                 </div>
                 <p className='text-sm font-semibold text-gray-600'>
@@ -71,6 +80,12 @@ const StoreSlug = ({ store, products, reviews }) => {
                 <br />
                 {store?.addresses[0]?.region}, {store?.addresses[0]?.country}.
               </div>
+            </div>
+            <div className='flex items-center mx-3'>
+              <h5 className='text-xl font-bold text-gray-700'>Store Timings: </h5>
+              <p className='tracking-wide text-lg mt-1 ml-2 font-bold text-gray-400'>
+                {store?.timings?.from} - {store?.timings?.to}
+              </p>
             </div>
             <div className='flex items-center mt-3'>
               <a

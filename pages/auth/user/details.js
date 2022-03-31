@@ -6,6 +6,7 @@ import { getSession, useSession } from "next-auth/react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { reloadSession } from "../../../src/lib/helper";
+import { MdOutlineArrowBackIosNew } from "react-icons/md";
 
 const categories = [
   { id: "customer", title: "customer" },
@@ -112,37 +113,39 @@ const Details = () => {
               <div>
                 {state === 0 ? (
                   <React.Fragment>
-                    <fieldset>
-                      <div className='catdiv space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10'>
-                        {categories.map((category) => (
-                          <div key={category.id} className='flex items-center'>
-                            <input
-                              id={category.id}
-                              name='category'
-                              type='radio'
-                              defaultChecked={category.id === "customer"}
-                              value={category.title}
-                              onChange={(e) => handleCategory()}
-                              className='h-4 w-4 text-indigo-600 border-gray-300'
-                            />
-                            <label
-                              htmlFor={category.id}
-                              className='ml-3 block text-sm font-medium text-gray-700 capitalize'
-                            >
-                              {category.title}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                      <div className='mt-4'>
+                    <div className='flex flex-col'>
+                      <h1 className='text-lg text-center uppercase font-bold text-sky-700'>
+                        Select account type
+                      </h1>
+                      {categories.map((category) => (
                         <button
-                          onClick={() => setState(1)}
-                          className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 '
+                          key={category.id}
+                          onClick={(e) => {
+                            setCategory(category.title);
+                            setState(1);
+                          }}
+                          className='px-5 h-28 flex justify-between items-center w-full rounded-lg shadow-md my-5 hover:shadow-xl'
                         >
-                          Next
+                          <div className='h-24'>
+                            {category.title === "customer" ? (
+                              <img className='h-full' src='/customers.svg' alt='' />
+                            ) : category.title === "volunteer" ? (
+                              <img className='h-full' src='/volunteer.svg' alt='' />
+                            ) : (
+                              <img className='h-full' src='/provider.svg' alt='' />
+                            )}
+                          </div>
+                          <h2 className='text-gray-600 font-bold text-2xl'>
+                            <span className='capitalize relative inline-block mr-4'>
+                              {category.title}
+                            </span>
+                          </h2>
+                          <div className='w-16'>
+                            <img className='w-7 mx-auto' src='/right-arrow.png' alt='right-arrow' />
+                          </div>
                         </button>
-                      </div>
-                    </fieldset>
+                      ))}
+                    </div>
                   </React.Fragment>
                 ) : (
                   <div />
@@ -150,9 +153,14 @@ const Details = () => {
 
                 {state === 1 ? (
                   <React.Fragment>
-                    <button onClick={() => setState(0)}>Back</button>
+                    <button
+                      className='relative right-5 mb-3 text-gray-800 hover:text-gray-500'
+                      onClick={() => setState(0)}
+                    >
+                      <MdOutlineArrowBackIosNew />
+                    </button>
                     <div className='grid grid-cols-6 gap-6'>
-                      <div className='col-span-6 sm:col-span-3'>
+                      <div className='col-span-6 sm:col-span-6'>
                         <label
                           htmlFor='firstName'
                           className='block text-sm font-medium text-gray-700'
@@ -171,7 +179,7 @@ const Details = () => {
                         />
                       </div>
 
-                      <div className='col-span-6 sm:col-span-3'>
+                      <div className='col-span-6 sm:col-span-6'>
                         <label
                           htmlFor='lastName'
                           className='block text-sm font-medium text-gray-700'
@@ -191,7 +199,7 @@ const Details = () => {
                       </div>
                     </div>
 
-                    <div className='col-span-6 sm:col-span-4 mt-4'>
+                    <div className='col-span-6 sm:col-span-4 mt-7'>
                       <label htmlFor='phone' className='block text-sm font-medium text-gray-700'>
                         Phone Number
                       </label>

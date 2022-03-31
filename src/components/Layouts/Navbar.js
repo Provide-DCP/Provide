@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useState, useEffect } from "react";
+import Loader from "./Loader";
 import { Popover, Transition } from "@headlessui/react";
 import {
   ChartBarIcon,
@@ -118,63 +119,100 @@ const volunteerNavigation = [
   },
 ];
 
+const landingNavigation = [
+  {
+    name: "Home",
+    href: "#home",
+    icon: MdSpaceDashboard,
+    current: false,
+  },
+  {
+    name: "Features",
+    href: "#features",
+    icon: MdSpaceDashboard,
+    current: false,
+  },
+  {
+    name: "Flows",
+    href: "#flows",
+    icon: MdSpaceDashboard,
+    current: false,
+  },
+  {
+    name: "Reviews",
+    href: "#flows",
+    icon: MdSpaceDashboard,
+    current: false,
+  },
+  {
+    name: "FAQ",
+    href: "#faq",
+    icon: MdSpaceDashboard,
+    current: false,
+  },
+];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export const Navbar = () => {
   const { data: session } = useSession();
-  const [navigation, setNavigation] = useState([]);
+  const [navigation, setNavigation] = useState(landingNavigation);
 
   useEffect(() => {
-    if (!session) return;
-    if (session?.userDetails?.category === "provider") setNavigation(providerNavigation);
+    if (!session) setNavigation(landingNavigation);
+    else if (session?.userDetails?.category === "provider") setNavigation(providerNavigation);
     else if (session?.userDetails?.category === "customer") setNavigation(customerNavigation);
     else setNavigation(volunteerNavigation);
   }, [session]);
 
   return (
-    <Popover className="fixed top-0 left-0 z-10 w-full h-[10vh] bg-white shadow">
-      <div className="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10">
-        <div className="flex justify-start lg:w-0 lg:flex-1">
-          <a href="#">
-            <span className="sr-only">Workflow</span>
-            <img className="h-8 w-auto sm:h-10" src="/favicon.ico" alt="" />
-          </a>
+    <Popover className='fixed top-0 left-0 z-40 w-full bg-white shadow'>
+      <div className='flex justify-between items-center px-4 py-2 sm:px-6 md:justify-start md:space-x-10'>
+        <div className='flex justify-start lg:w-0 lg:flex-1'>
+          <Link href={"/"} passHref>
+            <div className='w-40 h-[10vh]'>
+              <img className='object-cover rounded-md h-full w-full' src='/logo.jpeg' alt='' />
+            </div>
+          </Link>
         </div>
-        <div className="-mr-2 -my-2 md:hidden">
-          <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-            <span className="sr-only">Open menu</span>
-            <MenuIcon className="h-6 w-6" aria-hidden="true" />
+        <div className='-mr-2 -my-2 md:hidden'>
+          <Popover.Button className='bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500'>
+            <span className='sr-only'>Open menu</span>
+            <MenuIcon className='h-6 w-6' aria-hidden='true' />
           </Popover.Button>
         </div>
-        <Popover.Group as="nav" className="hidden md:flex space-x-10">
-          {session &&
-            navigation.map((option, index) => (
-              <Link key={index} href={option.href}>
-                <a className="text-base font-medium text-gray-500 hover:text-gray-900">
-                  {option.name}
-                </a>
-              </Link>
-            ))}
+        <Popover.Group as='nav' className='hidden md:flex space-x-10'>
+          {navigation.map((option, index) => (
+            <Link key={index} href={option.href}>
+              <a className='text-base font-medium text-gray-500 hover:text-gray-900'>
+                {option.name}
+              </a>
+            </Link>
+          ))}
         </Popover.Group>
-        <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+
+        <div className='hidden md:flex items-center justify-end md:flex-1 lg:w-0'>
+          {session && (
+            <div>
+              {session?.userDetails?.image ? (
+                <div className='hidden sm:ml-6 sm:flex sm:items-center'>
+                  <img className='h-8 w-8 rounded-full' src={session?.userDetails?.image} alt='' />
+                </div>
+              ) : (
+                <Loader height='6' width='6' color='gray' />
+              )}
+            </div>
+          )}
           {session ? (
             <>
-              <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                <img
-                  className="h-8 w-8 rounded-full"
-                  src={session?.userDetails?.image}
-                  alt="profile-image"
-                />
-              </div>
-
               {/* Profile dropdown */}
               <LoginDropdown />
             </>
           ) : (
-            <Link href="/auth/signin">
-              <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700">
+            <Link href='/auth/signin'>
+              <a className='ml-8 whitespace-nowrap inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-600 bg-origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-blue-700'>
                 Sign in
               </a>
             </Link>
@@ -184,55 +222,53 @@ export const Navbar = () => {
 
       <Transition
         as={Fragment}
-        enter="duration-200 ease-out"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="duration-100 ease-in"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
+        enter='duration-200 ease-out'
+        enterFrom='opacity-0 scale-95'
+        enterTo='opacity-100 scale-100'
+        leave='duration-100 ease-in'
+        leaveFrom='opacity-100 scale-100'
+        leaveTo='opacity-0 scale-95'
       >
         <Popover.Panel
           focus
-          className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+          className='absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden'
         >
-          <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
-            <div className="pt-5 pb-6 px-5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <img className="h-8 w-auto" src="/favicon.ico" alt="Workflow" />
-                </div>
-                <div className="-mr-2">
-                  <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                    <span className="sr-only">Close menu</span>
-                    <XIcon className="h-6 w-6" aria-hidden="true" />
+          <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50'>
+            <div className='pt-5 pb-6 px-5'>
+              <div className='flex items-center justify-between'>
+                <Link href={"/"} passHref>
+                  <div className='w-40 h-[10vh]'>
+                    <img
+                      className='object-cover rounded-md h-full w-full'
+                      src='/logo.jpeg'
+                      alt=''
+                    />
+                  </div>
+                </Link>
+                <div className='-mr-2'>
+                  <Popover.Button className='bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500'>
+                    <span className='sr-only'>Close menu</span>
+                    <XIcon className='h-6 w-6' aria-hidden='true' />
                   </Popover.Button>
                 </div>
               </div>
             </div>
-            <div className="py-6 px-5">
-              <div className="grid grid-cols-2 gap-4">
-                {session &&
-                  navigation.map((option, index) => (
-                    <Link key={index} href={option.href}>
-                      <a className="text-base font-medium text-gray-900 hover:text-gray-700">
-                        {option.name}
-                      </a>
-                    </Link>
-                  ))}
+            <div className='py-6 px-5'>
+              <div className='grid grid-cols-2 gap-4'>
+                {navigation.map((option, index) => (
+                  <Link key={index} href={option.href}>
+                    <a className='text-base font-medium text-gray-900 hover:text-gray-700'>
+                      {option.name}
+                    </a>
+                  </Link>
+                ))}
               </div>
-              <div className="mt-6">
-                <a
-                  href="#"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                >
-                  Sign up
-                </a>
-                <p className="mt-6 text-center text-base font-medium text-gray-500">
-                  Existing customer?{" "}
-                  <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                    Sign in
+              <div className='mt-6'>
+                <Link href={"/auth/signin"}>
+                  <a className='w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700'>
+                    Sign In
                   </a>
-                </p>
+                </Link>
               </div>
             </div>
           </div>

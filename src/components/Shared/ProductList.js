@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import React, { useState } from "react";
 import { GridView } from "./GridView";
 import { ListView } from "./ListView";
@@ -36,12 +37,12 @@ export const ProductList = ({ products }) => {
 
         <div className="flex items-center justify-between w-28">
           {session.userDetails.category === "provider" && (
-            <Link
+            <a
               href="/dashboard/provider/products/add"
-              className={` ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700`}
+              className={` ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700`}
             >
               Add
-            </Link>
+            </a>
           )}
         </div>
       </div>

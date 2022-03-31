@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react';
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
 
 export const GridView = ({ products }) => {
   const { data: session } = useSession();
@@ -13,16 +13,16 @@ export const GridView = ({ products }) => {
         <Link
           key={product._id}
           href={`${
-            session.userDetails.category === 'provider'
-              ? '/dashboard/provider'
-              : '/customer/stores/' + router.query.id
+            session.userDetails.category === "provider"
+              ? "/dashboard/provider"
+              : "/customer/stores/" + router.query.id
           }/products/${product._id}`}
         >
           <a className='group relative cursor-pointer shadow rounded-md p-3'>
             <div className='w-full h-48 bg-gray-200 aspect-w-2 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-48 lg:aspect-none'>
               <img
                 src={product.image}
-                alt={'image'}
+                alt={"image"}
                 className='w-full h-full object-center object-cover lg:w-full lg:h-full'
               />
             </div>
@@ -33,13 +33,10 @@ export const GridView = ({ products }) => {
                   {product.name}
                 </h3>
                 <p className='truncate text-sm font-semibold text-gray-600 text-ellipsis'>
-                  {product.description.charAt(0).toUpperCase() +
-                    product.description.slice(1)}
+                  {product.description.charAt(0).toUpperCase() + product.description.slice(1)}
                 </p>
               </div>
-              <p className='text-md font-semibold text-indigo-900'>
-                {'Rs. ' + product.price}
-              </p>
+              <p className='text-md font-semibold text-blue-900'>{"Rs. " + product.price}</p>
             </div>
           </a>
         </Link>

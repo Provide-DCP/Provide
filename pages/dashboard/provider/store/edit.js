@@ -175,7 +175,7 @@ const StoreEdit = ({ store }) => {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           autoComplete='name'
-                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                          className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                       <div className='col-span-6 sm:col-span-4'>
@@ -189,7 +189,7 @@ const StoreEdit = ({ store }) => {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           autoComplete='email'
-                          className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                          className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                       <div>
@@ -206,7 +206,7 @@ const StoreEdit = ({ store }) => {
                             rows={3}
                             value={purpose}
                             onChange={(e) => setPurpose(e.target.value)}
-                            className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
+                            className='shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md'
                             placeholder='About your store'
                           />
                         </div>
@@ -241,7 +241,7 @@ const StoreEdit = ({ store }) => {
                                 value={timings.from}
                                 onChange={(e) => setTimings({ ...timings, from: e.target.value })}
                                 placeholder='11:00'
-                                className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                                className='shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md'
                               />
                             </div>
                           </div>
@@ -260,7 +260,7 @@ const StoreEdit = ({ store }) => {
                                 value={timings.to}
                                 onChange={(e) => setTimings({ ...timings, to: e.target.value })}
                                 placeholder='13:00'
-                                className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                                className='shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md'
                               />
                             </div>
                           </div>
@@ -296,7 +296,7 @@ const StoreEdit = ({ store }) => {
                                           setCategories([...cat]);
                                         }
                                       }}
-                                      className='h-4 w-4 text-indigo-600 border-gray-300 rounded'
+                                      className='h-4 w-4 text-blue-600 border-gray-300 rounded'
                                     />
                                   </div>
                                   <div className='ml-1 text-sm'>
@@ -380,7 +380,7 @@ const StoreEdit = ({ store }) => {
                             value={addressName}
                             onChange={(e) => setAddressName(e.target.value)}
                             autoComplete='family-name'
-                            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                           />
                         </div>
 
@@ -398,7 +398,7 @@ const StoreEdit = ({ store }) => {
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                             autoComplete='tel'
-                            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                           />
                         </div>
 
@@ -410,7 +410,7 @@ const StoreEdit = ({ store }) => {
                                   Country
                                 </Listbox.Label>
                                 <div className='relative -top-4 left-0'>
-                                  <Listbox.Button className='bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'>
+                                  <Listbox.Button className='bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm'>
                                     <span className='block truncate'>{selectedCountry.name}</span>
                                     <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
                                       <SelectorIcon
@@ -433,7 +433,7 @@ const StoreEdit = ({ store }) => {
                                           key={person.id}
                                           className={({ active }) =>
                                             classNames(
-                                              active ? "text-white bg-indigo-600" : "text-gray-900",
+                                              active ? "text-white bg-blue-600" : "text-gray-900",
                                               "cursor-default select-none relative py-2 pl-3 pr-9"
                                             )
                                           }
@@ -453,7 +453,7 @@ const StoreEdit = ({ store }) => {
                                               {selectedCountry ? (
                                                 <span
                                                   className={classNames(
-                                                    active ? "text-white" : "text-indigo-600",
+                                                    active ? "text-white" : "text-blue-600",
                                                     "absolute inset-y-0 right-0 flex items-center pr-4"
                                                   )}
                                                 >
@@ -489,7 +489,7 @@ const StoreEdit = ({ store }) => {
                             onChange={(e) => setBuilding(e.target.value)}
                             id='street-address'
                             autoComplete='street-address'
-                            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                           />
                         </div>
                         <div className='col-span-6'>
@@ -503,7 +503,7 @@ const StoreEdit = ({ store }) => {
                             value={area}
                             onChange={(e) => setArea(e.target.value)}
                             autoComplete='address-line1'
-                            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                           />
                         </div>
                         <div className='col-span-6'>
@@ -520,7 +520,7 @@ const StoreEdit = ({ store }) => {
                             value={landmark}
                             onChange={(e) => setLandmark(e.target.value)}
                             autoComplete='address-line2'
-                            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                           />
                         </div>
 
@@ -535,7 +535,7 @@ const StoreEdit = ({ store }) => {
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                             autoComplete='address-level2'
-                            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                           />
                         </div>
 
@@ -553,7 +553,7 @@ const StoreEdit = ({ store }) => {
                             value={state}
                             onChange={(e) => setState(e.target.value)}
                             autoComplete='address-level1'
-                            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                           />
                         </div>
 
@@ -571,7 +571,7 @@ const StoreEdit = ({ store }) => {
                             value={pincode}
                             onChange={(e) => setPincode(e.target.value)}
                             autoComplete='postal-code'
-                            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                           />
                         </div>
                       </div>
@@ -599,7 +599,7 @@ const StoreEdit = ({ store }) => {
                               })
                             }
                             autoComplete='lat'
-                            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                           />
                         </div>
 
@@ -626,7 +626,7 @@ const StoreEdit = ({ store }) => {
                               })
                             }
                             autoComplete='long'
-                            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                           />
                         </div>
                       </div>
@@ -673,7 +673,7 @@ const StoreEdit = ({ store }) => {
               <div className='flex justify-end'>
                 <button
                   type='button'
-                  className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                  className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                 >
                   Cancel
                 </button>
@@ -681,8 +681,8 @@ const StoreEdit = ({ store }) => {
                   disabled={loading}
                   onClick={onSubmitHandler}
                   className={`${
-                    loading ? "cursor-not-allowed" : "hover:bg-indigo-700 "
-                  } ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600`}
+                    loading ? "cursor-not-allowed" : "hover:bg-blue-700 "
+                  } ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600`}
                 >
                   Save
                 </button>
