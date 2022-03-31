@@ -192,13 +192,18 @@ export const Navbar = () => {
             </Link>
           ))}
         </Popover.Group>
+
         <div className='hidden md:flex items-center justify-end md:flex-1 lg:w-0'>
-          {session?.userDetails?.image ? (
-            <div className='hidden sm:ml-6 sm:flex sm:items-center'>
-              <img className='h-8 w-8 rounded-full' src={session?.userDetails?.image} alt='' />
+          {session && (
+            <div>
+              {session?.userDetails?.image ? (
+                <div className='hidden sm:ml-6 sm:flex sm:items-center'>
+                  <img className='h-8 w-8 rounded-full' src={session?.userDetails?.image} alt='' />
+                </div>
+              ) : (
+                <Loader height='6' width='6' color='gray' />
+              )}
             </div>
-          ) : (
-            <Loader height='6' width='6' color='gray' />
           )}
           {session ? (
             <>
