@@ -16,8 +16,6 @@ This project has tailwindcss with [Create next App](https://nextjs.org/docs/api-
 
 ## Add .env in root directory
 
-First, run the development server:
-
 ```bash
 DATABASE_URL =
 CALLBACK_URL =
