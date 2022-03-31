@@ -140,7 +140,7 @@ export default function Product({ store, product, reviews }) {
                         <p className='sr-only'>{averageRating} out of 5 stars</p>
                         <a
                           href='#'
-                          className='ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500'
+                          className='ml-3 text-sm font-medium text-blue-600 hover:text-blue-500'
                         >
                           {reviews.length} reviews
                         </a>
@@ -198,13 +198,13 @@ export default function Product({ store, product, reviews }) {
                     {" "}
                     <a
                       href={`/dashboard/provider/products/${product._id}/edit`}
-                      className='mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                      className='mt-6 w-full bg-blue-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                     >
                       Edit Product
                     </a>
                     <div
                       onClick={handleDelete}
-                      className='mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer'
+                      className='mt-6 w-full bg-blue-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer'
                     >
                       Delete Product
                     </div>
@@ -212,7 +212,7 @@ export default function Product({ store, product, reviews }) {
                 ) : (
                   <div
                     onClick={handleBuy}
-                    className='mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer'
+                    className='mt-6 w-full bg-blue-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer'
                   >
                     Buy now
                   </div>

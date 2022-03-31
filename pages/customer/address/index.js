@@ -45,12 +45,12 @@ const AddressIndex = () => {
                   </div>
                   <div className='flex'>
                     <Link href={`/customer/address/${address._id}/edit`}>
-                      <a className='text-sm font-semibold text-indigo-800 pr-5 border-r-2 border-gray-800 hover:text-indigo-500'>
+                      <a className='text-sm font-semibold text-blue-800 pr-5 border-r-2 border-gray-800 hover:text-blue-500'>
                         Edit
                       </a>
                     </Link>
                     <Link href={`/`}>
-                      <a className='text-sm font-semibold text-indigo-800 pl-5 hover:text-indigo-500'>
+                      <a className='text-sm font-semibold text-blue-800 pl-5 hover:text-blue-500'>
                         Remove
                       </a>
                     </Link>
