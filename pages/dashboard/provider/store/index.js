@@ -156,20 +156,12 @@ export const getServerSideProps = async (context) => {
     };
   }
 
-  const { data } = await axios.get(process.env.HOST_URL + "/api/store", {
-    params: {
-      userId: session.userId,
-    },
-  });
+  const { data } = await axios.get(`${process.env.HOST_URL}/api/store?userId=${session.userId}`);
   const { store } = data;
 
   let reviews = [];
   if (store) {
-    const { data } = await axios.get(process.env.HOST_URL + "/api/reviews", {
-      params: {
-        storeId: store._id,
-      },
-    });
+    const { data } = await axios.get(`${process.env.HOST_URL}/api/reviews?storeId=${store._id}`);
     reviews = data.reviews;
   }
 

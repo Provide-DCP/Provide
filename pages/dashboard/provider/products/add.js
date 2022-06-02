@@ -63,7 +63,7 @@ const AddProduct = ({ store }) => {
     try {
       const {
         data: { message },
-      } = await axios.post("/api/products", {
+      } = await axios.post(`/api/products`, {
         userId: session.userId,
         storeId: store._id,
         name,
@@ -360,11 +360,7 @@ export const getServerSideProps = async ({ req, res }) => {
 
   const {
     data: { store },
-  } = await axios.get(process.env.HOST_URL + "/api/store", {
-    params: {
-      userId: userId,
-    },
-  });
+  } = await axios.get(`${process.env.HOST_URL}/api/store?userId=${userId}`);
 
   if (session.userDetails.category !== "provider" || !store) {
     return {

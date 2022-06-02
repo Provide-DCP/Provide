@@ -202,15 +202,11 @@ export const getServerSideProps = async (context) => {
   const session = await getSession(context);
   const {
     data: { store },
-  } = await axios.get(`http://localhost:3000/api/store/${context.query.id}`);
+  } = await axios.get(`${process.env.HOST_URL}/api/store/${context.query.id}`);
 
   const {
     data: { reviews },
-  } = await axios.get(process.env.HOST_URL + "/api/reviews", {
-    params: {
-      storeId: context.query.id,
-    },
-  });
+  } = await axios.get(`${process.env.HOST_URL}/api/reviews?storeId=${context.query.id}`);
 
   if (!session) {
     return {

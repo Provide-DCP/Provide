@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 const requestSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Types.ObjectId, ref: "User" },
+    user: { type: String, required: true },
     userdetails: { type: mongoose.Schema.Types.ObjectId, ref: "Userdetail" },
     pending: {
       type: Boolean,
       required: true,
     },
-    volunteer: { type: mongoose.Types.ObjectId, ref: "User" },
+    volunteer: { type: String },
     category: {
       type: String,
       required: true,

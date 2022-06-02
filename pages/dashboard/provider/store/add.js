@@ -89,7 +89,7 @@ const StoreAdd = () => {
     e.preventDefault();
     const {
       data: { message },
-    } = await axios.post("/api/store", {
+    } = await axios.post(`/api/store`, {
       userId: session.userId,
       name,
       image,
@@ -729,11 +729,7 @@ export const getServerSideProps = async (context) => {
   }
   const {
     data: { store },
-  } = await axios.get(process.env.HOST_URL + "/api/store", {
-    params: {
-      userId: session.userId,
-    },
-  });
+  } = await axios.get(`${process.env.HOST_URL}/api/store?userId=${session.userId}`);
   if (store) {
     return {
       redirect: {

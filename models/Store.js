@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const StoreSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Types.ObjectId, ref: "User" },
+    user: { type: String, required: true },
     name: {
       type: String,
       required: true,

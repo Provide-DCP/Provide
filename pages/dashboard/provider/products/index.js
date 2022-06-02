@@ -58,11 +58,7 @@ export const getServerSideProps = async (context) => {
 
   const {
     data: { store },
-  } = await axios.get(process.env.HOST_URL + "/api/store", {
-    params: {
-      userId: session.userId,
-    },
-  });
+  } = await axios.get(`${process.env.HOST_URL}/api/store?userId=${session.userId}`);
   if (session.userDetails.category !== "provider" || !store || !store.approved) {
     const category = session.userDetails.category;
     return {
@@ -79,11 +75,7 @@ export const getServerSideProps = async (context) => {
   let products = [];
 
   if (store) {
-    const { data } = await axios.get(process.env.HOST_URL + "/api/products", {
-      params: {
-        storeId: store._id,
-      },
-    });
+    const { data } = await axios.get(`${process.env.HOST_URL}/api/products?storeId=${store._id}`);
     products = data.products;
   }
 

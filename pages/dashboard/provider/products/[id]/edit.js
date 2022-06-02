@@ -65,7 +65,7 @@ const EditProduct = ({ store, product }) => {
     try {
       const {
         data: { message },
-      } = await axios.put(`http://localhost:3000/api/products/${product._id}`, {
+      } = await axios.put(`/api/products/${product._id}`, {
         userId: session.userId,
         productId: product._id,
         name,
@@ -363,15 +363,11 @@ export const getServerSideProps = async (context) => {
 
   const {
     data: { store },
-  } = await axios.get(process.env.HOST_URL + "/api/store", {
-    params: {
-      userId: session.userId,
-    },
-  });
+  } = await axios.get(`${process.env.HOST_URL}/api/store?userId=${session.userId}`);
 
   const {
     data: { product },
-  } = await axios.get(`http://localhost:3000/api/products/${context.query.id}`);
+  } = await axios.get(`${process.env.HOST_URL}/api/products/${context.query.id}`);
 
   if (session.userDetails.category !== "provider" || !store || !product) {
     const category = session.userDetails.category;

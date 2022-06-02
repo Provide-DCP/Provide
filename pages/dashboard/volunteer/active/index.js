@@ -17,10 +17,10 @@ const Index = ({ requestDetails }) => {
   return (
     <>
       <Header heading={"Active Requests"} />
-      <main className="relative -mt-40">
-        <div className="w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle">
-          <div className="rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <main className='relative -mt-40'>
+        <div className='w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle'>
+          <div className='rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
+            <div className='max-w-7xl mx-auto px-4 sm:px-6 md:px-8'>
               {requests.length > 0 ? (
                 requests.map((request, index) => {
                   return (
@@ -31,8 +31,8 @@ const Index = ({ requestDetails }) => {
                 <NoOrderProductState
                   heading={`Looks like you haven't accepted any request.`}
                   href={"/dashboard/volunteer/requests"}
-                  buttonText="Go To Requests"
-                  image="/empty-active-request.svg"
+                  buttonText='Go To Requests'
+                  image='/empty-active-request.svg'
                 />
               )}
             </div>
@@ -91,9 +91,7 @@ export const getServerSideProps = async (context) => {
 
   const {
     data: { requests },
-  } = await axios.get(process.env.HOST_URL + "/api/requests", {
-    params: { volunteerId: session.userId },
-  });
+  } = await axios.get(`${process.env.HOST_URL}/api/requests?volunteerId=${session.userId}`);
 
   if (session.userDetails.category !== "volunteer") {
     const category = session.userDetails.category;

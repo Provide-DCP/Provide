@@ -9,12 +9,12 @@ import { Header } from "../../../src/components/Layouts/Header";
 const Orders = ({ orders }) => {
   const { data: session } = useSession();
   return (
-    <main className="">
+    <main className=''>
       <Header heading={"Your Orders"} />
-      <div className="relative -mt-40">
-        <div className="w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle">
-          <div className="rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-            <div className="flex flex-col items-center justify-between w-full ">
+      <div className='relative -mt-40'>
+        <div className='w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle'>
+          <div className='rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
+            <div className='flex flex-col items-center justify-between w-full '>
               {orders?.length > 0 ? (
                 orders.map((order, index) => (
                   <OrderDetailsCard key={index} orderDetails={order} session={session} />
@@ -23,8 +23,8 @@ const Orders = ({ orders }) => {
                 <NoOrderProductState
                   heading={`Looks like you haven't made any order yet.`}
                   href={"/customer/stores"}
-                  buttonText="Go To Stores"
-                  image="/empty_cart.svg"
+                  buttonText='Go To Stores'
+                  image='/empty_cart.svg'
                 />
               )}
             </div>
@@ -67,9 +67,7 @@ export const getServerSideProps = async (context) => {
 
   let orders = [];
   if (session) {
-    const { data } = await axios.get(process.env.HOST_URL + "/api/orders", {
-      params: { userId: session.userId },
-    });
+    const { data } = await axios.get(`${process.env.HOST_URL}/api/orders?userId=${session.userId}`);
 
     orders = data.orders;
   }

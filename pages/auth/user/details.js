@@ -70,7 +70,7 @@ const Details = () => {
     e.preventDefault();
 
     try {
-      await axios.post("/api/users", {
+      await axios.post(`/api/users`, {
         userId: session.userId,
         firstName,
         lastName,

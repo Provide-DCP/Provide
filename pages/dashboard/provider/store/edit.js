@@ -88,7 +88,7 @@ const StoreEdit = ({ store }) => {
     e.preventDefault();
     const {
       data: { message },
-    } = await axios.put("/api/store", {
+    } = await axios.put(`/api/store`, {
       userId: session.userId,
       storeId: store._id,
       name,
@@ -718,11 +718,7 @@ export const getServerSideProps = async (context) => {
 
   const {
     data: { store },
-  } = await axios.get("http://localhost:3000/api/store", {
-    params: {
-      userId: session.userId,
-    },
-  });
+  } = await axios.get(`${process.env.HOST_URL}/api/store?userId=${session.userId}`);
 
   if (session.userDetails.category !== "provider" || !store) {
     const category = session.userDetails.category;

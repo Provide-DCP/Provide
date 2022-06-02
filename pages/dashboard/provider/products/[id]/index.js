@@ -30,7 +30,7 @@ export default function Product({ store, product, reviews }) {
     try {
       const {
         data: { message },
-      } = await axios.delete(`http://localhost:3000/api/products/${product._id}`);
+      } = await axios.delete(`/api/products/${product._id}`);
       if (message === "Product Deleted!") {
         toast.success(message, { toastId: message });
         router.push("/dashboard/provider/products");
@@ -181,23 +181,17 @@ export const getServerSideProps = async (context) => {
 
   const {
     data: { store },
-  } = await axios.get(process.env.HOST_URL + "/api/store", {
-    params: {
-      userId: session.userId,
-    },
-  });
+  } = await axios.get(`${process.env.HOST_URL}/api/store?userId=${session.userId}`);
 
   const {
     data: { product },
-  } = await axios.get(`http://localhost:3000/api/products/${context.query.id}`);
+  } = await axios.get(`${process.env.HOST_URL}/api/products/${context.query.id}`);
 
   let reviews = [];
   if (product) {
-    const { data } = await axios.get(process.env.HOST_URL + "/api/reviews", {
-      params: {
-        productId: product._id,
-      },
-    });
+    const { data } = await axios.get(
+      `${process.env.HOST_URL}/api/reviews?productId=${product._id}`
+    );
     reviews = data.reviews;
   }
 

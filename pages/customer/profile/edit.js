@@ -41,7 +41,7 @@ const ProfileEdit = ({ details }) => {
     e.preventDefault();
     const {
       data: { message },
-    } = await axios.put("http://localhost:3000/api/users", {
+    } = await axios.put(`/api/users`, {
       userId: session.userId,
       firstName,
       lastName,
@@ -278,11 +278,7 @@ export const getServerSideProps = async ({ req, res }) => {
     };
   }
 
-  const { data } = await axios.get("http://localhost:3000/api/users", {
-    params: {
-      userId: userId,
-    },
-  });
+  const { data } = await axios.get(`${process.env.HOST_URL}/api/users?userId=${userId}`);
 
   const { details } = data;
 

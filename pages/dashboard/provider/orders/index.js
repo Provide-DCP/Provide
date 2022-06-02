@@ -8,18 +8,18 @@ const Orders = ({ orders }) => {
   return (
     <>
       <Header heading={"Store Orders"} />
-      <main className="relative -mt-40">
-        <div className="w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle">
-          <div className="rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-            <div className="flex flex-col">
+      <main className='relative -mt-40'>
+        <div className='w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle'>
+          <div className='rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
+            <div className='flex flex-col'>
               {orders?.length > 0 ? (
                 orders.map((order, index) => <OrderDetailsCard key={index} orderDetails={order} />)
               ) : (
                 <NoOrderProductState
                   heading={`Looks like no one have made any order from your store yet.`}
                   href={"/dashboard/provider"}
-                  buttonText="Go To Dashboard"
-                  image="/empty_cart.svg"
+                  buttonText='Go To Dashboard'
+                  image='/empty_cart.svg'
                 />
               )}
             </div>
@@ -51,18 +51,12 @@ export const getServerSideProps = async (context) => {
     };
   }
 
-  const { data } = await axios.get(process.env.HOST_URL + "/api/store", {
-    params: {
-      userId: session.userId,
-    },
-  });
+  const { data } = await axios.get(`${process.env.HOST_URL}/api/store?userId=${session.userId}`);
   const { store } = data;
 
   const {
     data: { orders },
-  } = await axios.get(process.env.HOST_URL + "/api/orders", {
-    params: { storeId: store._id },
-  });
+  } = await axios.get(`${process.env.HOST_URL}/api/orders?storeId=${store._id}`);
 
   if (session.userDetails.category !== "provider" || !store || !store.approved) {
     const category = session.userDetails.category;

@@ -65,7 +65,7 @@ const AddRequest = () => {
     e.preventDefault();
     const {
       data: { request },
-    } = await axios.post("/api/requests", {
+    } = await axios.post(`/api/requests`, {
       user: session.userId,
       userdetails: session.userDetails._id,
       pending: true,
@@ -81,7 +81,7 @@ const AddRequest = () => {
     if (request) {
       const {
         data: { rotp },
-      } = await axios.post("/api/rotp", {
+      } = await axios.post(`/api/rotp`, {
         request: request._id,
         value: Math.ceil(Math.random() * 1000000),
       });

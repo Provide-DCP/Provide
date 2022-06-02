@@ -204,9 +204,7 @@ export const getServerSideProps = async (context) => {
 
   const {
     data: { requests },
-  } = await axios.get(process.env.HOST_URL + "/api/requests", {
-    params: { userId: session.userId },
-  });
+  } = await axios.get(`${process.env.HOST_URL}/api/requests?userId=${session.userId}`);
 
   return {
     props: {

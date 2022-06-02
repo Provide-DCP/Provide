@@ -22,9 +22,7 @@ export const OrderDetailsCard = ({ orderDetails }) => {
     (async () => {
       const {
         data: { otp },
-      } = await axios.get("/api/otp", {
-        params: { orderId: order._id },
-      });
+      } = await axios.get(`/api/otp?orderId=${order._id}`);
       setOtp(otp.value);
     })();
   }, [order, session]);
@@ -37,7 +35,7 @@ export const OrderDetailsCard = ({ orderDetails }) => {
     if (order.status < 2) {
       const {
         data: { newstate },
-      } = await axios.put("/api/orders", {
+      } = await axios.put(`/api/orders`, {
         ...order,
         status: order.status + 1,
       });
@@ -45,16 +43,11 @@ export const OrderDetailsCard = ({ orderDetails }) => {
     } else {
       const {
         data: { verified },
-      } = await axios.get("/api/otp/verify", {
-        params: {
-          otp: otp,
-          orderId: order._id,
-        },
-      });
+      } = await axios.get(`/api/otp/verify?otp=${otp}&orderId=${order._id}`);
       if (verified) {
         const {
           data: { newstate },
-        } = await axios.put("/api/orders", {
+        } = await axios.put(`/api/orders`, {
           ...order,
           status: order.status + 1,
         });
@@ -69,7 +62,7 @@ export const OrderDetailsCard = ({ orderDetails }) => {
   };
   const handleReviewCreate = async () => {
     try {
-      const { data } = await axios.post("/api/reviews", {
+      const { data } = await axios.post(`/api/reviews`, {
         userdetails: session.userDetails._id,
         product: order.product._id,
         store: order.store._id,

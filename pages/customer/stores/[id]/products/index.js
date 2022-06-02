@@ -38,14 +38,12 @@ export const getServerSideProps = async (context) => {
 
   const {
     data: { store },
-  } = await axios.get(`http://localhost:3000/api/store/${context.query.id}`);
+  } = await axios.get(`${process.env.HOST_URL}/api/store/${context.query.id}`);
 
   let products = [];
-  const { data } = await axios.get("http://localhost:3000/api/products", {
-    params: {
-      storeId: context.query.id,
-    },
-  });
+  const { data } = await axios.get(
+    `${process.env.HOST_URL}/api/products?storeId=${context.query.id}`
+  );
   products = data.products;
 
   if (session.userDetails.category !== "customer" || !store) {

@@ -70,7 +70,7 @@ const CustomerAdd = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    const { data } = await axios.post("/api/users/address", {
+    const { data } = await axios.post(`/api/users/address`, {
       userId: session.userId,
       name,
       phone,

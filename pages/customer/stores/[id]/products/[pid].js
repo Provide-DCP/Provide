@@ -46,7 +46,7 @@ export default function Product({ store, product, reviews }) {
     try {
       const {
         data: { message },
-      } = await axios.delete(`http://localhost:3000/api/products/${product._id}`);
+      } = await axios.delete(`/api/products/${product._id}`);
 
       if (message === "Product Deleted!") {
         toast.success(message, { toastId: message });
@@ -68,7 +68,7 @@ export default function Product({ store, product, reviews }) {
       selectedToppings.forEach((topping) => (total += parseInt(topping.price)));
       const {
         data: { message, order },
-      } = await axios.post(`http://localhost:3000/api/orders`, {
+      } = await axios.post(`/api/orders`, {
         user: session.userId,
         store: store._id,
         product: product._id,
@@ -85,7 +85,7 @@ export default function Product({ store, product, reviews }) {
       if (message === "Success! Order Created") {
         const {
           data: { otp },
-        } = await axios.post("/api/otp", {
+        } = await axios.post(`/api/otp`, {
           order: order._id,
           value: Math.ceil(Math.random() * 1000000),
         });
@@ -249,19 +249,17 @@ export const getServerSideProps = async (context) => {
 
   const {
     data: { store },
-  } = await axios.get(`http://localhost:3000/api/store/${context.query.id}`);
+  } = await axios.get(`${process.env.HOST_URL}/api/store/${context.query.id}`);
 
   const {
     data: { product },
-  } = await axios.get(`http://localhost:3000/api/products/${context.query.pid}`);
+  } = await axios.get(`${process.env.HOST_URL}/api/products/${context.query.pid}`);
 
   let reviews = [];
   if (product) {
-    const { data } = await axios.get(process.env.HOST_URL + "/api/reviews", {
-      params: {
-        productId: product._id,
-      },
-    });
+    const { data } = await axios.get(
+      `${process.env.HOST_URL}/api/reviews?productId=${product._id}`
+    );
     reviews = data.reviews;
   }
 

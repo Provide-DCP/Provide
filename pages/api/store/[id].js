@@ -1,5 +1,5 @@
-import connectDB from "../../../src/lib/connectDB.js";
 import Store from "../../../models/Store.js";
+import connectDB from "../../../src/lib/connectDB.js";
 
 export default async function handler(req, res) {
   switch (req.method) {

@@ -34,7 +34,7 @@ const CustomerAdd = () => {
   });
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    const { data } = await axios.put("/api/users/address", {
+    const { data } = await axios.put(`/api/users/address`, {
       userId: session.userId,
       addressId: id,
       name,
@@ -54,53 +54,53 @@ const CustomerAdd = () => {
   return (
     <>
       <Header heading={"Edit Address"} />
-      <main className="relative -mt-40">
-        <div className="w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle">
-          <div className="rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-            <form className="space-y-8 divide-y divide-gray-200" onSubmit={onSubmitHandler}>
-              <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-                <div className="py-8 space-y-6 sm:pt-10 sm:space-y-5">
+      <main className='relative -mt-40'>
+        <div className='w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle'>
+          <div className='rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
+            <form className='space-y-8 divide-y divide-gray-200' onSubmit={onSubmitHandler}>
+              <div className='space-y-8 divide-y divide-gray-200 sm:space-y-5'>
+                <div className='py-8 space-y-6 sm:pt-10 sm:space-y-5'>
                   <div>
-                    <h3 className="text-lg leading-6 font-medium text-gray-900">Edit Address</h3>
-                    <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                    <h3 className='text-lg leading-6 font-medium text-gray-900'>Edit Address</h3>
+                    <p className='mt-1 max-w-2xl text-sm text-gray-500'>
                       Use address where you can receive order.
                     </p>
                   </div>
-                  <div className="space-y-6 sm:space-y-5">
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                  <div className='space-y-6 sm:space-y-5'>
+                    <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
-                        htmlFor="first-name"
-                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        htmlFor='first-name'
+                        className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                       >
                         Full Name
                       </label>
-                      <div className="mt-1 sm:mt-0 sm:col-span-2">
+                      <div className='mt-1 sm:mt-0 sm:col-span-2'>
                         <input
-                          type="text"
-                          name="first-name"
-                          id="first-name"
+                          type='text'
+                          name='first-name'
+                          id='first-name'
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          autoComplete="given-name"
-                          className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                          autoComplete='given-name'
+                          className='max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
 
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5 ">
+                    <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5 '>
                       <Listbox value={selectedCountry} onChange={setSelectedCountry}>
                         {({ open }) => (
                           <>
-                            <Listbox.Label className="flex items-center h-full block text-sm font-medium text-gray-700">
+                            <Listbox.Label className='flex items-center h-full block text-sm font-medium text-gray-700'>
                               Country
                             </Listbox.Label>
-                            <div className="mt-1 relative">
-                              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                                <span className="block truncate">{selectedCountry.name}</span>
-                                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                            <div className='mt-1 relative'>
+                              <Listbox.Button className='bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm'>
+                                <span className='block truncate'>{selectedCountry.name}</span>
+                                <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
                                   <SelectorIcon
-                                    className="h-5 w-5 text-gray-400"
-                                    aria-hidden="true"
+                                    className='h-5 w-5 text-gray-400'
+                                    aria-hidden='true'
                                   />
                                 </span>
                               </Listbox.Button>
@@ -108,11 +108,11 @@ const CustomerAdd = () => {
                               <Transition
                                 show={open}
                                 as={Fragment}
-                                leave="transition ease-in duration-100"
-                                leaveFrom="opacity-100"
-                                leaveTo="opacity-0"
+                                leave='transition ease-in duration-100'
+                                leaveFrom='opacity-100'
+                                leaveTo='opacity-0'
                               >
-                                <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                                <Listbox.Options className='absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm'>
                                   {country.map((person) => (
                                     <Listbox.Option
                                       key={person.id}
@@ -142,7 +142,7 @@ const CustomerAdd = () => {
                                                 "absolute inset-y-0 right-0 flex items-center pr-4"
                                               )}
                                             >
-                                              <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                                              <CheckIcon className='h-5 w-5' aria-hidden='true' />
                                             </span>
                                           ) : null}
                                         </>
@@ -157,139 +157,139 @@ const CustomerAdd = () => {
                       </Listbox>
                     </div>
 
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                    <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
-                        htmlFor="street-address"
-                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        htmlFor='street-address'
+                        className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                       >
                         Building
                       </label>
-                      <div className="mt-1 sm:mt-0 sm:col-span-2">
+                      <div className='mt-1 sm:mt-0 sm:col-span-2'>
                         <input
-                          type="text"
-                          name="street-address"
-                          id="street-address"
+                          type='text'
+                          name='street-address'
+                          id='street-address'
                           value={building}
                           onChange={(e) => setBuilding(e.target.value)}
-                          autoComplete="street-address"
-                          className="block max-w-lg w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md"
+                          autoComplete='street-address'
+                          className='block max-w-lg w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                    <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
-                        htmlFor="street-address"
-                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        htmlFor='street-address'
+                        className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                       >
                         Area
                       </label>
-                      <div className="mt-1 sm:mt-0 sm:col-span-2">
+                      <div className='mt-1 sm:mt-0 sm:col-span-2'>
                         <input
-                          type="text"
-                          name="street-address"
-                          id="street-address"
+                          type='text'
+                          name='street-address'
+                          id='street-address'
                           value={area}
                           onChange={(e) => setArea(e.target.value)}
-                          autoComplete="street-address"
-                          className="block max-w-lg w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md"
+                          autoComplete='street-address'
+                          className='block max-w-lg w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                    <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
-                        htmlFor="street-address"
-                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        htmlFor='street-address'
+                        className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                       >
                         Landmark
                       </label>
-                      <div className="mt-1 sm:mt-0 sm:col-span-2">
+                      <div className='mt-1 sm:mt-0 sm:col-span-2'>
                         <input
-                          type="text"
-                          name="street-address"
-                          id="street-address"
+                          type='text'
+                          name='street-address'
+                          id='street-address'
                           value={landmark}
                           onChange={(e) => setLandmark(e.target.value)}
-                          autoComplete="street-address"
-                          className="block max-w-lg w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md"
+                          autoComplete='street-address'
+                          className='block max-w-lg w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
 
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                    <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
-                        htmlFor="city"
-                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        htmlFor='city'
+                        className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                       >
                         City
                       </label>
-                      <div className="mt-1 sm:mt-0 sm:col-span-2">
+                      <div className='mt-1 sm:mt-0 sm:col-span-2'>
                         <input
-                          type="text"
-                          name="city"
-                          id="city"
+                          type='text'
+                          name='city'
+                          id='city'
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
-                          autoComplete="address-level2"
-                          className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                          autoComplete='address-level2'
+                          className='max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
 
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                    <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
-                        htmlFor="region"
-                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        htmlFor='region'
+                        className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                       >
                         State / Province
                       </label>
-                      <div className="mt-1 sm:mt-0 sm:col-span-2">
+                      <div className='mt-1 sm:mt-0 sm:col-span-2'>
                         <input
-                          type="text"
-                          name="region"
-                          id="region"
+                          type='text'
+                          name='region'
+                          id='region'
                           value={state}
                           onChange={(e) => setState(e.target.value)}
-                          autoComplete="address-level1"
-                          className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                          autoComplete='address-level1'
+                          className='max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
 
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                    <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
-                        htmlFor="postal-code"
-                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        htmlFor='postal-code'
+                        className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                       >
                         ZIP / Postal code
                       </label>
-                      <div className="mt-1 sm:mt-0 sm:col-span-2">
+                      <div className='mt-1 sm:mt-0 sm:col-span-2'>
                         <input
-                          type="text"
-                          name="postal-code"
-                          id="postal-code"
+                          type='text'
+                          name='postal-code'
+                          id='postal-code'
                           value={pincode}
                           onChange={(e) => setPincode(e.target.value)}
-                          autoComplete="postal-code"
-                          className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                          autoComplete='postal-code'
+                          className='max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                    <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                       <label
-                        htmlFor="phone"
-                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        htmlFor='phone'
+                        className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                       >
                         Mobile
                       </label>
-                      <div className="mt-1 sm:mt-0 sm:col-span-2">
+                      <div className='mt-1 sm:mt-0 sm:col-span-2'>
                         <input
-                          type="text"
-                          name="phone"
-                          id="phone"
+                          type='text'
+                          name='phone'
+                          id='phone'
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          autoComplete="tel"
-                          className="max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                          autoComplete='tel'
+                          className='max-w-lg block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                         />
                       </div>
                     </div>
@@ -297,17 +297,17 @@ const CustomerAdd = () => {
                 </div>
               </div>
 
-              <div className="pt-5">
-                <div className="flex justify-end">
+              <div className='pt-5'>
+                <div className='flex justify-end'>
                   <button
-                    type="button"
-                    className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    type='button'
+                    className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                   >
                     Cancel
                   </button>
                   <button
-                    type="submit"
-                    className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    type='submit'
+                    className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                   >
                     Save
                   </button>

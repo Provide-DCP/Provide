@@ -10,19 +10,12 @@ export const Active = ({ request, setRequests }) => {
   const handleVerify = async (request) => {
     const {
       data: { verified },
-    } = await axios.get("/api/rotp/verify", {
-      params: {
-        rotp: otp,
-        requestId: request._id,
-      },
-    });
+    } = await axios.get(`/api/rotp/verify?rotp=${otp}&requestId=${request._id}`);
     if (verified) {
-      await axios.put("/api/requests", {
+      await axios.put(`/api/requests`, {
         request: { ...request, finished: true },
       });
-      const { data } = await axios.get("/api/requests", {
-        params: { volunteerId: session.userId },
-      });
+      const { data } = await axios.get(`/api/requests?volunteerId=${session.userId}`);
       toast.success("Success! Request Completed", {
         toastId: "Success! Request Completed",
       });

@@ -28,7 +28,7 @@ const StoreIndex = ({ stores }) => {
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
-  const { data } = await axios.get(process.env.HOST_URL + "/api/store");
+  const { data } = await axios.get(`${process.env.HOST_URL}/api/store`);
   const stores = data.store;
 
   if (!session) {
