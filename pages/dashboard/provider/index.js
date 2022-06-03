@@ -27,7 +27,7 @@ const Index = ({ store, products, orders }) => {
       const month = time.getMonth();
       const year = time.getFullYear();
       if (month === today.getMonth() && year === today.getFullYear())
-        count[Math.floor(day / 5) - 1] += 1;
+        count[Math.ceil(day / 5) - 1] += 1;
     });
     setValues(count);
 
@@ -71,11 +71,11 @@ const Index = ({ store, products, orders }) => {
     return (
       <>
         <Header heading={"Dashboard"} />
-        <main className='relative -mt-40'>
-          <div className='w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle'>
-            <div className='rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
-              <div className='max-w-7xl mx-auto px-4 sm:px-6 md:px-8'>
-                <div className='mt-5'>
+        <main className="relative -mt-40">
+          <div className="w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle">
+            <div className="rounded-lg shadow w-full relative bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                <div className="mt-5">
                   <Stats orders={orders} />
                   {values && (
                     <Chart
@@ -117,42 +117,42 @@ const Index = ({ store, products, orders }) => {
   }
 
   return (
-    <main className='  mt-[15vh] px-10'>
-      <div className='max-w-6xl mx-auto'>
-        <h1 className='text-start my-10 text-3xl font-bold uppercase text-gray-600'>
+    <main className="  mt-[15vh] px-10">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-start my-10 text-3xl font-bold uppercase text-gray-600">
           Setup Account
         </h1>
         <Status steps={steps} />
-        <div className='my-10'>
+        <div className="my-10">
           {!store ? (
-            <EmptyState heading='Add Store' link='/dashboard/provider/store/add' Icon={BiStore} />
+            <EmptyState heading="Add Store" link="/dashboard/provider/store/add" Icon={BiStore} />
           ) : !store.approved ? (
-            <div className='w-full mt-5 flex flex-col items-center'>
-              <span className='relative inline-flex'>
-                <div className='inline-flex items-center px-4 py-2 text-center font-bold leading-6 text-lg md:text-4xl rounded-md text-gray-500 bg-white transition ease-in-out duration-150 ring-1 ring-slate-900/10 dark:ring-slate-200/20'>
+            <div className="w-full mt-5 flex flex-col items-center">
+              <span className="relative inline-flex">
+                <div className="inline-flex items-center px-4 py-2 text-center font-bold leading-6 text-lg md:text-4xl rounded-md text-gray-500 bg-white transition ease-in-out duration-150 ring-1 ring-slate-900/10 dark:ring-slate-200/20">
                   Please wait until our team approves your store.
                 </div>
-                <span className='flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1'>
-                  <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75' />
-                  <span className='relative inline-flex rounded-full h-3 w-3 bg-green-500' />
+                <span className="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
                 </span>
               </span>
-              <img className='mx-auto' src='/loading.gif' alt='loading' />
+              <img className="mx-auto" src="/loading.gif" alt="loading" />
             </div>
           ) : (
-            <div className='relative'>
+            <div className="relative">
               <h1
-                data-aos='fade-up'
-                id='popperHead'
-                className='relative md:top-[100px] text-center text-lg md:text-3xl font-bold tracking-wide text-green-500'
+                data-aos="fade-up"
+                id="popperHead"
+                className="relative md:top-[100px] text-center text-lg md:text-3xl font-bold tracking-wide text-green-500"
               >
                 Congratulations your store has been approved!
               </h1>
-              <div id='popper' className='popper min-h-[440px]'></div>
-              <div id='addProduct' className='hidden absolute w-full top-20'>
+              <div id="popper" className="popper min-h-[440px]"></div>
+              <div id="addProduct" className="hidden absolute w-full top-20">
                 <EmptyState
-                  heading='Add Product'
-                  link='/dashboard/provider/products/add'
+                  heading="Add Product"
+                  link="/dashboard/provider/products/add"
                   Icon={BiStore}
                 />
               </div>
