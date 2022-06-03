@@ -7,14 +7,14 @@ export const ReviewCard = ({ review }) => {
       <div className="flex justify-start">
         <div className="mr-3">
           <img
-            src={review.userdetails.image}
+            src={review.userdetails?.image}
             className="h-12 w-12 rounded-full"
             alt="product-image"
           />
         </div>
         <div>
           <div className="font-bold">
-            {review.userdetails.firstName + " " + review.userdetails.lastName}
+            {review.userdetails?.firstName + " " + review.userdetails?.lastName}
           </div>
           <div className="flex items-center">
             {[1, 2, 3, 4, 5].map((x) => {

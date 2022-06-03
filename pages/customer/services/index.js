@@ -30,23 +30,23 @@ const ServicesIndex = ({ requests }) => {
   return (
     <>
       <Header heading={"Get Help"} />
-      <main className='relative -mt-40'>
-        <div className='w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle'>
-          <div className='rounded-lg shadow w-full relative bg-gray-50 px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
-            <div className='flex flex-col items-center justify-center'>
-              <h1 className='text-5xl font-bold text-gray-800'>Emergency help needed?</h1>
-              <p className='my-5 text-2xl font-bold text-gray-500'>Push the button</p>
-              <Link href='/customer/services/add'>
-                <button className='mt-10 font-black shadow text-2xl bubbly-button'>
+      <main className="relative -mt-40">
+        <div className="w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle">
+          <div className="rounded-lg shadow w-full relative bg-gray-50 px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+            <div className="flex flex-col items-center justify-center">
+              <h1 className="text-5xl font-bold text-gray-800">Emergency help needed?</h1>
+              <p className="my-5 text-2xl font-bold text-gray-500">Push the button</p>
+              <Link href="/customer/services/add">
+                <button className="mt-10 font-black shadow text-2xl bubbly-button">
                   Emergency
                 </button>
               </Link>
             </div>
           </div>
         </div>
-        <div className='w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle'>
-          <div className='rounded-lg shadow w-full relative bg-gray-50 px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8'>
-            <h1 className='text-center text-3xl font-bold text-gray-600'>
+        <div className="w-[86%] mx-auto flex text-base text-left w-full md:my-8 md:align-middle">
+          <div className="rounded-lg shadow w-full relative bg-gray-50 px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+            <h1 className="text-center text-3xl font-bold text-gray-600">
               Current Pending Requests
             </h1>
             {requests.length > 0 ? (
@@ -54,10 +54,10 @@ const ServicesIndex = ({ requests }) => {
                 return <RequestDetailsCard key={index} requestDetails={request} />;
               })
             ) : (
-              <div className='mt-10'>
+              <div className="mt-10">
                 <NoOrderProductState
                   heading={`Looks like you have no pending requests.`}
-                  href='/customer/services'
+                  href="/customer/services"
                   image={"/empty_requests.svg"}
                   buttonText={"Go To Services"}
                 />
@@ -179,6 +179,15 @@ export const getServerSideProps = async (context) => {
     return {
       redirect: {
         destination: "/auth/signin",
+        permanent: false,
+      },
+    };
+  }
+
+  if (!session.userDetails) {
+    return {
+      redirect: {
+        destination: "/auth/user/details",
         permanent: false,
       },
     };
