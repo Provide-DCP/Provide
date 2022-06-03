@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from "react";
 import { getSession } from "next-auth/react";
 import { Status } from "../../../src/components/Provider/Status";
@@ -41,7 +42,7 @@ const Index = ({ store, products, orders }) => {
         addProduct.classList.remove("hidden");
       }
     }, 3000);
-  }, []);
+  }, [orders]);
 
   if (store && steps[0].status !== "complete") {
     let newstate = flows;
